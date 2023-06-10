@@ -1,0 +1,11 @@
+<ul class="layout-menu">
+    <ng-container *ngFor="let item of model; let i = index;">
+        <li app-menuitem *ngIf="!item.separator"   >asd</li>
+        <li *ngIf="item.separator" class="menu-separator">asdfas</li>
+    </ng-container>
+    <li>
+        <!-- <a href="https://www.primefaces.org/primeblocks-ng/#/">
+            <img src="assets/layout/images/logo.png" alt="Prime Blocks" class="w-full mt-3"/>
+        </a> -->
+    </li>
+</ul>
