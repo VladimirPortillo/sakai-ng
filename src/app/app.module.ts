@@ -21,10 +21,9 @@ import { AtractivosModule } from './atractivos/atractivos.module';
 import { ActividadesModule } from './actividades/actividades.module';
 
 
+
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -41,12 +40,10 @@ import { ActividadesModule } from './actividades/actividades.module';
         HotelesModule,
         RestaurantesModule,
         AtractivosModule,
-        ActividadesModule
-    ],
-    providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy },   
+        ActividadesModule,
 
     ],
-    bootstrap: [AppComponent]
+    providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
