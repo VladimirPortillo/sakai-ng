@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
                     {
                         label: 'Dashboard',
                         icon: 'pi pi-fw pi-home',
-                        routerLink: ['/'],
+                        routerLink: ['/index'],
                     },
                 ],
             },
@@ -30,7 +30,12 @@ export class MenuComponent implements OnInit {
                     {
                         label: 'Gestionar Roles',
                         icon: 'pi pi-fw pi-microsoft',
-                        routerLink: ['roles'], ///index/roles
+                        routerLink: ['roles'], //   /index/roles
+                    },
+                    {
+                        label: 'Gestionar Actividades',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['actividades'], //   /index/actividades
                     },
                     {
                         label: 'Auth',

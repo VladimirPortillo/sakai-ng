@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './pages/index/index.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RolesComponent } from './pages/roles/roles.component';
+import { ActividadesComponent } from './pages/actividades/actividades.component';
 
 const routes: Routes = [
     {
@@ -11,6 +12,7 @@ const routes: Routes = [
         children: [
             { path: '', component: HomeComponent },
             { path: 'roles', component: RolesComponent },
+            { path: 'actividades', component: ActividadesComponent },
             { path: '**', redirectTo: '' },
         ],
     },

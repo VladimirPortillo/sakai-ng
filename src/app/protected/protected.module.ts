@@ -23,10 +23,11 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ActividadesComponent } from './pages/actividades/actividades.component';
 
 
 @NgModule({
-    declarations: [IndexComponent, HomeComponent, RolesComponent],
+    declarations: [IndexComponent, HomeComponent, RolesComponent, ActividadesComponent],
     imports: [
         CommonModule,
         ProtectedRoutingModule,
