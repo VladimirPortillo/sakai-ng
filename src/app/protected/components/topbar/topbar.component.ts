@@ -18,4 +18,23 @@ export class TopbarComponent {
     @ViewChild('topbarmenu') menu!: ElementRef;
 
     constructor(public layoutService: LayoutService) {}
+     //ver Usuario
+    visible:boolean=false;
+    position: string='';
+    //  ver_menu!:Menus;
+     verUsuarioLogueado(position: string){
+       // console.log(id_rol)
+    //    console.log('ver rol0',this.ver_menu)
+       this.visible=true;
+       this.position=position;
+    //    console.log("entra");
+    //    this.menusService.verMenu(id_menu).subscribe(menus=>{
+        //  this.ver_menu=menus.data[0];
+    //   })
+     }
+   
+     cerrarVerUsuarioLogueado() {
+       this.visible=false;
+    //    this.ver_menu != undefined
+     } 
 }

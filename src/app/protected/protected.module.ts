@@ -23,11 +23,32 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { CalendarModule } from "primeng/calendar";
+import { InputTextareaModule } from "primeng/inputtextarea";
+
 import { ActividadesComponent } from './pages/actividades/actividades.component';
+import { MenusComponent } from './pages/menus/menus.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { ComunidadesComponent } from './pages/comunidades/comunidades.component';
+import { AtractivosComponent } from './pages/atractivos/atractivos.component';
+import { HotelesComponent } from './pages/hoteles/hoteles.component';
+import { RestaurantesComponent } from './pages/restaurantes/restaurantes.component';
+import { GastronomiasComponent } from './pages/gastronomias/gastronomias.component';
 
 
 @NgModule({
-    declarations: [IndexComponent, HomeComponent, RolesComponent, ActividadesComponent],
+    declarations: [
+        IndexComponent, 
+        HomeComponent, 
+        RolesComponent, 
+        ActividadesComponent, 
+        MenusComponent, 
+        UsuariosComponent, 
+        ComunidadesComponent, 
+        AtractivosComponent, 
+        HotelesComponent, 
+        RestaurantesComponent, 
+        GastronomiasComponent],
     imports: [
         CommonModule,
         ProtectedRoutingModule,
@@ -49,6 +70,8 @@ import { ActividadesComponent } from './pages/actividades/actividades.component'
         InputSwitchModule,
         DialogModule,
         ConfirmDialogModule,
+        CalendarModule,
+        InputTextareaModule
     ],
 })
 export class ProtectedModule {}

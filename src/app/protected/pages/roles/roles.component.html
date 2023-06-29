@@ -1,35 +1,48 @@
 <div class="grid">
 	<div class="col-12">
 		<div class="card">
-			<h5>GESTIONAR ROLES</h5>
+			<h5>ADMINISTRAR ROLES</h5>
 
             <!-- Aqui va el contenido de la pagina -->
             
-            <p-table [value]="roles" #dt1  dataKey="id" [rows]="10"  [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"  >
+            <p-table [value]="roles" #dt1  dataKey="id" [rows]="5"  [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"  
+            [globalFilterFields]="['nombre']" >
 				<ng-template pTemplate="caption">
 					<div class="flex justify-content-between flex-column sm:flex-row">     
 						<span class="p-input-icon-left mb-2" style="text-align:left;">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter  placeholder="Buscar..." class="w-full"/>
+							<input pInputText type="text" #filter  placeholder="Buscar..." class="w-full" 
+                             (input)="onGlobalFilter(dt1, $event)"/>
 						</span>
                         <span style="text-align: right;">
                             <button pButton pRipple type="button" label="Agregar" class="p-button-secondary" style="text-align: right;" (click)="verAgregarRol()"></button>
                         </span>
 					</div>
-                    <div class="flex justify-content-between flex-column sm:flex-row">     
-						<div class="col-12 md:col-4">
+                    <div class="grid formgrid">
+                        <div class="col-12 md:col-2">
                             <div class="field-radiobutton">
-                                <p-radioButton name="city" value="Chicago"  id="city1"></p-radioButton>
-                                <label for="city1">Activos.</label>
-                            </div>
-                        
-                            <div class="field-radiobutton">
-                                <p-radioButton name="city" value="Los Angeles" 
-                                               id="city2"></p-radioButton>
-                                <label for="city2">Eliminados.</label>
+                                <p-radioButton name="city" value="2" [(ngModel)]="valRadio" checked></p-radioButton>
+                                <label for="city1">Todos.</label>
                             </div>
                         </div>
-					</div>
+                        <div class="col-12 md:col-2">
+                            <div class="field-radiobutton">
+                                <p-radioButton name="city" value="1" [(ngModel)]="valRadio"></p-radioButton>
+                                <label for="city2">Activos.</label>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-2">
+                            <div class="field-radiobutton">
+                                <p-radioButton name="city" value="0" [(ngModel)]="valRadio"></p-radioButton>
+                                <label for="city3">Eliminados.</label>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="field-radiobutton">
+                               
+                            </div>
+                        </div>
+                    </div>
 				</ng-template>
 				<ng-template pTemplate="header">
 					<tr>
@@ -38,22 +51,22 @@
 								<span>Nº</span>
 							</div>
 						</th>
-						<th style="min-width: 12rem">
-							<div class="flex justify-content-between align-items-center">
+						<th style="min-width: 12rem; text-align:center;">
+							<div class="flex justify-content-between align-items-center;text-align:center;">
 								Nombre
 							</div>
 						</th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
 								Ver
 							</div>
 						</th>
-						<th style="min-width: 12rem">
+						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
 								Editar
 							</div>
 						</th>
-						<th style="min-width: 14rem">
+						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center"></div>
 								Eliminar
 						</th>
@@ -94,29 +107,32 @@
 				</ng-template>
 				<ng-template pTemplate="loadingbody">
 					<tr>
-						<td colspan="8">Loading customers data. Please wait.</td>
+						<td colspan="8">Cargando los roles espere por favor.</td>
 					</tr>
 				</ng-template>
     		</p-table>
-
-            
             <!-- ver un Rol -->
-            <p-dialog header="Header" [(visible)]="visible" [style]="{ width: '30vw' }">
+            <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '30vw' }">
                 <ng-template pTemplate="header">
                     <span class="text-xl font-bold" >Ver rol</span>
                 </ng-template>
                 <div *ngIf="ver_rol">
                     <!-- {{ver_rol | json}} -->
                     <!-- {{ver_rol.id_rol}} -->
-                    <div class="field">
-                        <label style="font-weight: bold;">Nombre: </label>
-                        <span>{{ ver_rol.nombre}}</span>
+                    <div class="field grid">
+                        <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+                        <div class="col-12 md:col-8">
+                            <span>{{ver_rol.nombre}}</span>
+        
+                        </div>
                     </div>
-                    <div class="field">
-                        <span style="font-weight: bold;">Estado:</span>
-                        <span *ngIf="ver_rol.estado==1">Activo</span>
-                        <span *ngIf="ver_rol.estado==0">Eliminado</span>
-                    </div>	
+                    <div class="field grid">
+                        <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+                        <div class="col-12 md:col-8">
+                            <span *ngIf="ver_rol.estado==1">Activo</span>
+                            <span *ngIf="ver_rol.estado==0">Eliminado</span>
+                        </div>
+                    </div>
                     <!-- {{ver_rol.estado}} -->
                 </div>
                 <ng-template pTemplate="footer">
@@ -124,7 +140,7 @@
                 </ng-template>
             </p-dialog>
             <!-- Agregar rol -->
-            <p-dialog header="Header" [(visible)]="visible_agregar" [style]="{ width: '30vw' }">
+            <p-dialog header="Header" [(visible)]="visible_agregar" [modal]="true" [style]="{ width: '30vw' }">
                 <ng-template pTemplate="header">
                     <span class="text-xl font-bold" >Agregar Rol</span>
                 </ng-template>
@@ -140,22 +156,27 @@
                 </ng-template>
             </p-dialog>
             <!-- modal eliminar rol -->
-            <p-dialog header="Header" [(visible)]="visible_eliminar" [style]="{ width: '30vw' }">
+            <p-dialog header="Header" [(visible)]="visible_eliminar" [modal]="true" [style]="{ width: '30vw' }">
                 <ng-template pTemplate="header">
                     <span class="text-xl font-bold" >Eliminar rol</span>
                 </ng-template>
                 <div *ngIf="ver_rol">
                     <!-- {{ver_rol | json}} -->
                     <!-- {{ver_rol.id_rol}} -->
-                    <div class="field">
-                        <label style="font-weight: bold;">Nombre: </label>
-                        <span>{{ ver_rol.nombre}}</span>
+                    <div class="field grid">
+                        <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+                        <div class="col-12 md:col-8">
+                            <span>{{ver_rol.nombre}}</span>
+        
+                        </div>
                     </div>
-                    <div class="field">
-                        <span style="font-weight: bold;">Estado:</span>
-                        <span *ngIf="ver_rol.estado==1">Activo</span>
-                        <span *ngIf="ver_rol.estado==0">Eliminado</span>
-                    </div>	
+                    <div class="field grid">
+                        <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+                        <div class="col-12 md:col-8">
+                            <span *ngIf="ver_rol.estado==1">Activo</span>
+                            <span *ngIf="ver_rol.estado==0">Eliminado</span>
+                        </div>
+                    </div>
                     <!-- {{ver_rol.estado}} -->
                 </div>
                 <ng-template pTemplate="footer">
@@ -165,21 +186,26 @@
                 </ng-template>
             </p-dialog>
             <!-- Habilitar rol -->
-            <p-dialog header="Header" [(visible)]="visible_habilitar" [style]="{ width: '30vw' }">
+            <p-dialog header="Header" [(visible)]="visible_habilitar" [modal]="true" [style]="{ width: '30vw' }">
                 <ng-template pTemplate="header">
                     <span class="text-xl font-bold" >Habilitar rol</span>
                 </ng-template>
                 <div *ngIf="ver_rol">
                     <!-- {{ver_rol | json}} -->
                     <!-- {{ver_rol.id_rol}} -->
-                    <div class="field">
-                        <label style="font-weight: bold;">Nombre: </label>
-                        <span>{{ ver_rol.nombre}}</span>
+                    <div class="field grid">
+                        <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+                        <div class="col-12 md:col-8">
+                            <span>{{ver_rol.nombre}}</span>
+        
+                        </div>
                     </div>
-                    <div class="field">
-                        <span style="font-weight: bold;">Estado:</span>
-                        <span *ngIf="ver_rol.estado==1">Activo</span>
-                        <span *ngIf="ver_rol.estado==0">Eliminado</span>
+                    <div class="field grid">
+                        <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+                        <div class="col-12 md:col-8">
+                            <span *ngIf="ver_rol.estado==1">Activo</span>
+                            <span *ngIf="ver_rol.estado==0">Eliminado</span>
+                        </div>
                     </div>	
                     <!-- {{ver_rol.estado}} -->
                 </div>
@@ -189,15 +215,15 @@
                 </ng-template>
             </p-dialog>
             <!-- Editar rol -->
-            <p-dialog header="Header" [(visible)]="visible_editar" [style]="{ width: '30vw' }">
+            <p-dialog header="Header" [(visible)]="visible_editar" [modal]="true" [style]="{ width: '30vw' }">
                 <ng-template pTemplate="header">
                     <span class="text-xl font-bold" >Editar rol</span>
                 </ng-template>
                     <div class="col-12 md:col-6">
-                                    <div class="field">
-                                        <label htmlFor="name1">Nombre:</label>
-                                        <input pInputText id="name1" type="text" [(ngModel)]="rol.nombre" required />
-                                    </div>	
+                        <div class="field">
+                            <label htmlFor="name1">Nombre:</label>
+                            <input pInputText id="name1" type="text" [(ngModel)]="rol.nombre" required />
+                        </div>	
                     </div>
                 <ng-template pTemplate="footer">
                     <p-button  (click)="editarRol(ver_rol.id_rol)" label="Guardar" styleClass="p-button-text"></p-button>

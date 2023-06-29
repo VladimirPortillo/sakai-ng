@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
+
 import { Roles } from '../../interfaces/roles';
 import { RolesService } from '../../services/roles.service';
 
@@ -12,8 +14,11 @@ export class RolesComponent {
 
     roles: Roles[] = [];
     ver_rol!: Roles;
+
     constructor(private rolesService: RolesService) {}
     ngOnInit(): void {
+        this.valRadio='';
+        console.log(this.valRadio);
         this.rolesService.getRoles().subscribe((roles) => {
             this.roles = roles;
             console.log(roles);
@@ -122,4 +127,12 @@ export class RolesComponent {
     cerrarEditarRol() {
         this.visible_editar = false;
     }
+    // buscar por filtro
+    onGlobalFilter(table: Table, event: Event) {
+        table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+    }
+
+    valRadio: string = '';
+    
+    
 }

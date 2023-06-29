@@ -1,7 +1,7 @@
 <div class="layout-topbar">
     <a class="layout-topbar-logo" routerLink="">
         <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo">
-        <span>ADMIN</span>
+        <span>COMARAPA TURISMO</span>
         <!-- <span>SAKAI</span> -->
     </a>
 
@@ -14,17 +14,62 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button class="p-link layout-topbar-button" [routerLink]="">
+        <!-- <button class="p-link layout-topbar-button" [routerLink]="">
             <i class="pi pi-calendar"></i>
             <span>Calendar</span>
-        </button>
-        <button class="p-link layout-topbar-button" [routerLink]="">
+        </button> -->
+        <button class="p-link layout-topbar-button" [routerLink]="" (click)="verUsuarioLogueado('top-right')">
             <i class="pi pi-user"></i>
             <span>Profile</span>
         </button>
-        <button class="p-link layout-topbar-button" [routerLink]="">
+        <!-- <button class="p-link layout-topbar-button" [routerLink]="">
             <i class="pi pi-cog"></i>
             <span>Settings</span>
-        </button>
+        </button> -->
     </div>
 </div>
+<!-- ver un Rol -->
+<p-dialog header="Header" [(visible)]="visible" [position]="position" [modal]="true" [style]="{ width: '30vw' }" >
+    <ng-template pTemplate="header">
+		<span class="text-xl font-bold" >.:Usuario:.</span>
+    </ng-template>
+    <div >
+        <div class="field grid" >
+			<label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0"></label>
+			<div class="col-12 md:col-8">
+				 <img src="assets/demo/images/comarapa/user.png" alt="Image" height="90" width="80" class="mb-3" style="border-radius: 50%;">
+			</div>
+		</div>
+        <div class="field grid">
+			<label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+			<div class="col-12 md:col-8">
+				<span>Juan Carlos Borda</span>
+			</div>
+		</div>
+		<div class="field grid">
+			<label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Usuario:</label>
+			<div class="col-12 md:col-8">
+				<span>user</span>
+			</div>
+		</div>
+        <div class="field grid">
+			<label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Rol:</label>
+			<div class="col-12 md:col-8">
+				<span>Administrador</span>
+			</div>
+		</div>
+        <div class="field grid">
+			<label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+			<div class="col-12 md:col-8">
+                <span>Activo</span>
+				<!-- <span *ngIf="ver_hotel.estado==1">Activo</span> -->
+				<!-- <span *ngIf="ver_hotel.estado==0">Eliminado</span> -->
+			</div>
+		</div>	
+    </div>
+    <ng-template pTemplate="footer">
+        <a href=""  label="Cerrar sesión" styleClass="p-button-info p-button-text" pButton ></a>
+        <!-- <p-button   label="Cerrar sesión" styleClass="p-button-text"></p-button> -->
+        <p-button  (click)="cerrarVerUsuarioLogueado()" label="Cerrar" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

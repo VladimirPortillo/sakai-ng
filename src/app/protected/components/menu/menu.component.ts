@@ -14,28 +14,63 @@ export class MenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Home',
+                label: 'Inicio',
                 items: [
                     {
-                        label: 'Dashboard',
+                        label: 'Dato general del municipio',
                         icon: 'pi pi-fw pi-home',
                         routerLink: ['/index'],
                     },
                 ],
             },
             {
-                label: 'Menú',
+                label: 'Menus',
                 icon: 'pi pi-fw pi-microsoft',
                 items: [
                     {
-                        label: 'Gestionar Roles',
+                        label: 'Administrar Roles',
                         icon: 'pi pi-fw pi-microsoft',
                         routerLink: ['roles'], //   /index/roles
                     },
                     {
-                        label: 'Gestionar Actividades',
+                        label: 'Administrar Actividades',
                         icon: 'pi pi-fw pi-microsoft',
                         routerLink: ['actividades'], //   /index/actividades
+                    },
+                    {
+                        label: 'Administrar Menus',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['menus'], //   /index/actividades
+                    },
+                    {
+                        label: 'Administrar Usuarios',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['usuarios'], //   /index/actividades
+                    },
+                    {
+                        label: 'Administrar Comunidades',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['comunidades'], //   /index/actividades
+                    },
+                    {
+                        label: 'Administrar Atractivos Turisticos',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['atractivos'], //   /index/actividades
+                    },
+                    {
+                        label: 'Administrar Hoteles',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['hoteles'], //   /index/actividades
+                    },
+                    {
+                        label: 'Administrar Restaurantes',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['restaurantes'], //   /index/actividades
+                    },
+                    {
+                        label: 'Administrar Gastronomias',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['gastronomias'], //   /index/actividades
                     },
                     {
                         label: 'Auth',

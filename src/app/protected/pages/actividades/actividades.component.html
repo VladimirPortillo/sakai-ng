@@ -1,7 +1,7 @@
 <div class="grid">
 	<div class="col-12">
 		<div class="card">
-			<h5>GESTIONAR ACTIVIDADES</h5>
+			<h5>ADMINISTRAR ACTIVIDADES</h5>
 
             <!-- Aqui va el contenido de la pagina -->
             
@@ -16,20 +16,32 @@
                             <button pButton pRipple type="button"   label="Agregar" class="p-button-secondary" style="text-align: right;"></button>
                         </span>
 					</div>
-                    <div class="flex justify-content-between flex-column sm:flex-row">     
-						<div class="col-12 md:col-4">
+					<div class="grid formgrid">
+                        <div class="col-12 md:col-2">
                             <div class="field-radiobutton">
-                                <p-radioButton name="city" value="Chicago"  id="city1"></p-radioButton>
-                                <label for="city1">Activos.</label>
-                            </div>
-                        
-                            <div class="field-radiobutton">
-                                <p-radioButton name="city" value="Los Angeles" 
-                                               id="city2"></p-radioButton>
-                                <label for="city2">Eliminados.</label>
+                                <p-radioButton name="city" value="Chicago" ></p-radioButton>
+                                <label for="city1">Todos.</label>
                             </div>
                         </div>
-					</div>
+                        <div class="col-12 md:col-2">
+                            <div class="field-radiobutton">
+                                <p-radioButton name="city" value="Los Angeles" 
+                                               ></p-radioButton>
+                                <label for="city2">Activos.</label>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-2">
+                            <div class="field-radiobutton">
+                                <p-radioButton name="city" value="New York"></p-radioButton>
+                                <label for="city3">Eliminados.</label>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="field-radiobutton">
+                               
+                            </div>
+                        </div>
+                    </div>
 				</ng-template>
 				<ng-template pTemplate="header">
 					<tr>
@@ -43,17 +55,17 @@
 								Nombre
 							</div>
 						</th>
-                        <th style="min-width: 12rem">
+                        <th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
 								Ver
 							</div>
 						</th>
-						<th style="min-width: 12rem">
+						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
 								Editar
 							</div>
 						</th>
-						<th style="min-width: 14rem">
+						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center"></div>
 								Eliminar
 						</th>
