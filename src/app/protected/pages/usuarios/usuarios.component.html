@@ -13,9 +13,10 @@
 						</span>
                         <span style="text-align: right;">
                             <button pButton pRipple type="button" (click)="verAgregarUsuario()" label="Agregar" class="p-button-secondary" style="text-align: right;" ></button>
+                            <button pButton pRipple type="button" (click)="modalUsuario(null,1,'Agregar Usuario','Guardar')" label="prueba" class="p-button-secondary" style="text-align: right;" ></button>
                         </span>
 					</div>
-                    <div class="grid formgrid">
+                    <!-- <div class="grid formgrid">
                         <div class="col-12 md:col-2">
                             <div class="field-radiobutton">
                                 <p-radioButton name="city" value="Chicago" ></p-radioButton>
@@ -25,7 +26,7 @@
                         <div class="col-12 md:col-2">
                             <div class="field-radiobutton">
                                 <p-radioButton name="city" value="Los Angeles" 
-                                               ></p-radioButton>
+></p-radioButton>
                                 <label for="city2">Activos.</label>
                             </div>
                         </div>
@@ -40,7 +41,7 @@
                                
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 				</ng-template>
 				<ng-template pTemplate="header">
 					<tr>
@@ -84,6 +85,7 @@
                             {{usuario.nombre}} {{usuario.ap}} {{usuario.am}}
 						</td>
 						<td style="text-align: center;">
+                            <button pButton pRipple type="button"  (click)="modalUsuario(usuario,2,'Editar Usuario','Editar')" icon="pi pi-user" class="p-button-rounded p-button-info p-button-outlined" ></button>
                             <button pButton pRipple type="button"  (click)="verUsuario(usuario.id_usuario)" icon="pi pi-user" class="p-button-rounded p-button-info p-button-outlined" ></button>
 						</td>
 						<td style="text-align: center;">
@@ -109,66 +111,87 @@
 					</tr>
 				</ng-template>
     		</p-table>
+
+            <p-dialog header="Header" [(visible)]="modalUsuarioVisible" [modal]="true" [style]="{ width: '50vw' }">
+            
+                <ng-template pTemplate="header">
+                    <span class="text-xl font-bold" >{{ modalTitle }}</span>
+                </ng-template>
+
+                <app-modal-usuario *ngIf="modalUsuarioVisible"
+                    [titleButton]="titleButton" 
+                    [usuario]="dataUsuario" 
+                    [tipoAccion]="tipoAccion"
+                    (onCloseModal)="cerrarModal($event)"
+                ></app-modal-usuario>
+            
+                <!-- <ng-template pTemplate="footer">
+                    <p-button (click)="guardar()" label="Agregar" styleClass="p-button-text"></p-button>
+                    <p-button (click)="cerrarModal()" label="Cerrar" styleClass="p-button-text"></p-button>
+                </ng-template> -->
+            </p-dialog>
+
+            
             <!-- modal agrega un usuario -->
-            <p-dialog header="Header" [(visible)]="visible_agregar" [modal]="true" [style]="{ width: '60vw' }">
+            <p-dialog header="Header" [(visible)]="visible_agregar" [modal]="true" [style]="{ width: '50vw' }">
                 <ng-template pTemplate="header">
                     <span class="text-xl font-bold" >Agregar Usuario</span>
                 </ng-template>
-                    <div class="col-12 md:col-6">
-                                    <div class="field grid">
-                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Nombre:</label>
-                                        <div class="col-12 md:col-6">
-                                            <input pInputText id="name3" type="text" [(ngModel)]="usuario.nombre"/>
-                                        </div>
-                                    </div>
-                                    <div class="field grid">
-                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Apellido paterno:</label>
-                                        <div class="col-12 md:col-6">
-                                            <input pInputText id="name3" type="text" [(ngModel)]="usuario.ap"/>
-                                        </div>
-                                    </div>
-                                    <div class="field grid">
-                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Apellido materno:</label>
-                                        <div class="col-12 md:col-6">
-                                            <input pInputText id="name3" type="text" [(ngModel)]="usuario.am"/>
-                                        </div>
-                                    </div>
-                                    <div class="field grid">
-                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Nº de celula de identidad:</label>
-                                        <div class="col-12 md:col-6">
-                                            <input pInputText id="name3" type="number" [(ngModel)]="usuario.ci"/>
-                                        </div>
-                                    </div>
-                                    <div class="field grid">
-                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Fecha de nacimiento:</label>
-                                        <div class="col-12 md:col-6">
-                                            <p-calendar  [touchUI]="true" [readonlyInput]="true" [(ngModel)]="usuario.fecha_nac"></p-calendar>
-                                        </div>
-                                    </div>
-                                    <!-- [(ngModel)]="usuario.fecha_nac" -->
-                                    <div class="field grid">
-                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Usuario:</label>
-                                        <div class="col-12 md:col-6">
-                                            <input pInputText id="name3" type="text" [(ngModel)]="usuario.usuario"/>
-                                        </div>
-                                    </div>
-                                    <div class="field grid">
-                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Contraseña:</label>
-                                        <div class="col-12 md:col-6">
-                                            <input pInputText id="name3" type="text" [(ngModel)]="usuario.contrasena"/>
-                                        </div>
-                                    </div>
-                                    <div class="field grid">
-                                        <label htmlFor="name3" class="col-12 mb-2 md:col-6 md:mb-0">Rol a asignar:</label>
-                                        <div class="col-12 md:col-6">
-                                            <p-dropdown [options]="roles" optionLabel="nombre"  placeholder="Seleccionar rol" [showClear]="true"
-                                                        [(ngModel)]="usuariorol" 
-                                            ></p-dropdown>
-                                             
-                                        </div>
-                                    </div>	
-            
+
+                    <div class="col-12">
+                        <div class="p-fluid">
+                            <div class="field grid">
+                                <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText id="nombre" type="text" />
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="ap" class="col-12 mb-2 md:col-2 md:mb-0">Apellido paterno:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText id="ap" type="text" />
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="am" class="col-12 mb-2 md:col-2 md:mb-0">Apellido materno:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText id="am" type="text" />
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="ci" class="col-12 mb-2 md:col-2 md:mb-0">Nº de celula de identidad:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText id="ci" type="text" />
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="fecha_nac" class="col-12 mb-2 md:col-2 md:mb-0">Fecha de nacimiento:</label>
+                                <div class="col-12 md:col-10">
+                                    <p-calendar id="fecha_nac" [touchUI]="true" [readonlyInput]="true"></p-calendar>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="usuario" class="col-12 mb-2 md:col-2 md:mb-0">Usuario:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText id="usuario" type="text" />
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="contrasena" class="col-12 mb-2 md:col-2 md:mb-0">Contraseña:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText id="contrasena" type="text" />
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="id_rol" class="col-12 mb-2 md:col-2 md:mb-0">Rol a asignar:</label>
+                                <div class="col-12 md:col-10">
+                                    <p-dropdown id="id_rol" [options]="roles" optionLabel="nombre"  placeholder="Seleccionar rol" [showClear]="true"></p-dropdown>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
                 <ng-template pTemplate="footer">
                     <p-button  (click)="guardar()" label="Agregar" styleClass="p-button-text"></p-button>
                     <p-button  (click)="cerraragregarUsuario()" label="Cerrar" styleClass="p-button-text"></p-button>

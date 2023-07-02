@@ -34,6 +34,7 @@ import { AtractivosComponent } from './pages/atractivos/atractivos.component';
 import { HotelesComponent } from './pages/hoteles/hoteles.component';
 import { RestaurantesComponent } from './pages/restaurantes/restaurantes.component';
 import { GastronomiasComponent } from './pages/gastronomias/gastronomias.component';
+import { ModalComponentsModule } from './pages/modal-components/modal-components.module';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { GastronomiasComponent } from './pages/gastronomias/gastronomias.compone
         CommonModule,
         ProtectedRoutingModule,
         ComponentsModule,
+        ModalComponentsModule,
 
         FormsModule,
         TableModule,

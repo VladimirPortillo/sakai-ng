@@ -1,0 +1,153 @@
+<form (ngSubmit)="guardar()" [formGroup]="miFormulario">
+    <div class="col-12">
+        <div class="p-fluid">
+            <div class="field grid">
+                <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
+                <div class="col-12 md:col-10">
+                    <input pInputText 
+                        id="nombre" 
+                        type="text"
+                        formControlName="nombre"
+                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}"/>
+                    <small 
+                        class="ng-dirty ng-invalid"
+                        class="p-error"
+                        *ngIf="campoEsValido('nombre')">
+                        {{ campoErrorMsg('nombre') }}
+                    </small>
+                </div>
+            </div>
+            <div class="field grid">
+                <label htmlFor="ap" class="col-12 mb-2 md:col-2 md:mb-0">Apellido paterno:</label>
+                <div class="col-12 md:col-10">
+                    <input pInputText 
+                        id="ap" 
+                        type="text" 
+                        formControlName="ap"
+                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('ap')}"/>
+                    <small 
+                        class="ng-dirty ng-invalid"
+                        class="p-error"
+                        *ngIf="campoEsValido('ap')">
+                        {{ campoErrorMsg('ap') }}
+                    </small>
+                </div>
+            </div>
+            <div class="field grid">
+                <label htmlFor="am" class="col-12 mb-2 md:col-2 md:mb-0">Apellido materno:</label>
+                <div class="col-12 md:col-10">
+                    <input pInputText 
+                        id="am" 
+                        type="text"
+                        formControlName="am"
+                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('am')}"/>
+                    <small 
+                        class="ng-dirty ng-invalid"
+                        class="p-error"
+                        *ngIf="campoEsValido('am')">
+                        {{ campoErrorMsg('am') }}
+                    </small>
+                </div>
+            </div>
+            <div class="field grid">
+                <label htmlFor="ci" class="col-12 mb-2 md:col-2 md:mb-0">Nº de celula de identidad:</label>
+                <div class="col-12 md:col-10">
+                    <input pInputText 
+                        id="ci" 
+                        type="text"
+                        formControlName="ci"
+                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('ci')}"/>
+                    <small 
+                        class="ng-dirty ng-invalid"
+                        class="p-error"
+                        *ngIf="campoEsValido('ci')">
+                        {{ campoErrorMsg('ci') }}
+                    </small>
+                </div>
+            </div>
+            <div class="field grid">
+                <label htmlFor="fecha_nac" class="col-12 mb-2 md:col-2 md:mb-0">Fecha de nacimiento:</label>
+                <div class="col-12 md:col-10">
+                    <p-calendar 
+                        id="fecha_nac" 
+                        [touchUI]="true" 
+                        [readonlyInput]="true"
+                        formControlName="fecha_nac"
+                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('fecha_nac')}">
+                    </p-calendar>
+                    <small 
+                        class="ng-dirty ng-invalid"
+                        class="p-error"
+                        *ngIf="campoEsValido('fecha_nac')">
+                        {{ campoErrorMsg('fecha_nac') }}
+                    </small>
+                </div>
+            </div>
+            <div class="field grid">
+                <label htmlFor="usuario" class="col-12 mb-2 md:col-2 md:mb-0">Usuario:</label>
+                <div class="col-12 md:col-10">
+                    <input pInputText 
+                        id="usuario" 
+                        type="text" 
+                        formControlName="usuario"
+                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('usuario')}"/>
+                    <small 
+                        class="ng-dirty ng-invalid"
+                        class="p-error"
+                        *ngIf="campoEsValido('usuario')">
+                        {{ campoErrorMsg('usuario') }}
+                    </small>
+                </div>
+            </div>
+            <div class="field grid">
+                <label htmlFor="contrasena" class="col-12 mb-2 md:col-2 md:mb-0">Contraseña:</label>
+                <div class="col-12 md:col-10">
+                    <input pInputText 
+                        id="contrasena" 
+                        type="text" 
+                        formControlName="contrasena"
+                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('contrasena')}"/>
+                    <small 
+                        class="ng-dirty ng-invalid"
+                        class="p-error"
+                        *ngIf="campoEsValido('contrasena')">
+                        {{ campoErrorMsg('contrasena') }}
+                    </small>
+                </div>
+            </div>
+            <div class="field grid">
+                <label htmlFor="rol" class="col-12 mb-2 md:col-2 md:mb-0">Rol a asignar:</label>
+                <div class="col-12 md:col-10">
+                    <p-dropdown 
+                        id="rol" 
+                        [options]="roles" 
+                        optionLabel="nombre" 
+                        placeholder="Seleccionar rol" 
+                        [showClear]="true"
+                        formControlName="rol"
+                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('rol')}">
+                    </p-dropdown>
+                    <small 
+                        class="ng-dirty ng-invalid"
+                        class="p-error"
+                        *ngIf="campoEsValido('rol')">
+                        {{ campoErrorMsg('rol') }}
+                    </small>
+                </div>
+            </div>
+            <div class="field grid">
+                <div class="col-12 md:col-6"></div>
+                <div class="col-12 md:col-3">
+                    <p-button 
+                        type="submit"
+                        label="{{ titleButton }}" 
+                        styleClass="p-button-text"
+                    ></p-button>
+                </div>
+                <div class="col-12 md:col-3">
+                    <p-button (click)="cerrarModal()" label="Cerrar" styleClass="p-button-text"></p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
