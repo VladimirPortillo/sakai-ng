@@ -1,7 +1,7 @@
 export interface Gastronomia{
     id_gastronomia?:number;
-    nombre:string;
-    descripcion:string;
-    tipo:string;
-    estado:number;
+    nombre:string | null;
+    descripcion:string | null;
+    tipo:string | null;
+    estado:number | null;
 }

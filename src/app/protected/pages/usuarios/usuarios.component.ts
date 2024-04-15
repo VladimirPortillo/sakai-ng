@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
 import { Roles } from '../../interfaces/roles';
 import { Usuarios } from '../../interfaces/usuarios';
 import { UsuariosService } from '../../services/usuarios.service';
@@ -78,5 +79,9 @@ export class UsuariosComponent {
     datosGuardadosModal(value: boolean) {
         this.modalUsuarioVisible = value;
         this.getUsuarios();
+    }
+      // buscar por filtro
+      onGlobalFilter(table: Table, event: Event) {
+        table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
     }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
+
 import { Gastronomia } from '../../interfaces/gastronomias';
 import { GastronomiasService } from '../../services/gastronomias.service';
 
@@ -8,96 +10,65 @@ import { GastronomiasService } from '../../services/gastronomias.service';
   styleUrls: ['./gastronomias.component.scss']
 })
 export class GastronomiasComponent {
-  gastronomias:Gastronomia[]=[];
- 
-  constructor(private gastronomiasService:GastronomiasService ){
-  }
-  ngOnInit():void{
-    this.gastronomiasService.getGastronomias().subscribe(gastronomias=>{
-      this.gastronomias=gastronomias;
-    } )
-  }
-  //agregar gastronomia
-  visible_agregar: boolean = false;
-  verAgregarGastronomia() {
-      this.visible_agregar = true;
-  }
-  gastronomia: Gastronomia = {
-      nombre: '',
-      descripcion:'',
-      tipo:'',
-      estado: 1,
+  gastronomias: Gastronomia[] = [];
+
+  modalGastronomiaVisible: boolean = false;
+  dataGastronomia: Gastronomia = {
+      nombre: null,
+      descripcion: null,
+      tipo: null,
+      estado:null,
   };
-  guardar() {
-      console.log(this.gastronomia);
-      if (this.gastronomia.nombre.trim().length === 0) {
-          return;
-      }
-      this.gastronomiasService.agregarGastronomia(this.gastronomia).subscribe((resp) => {
-          console.log('Respuesat', resp);
-      });
-      this.visible_agregar = false;
-      this.gastronomiasService.getGastronomias().subscribe(gastronomias => {
+  tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
+  modalTitle: String = 'Agregar Gastronomia';
+  titleButton: String = 'Agregar';
+
+  constructor(
+      private gastronomiasService: GastronomiasService,
+  ) {}
+
+  ngOnInit(): void {
+      this.getGastronomias();
+  }
+  
+  getGastronomias() {
+      this.gastronomiasService.getGastronomias().subscribe((gastronomias) => {
           this.gastronomias = gastronomias;
       });
   }
-  cerraragregarGastronomia() {
-      this.visible_agregar = false;
+
+  modalGastronomia(
+      gastronomia: any,
+      tipoAccion: number,
+      modalTitle: string,
+      titleButton: string
+  ) {
+      this.modalGastronomiaVisible = true;
+      if (gastronomia == null) {
+          this.dataGastronomia = {
+              nombre: null,
+              descripcion: null,
+              tipo: null,
+              estado:null,
+          };
+      } else {
+          this.dataGastronomia = gastronomia;
+      }
+      this.tipoAccion = tipoAccion;
+      this.modalTitle = modalTitle;
+      this.titleButton = titleButton;
   }
-    //ver gastronomia
-    visible:boolean=false;
-    ver_gastronomia!:Gastronomia;
-    verGastronomia(id_gastronomia:number){
-      // console.log(id_rol)
-      console.log('ver rol0',this.ver_gastronomia)
-      this.visible=true;
-      console.log("entra");
-      this.gastronomiasService.verGastronomia(id_gastronomia).subscribe(gastronomias=>{
-        this.ver_gastronomia=gastronomias.data[0];
-     })
-    }
+
+  cerrarModal(value: boolean) {
+      this.modalGastronomiaVisible = value;
+  }
   
-    cerrarVerGastronomia() {
-      this.visible=false;
-      this.ver_gastronomia != undefined
-    } 
-         //Eliminar gastronomia
-  visible_eliminar: boolean=false;
-  verEliminarGastronomia(id_gastronomia:number){
-    this.visible_eliminar=true;
-    this.gastronomiasService.verGastronomia(id_gastronomia).subscribe(gastronomias=>{
-      this.ver_gastronomia=gastronomias.data[0];
-    })
+  datosGuardadosModal(value: boolean) {
+      this.modalGastronomiaVisible = value;
+      this.getGastronomias();
   }
-  eliminarGastronomia(id_gastronomia:any){
-    
-    this.gastronomiasService.eliminarGastronomia(id_gastronomia).subscribe(gastronomias=>{})
-    this.visible_eliminar=false;
-    this.gastronomiasService.getGastronomias().subscribe(gastronomias=>{
-    this.gastronomias=gastronomias;
-    })
+    // buscar por filtro
+    onGlobalFilter(table: Table, event: Event) {
+      table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
-  cerrarElimiarGastronomia() {
-    this.visible_eliminar=false;
-    
-  }
-   //Habilitar gastronomia
-   visible_habilitar: boolean=false;
-   verHabilitarGastronomia(id_gastronomia:number){
-     this.visible_habilitar=true;
-     this.gastronomiasService.verGastronomia(id_gastronomia).subscribe(gastronomias=>{
-       this.ver_gastronomia=gastronomias.data[0];
-     })
-   }
-   habilitarGastronomia(id_gastronomia:any){
-     this.gastronomiasService.habilitarGastronomia(id_gastronomia).subscribe()
-     this.visible_habilitar=false;
-     this.gastronomiasService.getGastronomias().subscribe(gastronomias=>{
-     this.gastronomias=gastronomias;
-     })
-   }
-   cerrarHabilitarGastronomia() {
-     this.visible_habilitar=false;
-     
-   }
 }

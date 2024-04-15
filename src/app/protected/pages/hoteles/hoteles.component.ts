@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
+
 import { Hoteles } from '../../interfaces/hoteles';
 import { HotelesService } from '../../services/hoteles.service';
-import { Comunidades } from '../../interfaces/comunidades';
 import { ComunidadesService } from '../../services/comunidades.service';
 
 @Component({
@@ -10,103 +11,82 @@ import { ComunidadesService } from '../../services/comunidades.service';
   styleUrls: ['./hoteles.component.scss']
 })
 export class HotelesComponent {
-  comunidades:Comunidades[]=[];
-  hoteles:Hoteles[]=[]; 
-  constructor(private hotelesService:HotelesService,private comunidadesService:ComunidadesService ){
+  hoteles: Hoteles[] = [];
+
+  modalHotelVisible: boolean = false;
+  dataHotel: Hoteles = {
+      nombre: null,
+      descripcion: null,
+      direccion: null,
+      tipo: null,
+      categoria: null,
+      num_habitaciones: null,
+      telefono: null,
+      foto: null,
+      longitud: null,
+      latitud: null,
+      estado: null,
+      id_comunidad: null,
+  };
+  tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
+  modalTitle: String = 'Agregar Hotel';
+  titleButton: String = 'Agregar';
+
+  constructor(
+      private hotelesService: HotelesService,
+      private comunidadesService: ComunidadesService
+  ) {}
+
+  ngOnInit(): void {
+      this.getHoteles();
   }
-  ngOnInit():void{
-    this.hotelesService.getHoteles().subscribe(hoteles=>{
-      this.hoteles=hoteles;
-    } )
+  
+  getHoteles() {
+      this.hotelesService.getHoteles().subscribe((hoteles) => {
+          this.hoteles = hoteles;
+      });
   }
-  //agregar rol
-  visible_agregar: boolean=false;
-  verAgregarHotel(){
-    this.visible_agregar=true;
-    this.comunidadesService.getComunidades().subscribe(comunidades=>{
-    this.comunidades=comunidades;})
-  }
-  hotel:Hoteles={
-    nombre:'',
-    descripcion:'',
-    direccion:'',
-    tipo:'',
-    categoria:'',
-    num_habitaciones:0,
-    telefono:0,
-    foto:'',
-    longitud:0,
-    latitud:0,
-    estado:1,
-    id_comunidad:1,
-  }
-  guardar(){
-    console.log(this.hotel)
-    if(this.hotel.nombre.trim().length===0){
-      return;
-    }
-    this.hotelesService.agregarHotel(this.hotel).subscribe(resp=>{})
-    this.visible_agregar=false;
-    this.hotelesService.getHoteles().subscribe(hoteles=>{
-     this.hoteles=hoteles;
-    })
-  }
-  cerraragregarHotel() {
-    this.visible_agregar=false;
-  }
-      //ver usuario
-      visible:boolean=false;
-      ver_hotel!:Hoteles;
-      verHotel(id_hotel:number){
-        // console.log(id_rol)
-        console.log('ver rol0',this.ver_hotel)
-        this.visible=true;
-        console.log("entra");
-        this.hotelesService.verHotel(id_hotel).subscribe(hoteles=>{
-          this.ver_hotel=hoteles.data[0];
-       })
+
+  modalHotel(
+      hotel: any,
+      tipoAccion: number,
+      modalTitle: string,
+      titleButton: string
+  ) {
+      this.modalHotelVisible = true;
+      if (hotel == null) {
+          this.dataHotel = {
+              nombre: null,
+              descripcion: null,
+              direccion: null,
+              tipo: null,
+              categoria: null,
+              num_habitaciones: null,
+              telefono: null,
+              foto: null,
+              longitud: null,
+              latitud: null,
+              estado: null,
+              id_comunidad: null,
+          };
+      } else {
+          this.dataHotel = hotel;
       }
-    
-      cerrarVerHotel() {
-        this.visible=false;
-        this.ver_hotel!= undefined
-      }
-          //Eliminar hotel
-          visible_eliminar: boolean=false;
-          verEliminarHotel(id_hotel:number){
-            this.visible_eliminar=true;
-            this.hotelesService.verHotel(id_hotel).subscribe(hoteles=>{
-              this.ver_hotel=hoteles.data[0];
-            })
-          }
-          eliminarHotel(id_hotel:any){
-            this.hotelesService.eliminarHotel(id_hotel).subscribe(hoteles=>{})
-            this.visible_eliminar=false;
-            this.hotelesService.getHoteles().subscribe(hoteles=>{
-            this.hoteles=hoteles;
-            })
-          }
-          cerrarElimiarHotel() {
-            this.visible_eliminar=false;
-            
-          } 
-      //Habilitar hotel
-      visible_habilitar: boolean=false;
-      verHabilitarHotel(id_hotel:number){
-        this.visible_habilitar=true;
-        this.hotelesService.verHotel(id_hotel).subscribe(hoteles=>{
-          this.ver_hotel=hoteles.data[0];
-        })
-      }
-      habilitarHotel(id_hotel:any){
-        this.hotelesService.habilitarHotel(id_hotel).subscribe()
-        this.visible_habilitar=false;
-        this.hotelesService.getHoteles().subscribe(hoteles=>{
-        this.hoteles=hoteles;
-        })
-      }
-      cerrarHabilitarHotel() {
-        this.visible_habilitar=false;
-        
-      }
+      this.tipoAccion = tipoAccion;
+      this.modalTitle = modalTitle;
+      this.titleButton = titleButton;
+  }
+
+  cerrarModal(value: boolean) {
+      this.modalHotelVisible = value;
+  }
+  
+  datosGuardadosModal(value: boolean) {
+      this.modalHotelVisible = value;
+      this.getHoteles();
+  }
+    // buscar por filtro
+    onGlobalFilter(table: Table, event: Event) {
+      table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
 }

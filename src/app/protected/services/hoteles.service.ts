@@ -14,13 +14,19 @@ export class HotelesService {
   agregarHotel(hotel:Hoteles){
     return this.http.post<Hoteles[]>('http://localhost:3000/api/createHotel',hotel);
   }
+  editarRestaurante(Hotel:Hoteles, id_hotel: any){
+    return this.http.put<Hoteles[]>(
+        `http://localhost:3000/api/updateHotel/${id_hotel}`,
+        Hotel
+    );
+  }
   verHotel(id_hotel:number){
     return this.http.get<any>('http://localhost:3000/api/verHotel/'+id_hotel);
   }
-  eliminarHotel(id_hotel:number){
+  eliminarHotel(id_hotel:any){
     return this.http.delete<any>('http://localhost:3000/api/deleteHotel/'+id_hotel);
   }
-  habilitarHotel(id_hotel:number){
+  habilitarHotel(id_hotel:any){
     return this.http.get<any>('http://localhost:3000/api/habilitarHotel/'+id_hotel);
   }
 }

@@ -14,13 +14,19 @@ export class AtractivosService {
   agregarAtractivo(atractivo:Atractivos_turisticos){
     return this.http.post<Atractivos_turisticos[]>('http://localhost:3000/api/createAtractivo',atractivo);
   }
+  editarAtractivo(Atractivo:Atractivos_turisticos, id_atractivo: any){
+    return this.http.put<Atractivos_turisticos[]>(
+        `http://localhost:3000/api/updateAtractivo/${id_atractivo}`,
+        Atractivo
+    );
+  }
   verAtractivo(id_atractivo:number){
     return this.http.get<any>('http://localhost:3000/api/verAtractivo/'+id_atractivo);
   }
-  eliminarAtractivo(id_atractivo:number){
+  eliminarAtractivo(id_atractivo:any){
     return this.http.delete<any>('http://localhost:3000/api/deleteAtractivo/'+id_atractivo);
   }
-  habilitarAtractivo(id_atractivo:number){
+  habilitarAtractivo(id_atractivo:any){
     return this.http.get<any>('http://localhost:3000/api/habilitarAtractivo/'+id_atractivo);
   }
 }

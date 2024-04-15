@@ -13,13 +13,19 @@ export class GastronomiasService {
   agregarGastronomia(gastronomia:Gastronomia){
     return this.http.post<Gastronomia[]>('http://localhost:3000/api/createGastronomia',gastronomia);
   }
+  editarGastronomia(gastronomia:Gastronomia, id_gastronomia: any){
+    return this.http.put<Gastronomia[]>(
+        `http://localhost:3000/api/updateGastronomia/${id_gastronomia}`,
+        gastronomia
+    );
+  }
   verGastronomia(id_gastronomia:number){
     return this.http.get<any>('http://localhost:3000/api/verGastronomia/'+id_gastronomia);
   }
-  eliminarGastronomia(id_gastronomia:number){
+  eliminarGastronomia(id_gastronomia:any){
     return this.http.delete<any>('http://localhost:3000/api/deleteGastronomia/'+id_gastronomia);
   }
-  habilitarGastronomia(id_gastronomia:number){
+  habilitarGastronomia(id_gastronomia:any){
     return this.http.get<any>('http://localhost:3000/api/habilitarGastronomia/'+id_gastronomia);
   }
 }

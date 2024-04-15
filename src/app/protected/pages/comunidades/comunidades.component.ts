@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
+
 import { Comunidades } from '../../interfaces/comunidades';
 import { ComunidadesService } from '../../services/comunidades.service';
 
@@ -8,97 +10,73 @@ import { ComunidadesService } from '../../services/comunidades.service';
   styleUrls: ['./comunidades.component.scss']
 })
 export class ComunidadesComponent {
-  comunidades:Comunidades[]=[]; 
-  constructor(private comunidadesService:ComunidadesService){
+  comunidades: Comunidades[] = [];
+
+  modalComunidadVisible: boolean = false;
+  dataComunidad: Comunidades = {
+      nombre: null,
+      descripcion: null,
+      superficie: null,
+      poblacion: null,
+      longitud: null,
+      latitud: null,
+      estado: null,                     
+      id_usuario: null,
+  };
+  tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
+  modalTitle: String = 'Agregar Comunidad';
+  titleButton: String = 'Agregar';
+
+  constructor(
+      private comunidadesService: ComunidadesService
+  ) {}
+
+  ngOnInit(): void {
+      this.getComunidades();
   }
-  ngOnInit():void{
-    this.comunidadesService.getComunidades().subscribe(comunidades=>{
-      this.comunidades=comunidades;
-    } )
+  
+  getComunidades() {
+      this.comunidadesService.getComunidades().subscribe((comunidades) => {
+          this.comunidades = comunidades;
+      });
   }
-   //agregar rol
-   visible_agregar: boolean=false;
-   verAgregarComunidad(){
-     this.visible_agregar=true;
-   }
-   comunidad:Comunidades={
-     nombre:'',
-     descripcion:'',
-     superficie:0,
-     poblacion:0,
-     longitud:0,
-     latitud:0,
-     estado:1,
-     id_usuario:1,
-   }
-   guardar(){
-     console.log(this.comunidad)
-     if(this.comunidad.nombre.trim().length===0){
-       return;
-     }
-     this.comunidadesService.agregarComunidad(this.comunidad).subscribe(resp=>{})
-     this.visible_agregar=false;
-     this.comunidadesService.getComunidades().subscribe(comunidades=>{
-      this.comunidades=comunidades;
-     })
-   }
-   cerraragregarComunidad() {
-     this.visible_agregar=false;
-   }
-      //ver usuario
-      visible:boolean=false;
-      ver_comunidad!:Comunidades;
-      verComunidad(id_comunidad:number){
-        // console.log(id_rol)
-        console.log('ver rol0',this.ver_comunidad)
-        this.visible=true;
-        console.log("entra");
-        this.comunidadesService.verComunidad(id_comunidad).subscribe(comunidades=>{
-          this.ver_comunidad=comunidades.data[0];
-       })
+
+  modalComunidad(
+      comunidad: any,
+      tipoAccion: number,
+      modalTitle: string,
+      titleButton: string
+  ) {
+      this.modalComunidadVisible = true;
+      if (comunidad == null) {
+          this.dataComunidad = {
+              nombre: null,
+              descripcion: null,
+              superficie: null,
+              poblacion: null,
+              longitud: null,
+              latitud: null,
+              estado: null,
+              id_usuario: null,
+          };
+      } else {
+          this.dataComunidad = comunidad;
       }
-    
-      cerrarVerComunidad() {
-        this.visible=false;
-        this.ver_comunidad!= undefined
-      }
-        //Eliminar usuario
-  visible_eliminar: boolean=false;
-  verEliminarComunidad(id_comunidad:number){
-    this.visible_eliminar=true;
-    this.comunidadesService.verComunidad(id_comunidad).subscribe(comunidades=>{
-      this.ver_comunidad=comunidades.data[0];
-    })
+      this.tipoAccion = tipoAccion;
+      this.modalTitle = modalTitle;
+      this.titleButton = titleButton;
   }
-  eliminarComunidad(id_comunidad:any){
-    console.log(id_comunidad)
-    this.comunidadesService.eliminarComunidad(id_comunidad).subscribe(comunidades=>{})
-    this.visible_eliminar=false;
-    this.comunidadesService.getComunidades().subscribe(comunidades=>{
-    this.comunidades=comunidades;
-    })
+
+  cerrarModal(value: boolean) {
+      this.modalComunidadVisible = value;
   }
-  cerrarElimiarComunidad() {
-    this.visible_eliminar=false;
-    
-  } 
-    //Habilitar usuario
-    visible_habilitar: boolean=false;
-    verHabilitarComunidad(id_comunidad:number){
-      this.visible_habilitar=true;
-      this.comunidadesService.verComunidad(id_comunidad).subscribe(comunidades=>{
-        this.ver_comunidad=comunidades.data[0];
-      })
-    }
-    habilitarComunidad(id_comunidad:any){
-      this.comunidadesService.habilitarComunidad(id_comunidad).subscribe()
-      this.visible_habilitar=false;
-      this.comunidadesService.getComunidades().subscribe(comunidades=>{
-      this.comunidades=comunidades;
-      })
-    }
-    cerrarHabilitarComunidad() {
-      this.visible_habilitar=false;
-      
-    }
+  
+  datosGuardadosModal(value: boolean) {
+      this.modalComunidadVisible = value;
+      this.getComunidades();
+  }
+    // buscar por filtro
+    onGlobalFilter(table: Table, event: Event) {
+      table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
 }

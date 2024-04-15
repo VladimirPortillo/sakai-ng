@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
+
 import { Restaurantes } from '../../interfaces/restaurantes';
 import { RestaurantesService } from '../../services/restaurantes.service';
+import { ComunidadesService } from '../../services/comunidades.service';
 
 @Component({
   selector: 'app-restaurantes',
@@ -8,98 +11,78 @@ import { RestaurantesService } from '../../services/restaurantes.service';
   styleUrls: ['./restaurantes.component.scss']
 })
 export class RestaurantesComponent {
-  restaurantes:Restaurantes[]=[]; 
-  constructor(private restaurantesService:RestaurantesService){
+  restaurantes: Restaurantes[] = [];
+
+  modalRestauranteVisible: boolean = false;
+  dataRestaurante: Restaurantes = {
+      nombre: null,
+      descripcion: null,
+      direccion: null,
+      categoria: null,
+      telefono: null,
+      foto: null,
+      longitud: null,
+      latitud: null,
+      estado: null,
+      id_comunidad: null,
+  };
+  tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
+  modalTitle: String = 'Agregar Restaurante';
+  titleButton: String = 'Agregar';
+
+  constructor(
+      private restaurantesService: RestaurantesService,
+      private comunidadesService: ComunidadesService
+  ) {}
+
+  ngOnInit(): void {
+      this.getRestaurantes();
   }
-  ngOnInit():void{
-    this.restaurantesService.getRestaurantes().subscribe(restaurantes=>{
-      this.restaurantes=restaurantes;
-    } )
+  
+  getRestaurantes() {
+      this.restaurantesService.getRestaurantes().subscribe((restaurantes) => {
+          this.restaurantes = restaurantes;
+      });
   }
-    //agregar rol
-    visible_agregar: boolean=false;
-    verAgregarRestaurante(){
-      this.visible_agregar=true;
-    }
-    restaurante:Restaurantes={
-      nombre:'',
-      descripcion:'',
-      direccion:'',
-      categoria:'',
-      telefono:0,
-      foto:'',
-      longitud:0,
-      latitud:0,
-      estado:1,
-      id_comunidad:1,
-    }
-    guardar(){
-      console.log(this.restaurante)
-      if(this.restaurante.nombre.trim().length===0){
-        return;
+
+  modalRestaurante(
+      restaurante: any,
+      tipoAccion: number,
+      modalTitle: string,
+      titleButton: string
+  ) {
+      this.modalRestauranteVisible = true;
+      if (restaurante == null) {
+          this.dataRestaurante = {
+              nombre: null,
+              descripcion: null,
+              direccion: null,
+              categoria: null,
+              telefono: null,
+              foto: null,
+              longitud: null,
+              latitud: null,
+              estado: null,
+              id_comunidad: null,
+          };
+      } else {
+          this.dataRestaurante = restaurante;
       }
-      this.restaurantesService.agregarRestaurante(this.restaurante).subscribe(resp=>{})
-      this.visible_agregar=false;
-      this.restaurantesService.getRestaurantes().subscribe(restaurantes=>{
-       this.restaurantes=restaurantes;
-      })
-    }
-    cerraragregarRestaurante() {
-      this.visible_agregar=false;
-    }
-       //ver restautante
-       visible:boolean=false;
-       ver_restaurante!:Restaurantes;
-       verRestaurante(id_restaurante:number){
-         // console.log(id_rol)
-         console.log('ver rol0',this.ver_restaurante)
-         this.visible=true;
-         console.log("entra");
-         this.restaurantesService.verRestaurante(id_restaurante).subscribe(restaurantes=>{
-           this.ver_restaurante=restaurantes.data[0];
-        })
-       }
-     
-       cerrarVerRestaurante() {
-         this.visible=false;
-         this.ver_restaurante!= undefined
-       }
-             //Eliminar hotel
-             visible_eliminar: boolean=false;
-             verEliminarRestaurante(id_restaurante:number){
-               this.visible_eliminar=true;
-               this.restaurantesService.verRestaurante(id_restaurante).subscribe(restaurantes=>{
-                 this.ver_restaurante=restaurantes.data[0];
-               })
-             }
-             eliminarRestaurante(id_restaurante:any){
-               this.restaurantesService.eliminarRestaurante(id_restaurante).subscribe(restaurantes=>{})
-               this.visible_eliminar=false;
-               this.restaurantesService.getRestaurantes().subscribe(restaurantes=>{
-               this.restaurantes=restaurantes;
-               })
-             }
-             cerrarElimiarRestaurante() {
-               this.visible_eliminar=false;
-               
-             } 
-               //Habilitar hotel
-      visible_habilitar: boolean=false;
-      verHabilitarRestaurante(id_restaurante:number){
-        this.visible_habilitar=true;
-        this.restaurantesService.verRestaurante(id_restaurante).subscribe(restaurantes=>{
-          this.ver_restaurante=restaurantes.data[0];
-        })
-      }
-      habilitarRestaurante(id_restaurante:any){
-        this.restaurantesService.habilitarRestaurante(id_restaurante).subscribe()
-        this.visible_habilitar=false;
-        this.restaurantesService.getRestaurantes().subscribe(restaurantes=>{
-        this.restaurantes=restaurantes;
-        })
-      }
-      cerrarHabilitarRestaurante() {
-        this.visible_habilitar=false;
-        
-      }
+      this.tipoAccion = tipoAccion;
+      this.modalTitle = modalTitle;
+      this.titleButton = titleButton;
+  }
+
+  cerrarModal(value: boolean) {
+      this.modalRestauranteVisible = value;
+  }
+  
+  datosGuardadosModal(value: boolean) {
+      this.modalRestauranteVisible = value;
+      this.getRestaurantes();
+  }
+    // buscar por filtro
+    onGlobalFilter(table: Table, event: Event) {
+      table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
 }

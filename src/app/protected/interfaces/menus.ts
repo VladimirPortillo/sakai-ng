@@ -1,6 +1,6 @@
 export interface Menus{
     id_menu?:number;
-    nombre:string;
-    url:string;
-    estado:number;
+    nombre:string | null;
+    url:string | null;
+    estado:number | null;
 }

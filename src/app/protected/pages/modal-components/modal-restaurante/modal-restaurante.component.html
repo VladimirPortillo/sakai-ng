@@ -1,0 +1,154 @@
+<form (ngSubmit)="guardar()" [formGroup]="miFormulario">
+    <div class="col-12">
+        <div class="p-fluid">
+            <div *ngIf="tipoAccion == 0 || tipoAccion == 1 || tipoAccion == 2">
+                <div class="field grid">
+                    <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText 
+                            id="nombre" 
+                            type="text"
+                            formControlName="nombre"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}"/>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('nombre')">
+                            {{ campoErrorMsg('nombre') }}
+                        </small>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label htmlFor="descripcion" class="col-12 mb-2 md:col-2 md:mb-0">Descripción:</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText 
+                            id="descripcion" 
+                            type="text" 
+                            formControlName="descripcion"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('descripcion')}"/>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('descripcion')">
+                            {{ campoErrorMsg('descripcion') }}
+                        </small>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label htmlFor="direccion" class="col-12 mb-2 md:col-2 md:mb-0">Dirección:</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText 
+                            id="direccion" 
+                            type="text"
+                            formControlName="direccion"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('direccion')}"/>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('direccion')">
+                            {{ campoErrorMsg('direccion') }}
+                        </small>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label htmlFor="categoria" class="col-12 mb-2 md:col-2 md:mb-0">Categoria:</label>
+                    <div class="col-12 md:col-10">
+                        <div class="field-radiobutton">
+                            <p-radioButton 
+                                id="categoria" 
+                                formControlName="categoria"
+                                [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('categoria')}"
+                                value="mixto">
+                            </p-radioButton>
+                            <label for="0">Mixto.</label>
+                            </div>
+                            <div class="field-radiobutton">
+                                <p-radioButton 
+                                    id="categoria" 
+                                    formControlName="categoria"
+                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('categoria')}"
+                                    value="tradicional">
+                                </p-radioButton>
+                                <label for="0">Tradicional.</label>
+                            </div>
+                        <!-- <input pInputText 
+                            id="categoria" 
+                            type="text"
+                            formControlName="categoria"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('categoria')}"/> -->
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('categoria')">
+                            {{ campoErrorMsg('categoria') }}
+                        </small>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label htmlFor="telefono" class="col-12 mb-2 md:col-2 md:mb-0">Telefono:</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText 
+                            id="telefono" 
+                            type="number" 
+                            formControlName="telefono"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('telefono')}"/>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('telefono')">
+                            {{ campoErrorMsg('telefono') }}
+                        </small>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label htmlFor="comunidad" class="col-12 mb-2 md:col-2 md:mb-0">Comunidad a asignar:</label>
+                    <div class="col-12 md:col-10">
+                        <p-dropdown 
+                            id="comunidad" 
+                            [options]="comunidades" 
+                            optionLabel="nombre" 
+                            placeholder="Seleccionar comunidad" 
+                            [showClear]="true"
+                            formControlName="comunidad"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('comunidad')}">
+                        </p-dropdown>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('comunidad')">
+                            {{ campoErrorMsg('comunidad') }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="tipoAccion == 3 || tipoAccion == 4">
+                <div class="field grid">
+                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+                    <div class="col-12 md:col-8">
+                        <span>{{ restaurante.nombre}} </span>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+                    <div class="col-12 md:col-8">
+                        <span *ngIf="restaurante.estado==1">Activo</span>
+                        <span *ngIf="restaurante.estado==0">Eliminado</span>
+                    </div>
+                </div>
+            </div>
+            <div class="field grid">
+                <div class="col-12 md:col-6"></div>
+                <div class="col-12 md:col-3">
+                    <p-button 
+                        type="submit"
+                        label="{{ titleButton }}" 
+                        styleClass="p-button-text"
+                    ></p-button>
+                </div>
+                <div class="col-12 md:col-3">
+                    <p-button (click)="cerrarModal()" label="Cerrar" styleClass="p-button-text"></p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

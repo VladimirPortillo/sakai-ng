@@ -17,13 +17,30 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
+import { ModalRolComponent } from './modal-rol/modal-rol.component';
+import { ModalActividadComponent } from './modal-actividad/modal-actividad.component';
+import { ModalRestauranteComponent } from './modal-restaurante/modal-restaurante.component';
+import { ModalHotelComponent } from './modal-hotel/modal-hotel.component';
+import { ModalAtractivoComponent } from './modal-atractivo/modal-atractivo.component';
+import { ModalComunidadComponent } from './modal-comunidad/modal-comunidad.component';
+import { ModalGastronomiaComponent } from './modal-gastronomia/modal-gastronomia.component';
+import { ModalMenuComponent } from './modal-menu/modal-menu.component';
 
 @NgModule({
-    declarations: [ModalUsuarioComponent],
+    declarations: [
+        ModalUsuarioComponent, 
+        ModalRolComponent, 
+        ModalActividadComponent, 
+        ModalRestauranteComponent, 
+        ModalHotelComponent, 
+        ModalAtractivoComponent, 
+        ModalComunidadComponent, 
+        ModalGastronomiaComponent, 
+        ModalMenuComponent
+    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
-
         ButtonModule,
         InputTextModule,
         ToggleButtonModule,
@@ -37,8 +54,18 @@ import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
         DialogModule,
         ConfirmDialogModule,
         CalendarModule,
-        InputTextareaModule,
+        InputTextareaModule
     ],
-    exports: [ModalUsuarioComponent],
+    exports: [
+        ModalUsuarioComponent,
+        ModalRestauranteComponent,
+        ModalHotelComponent,
+        ModalAtractivoComponent,
+        ModalComunidadComponent,
+        ModalRolComponent, 
+        ModalActividadComponent, 
+        ModalGastronomiaComponent,
+        ModalMenuComponent
+    ],
 })
 export class ModalComponentsModule {}

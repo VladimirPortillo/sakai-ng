@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
+
 import { Menus } from '../../interfaces/menus';
 import { MenusService } from '../../services/menus.service';
 
@@ -8,116 +10,64 @@ import { MenusService } from '../../services/menus.service';
   styleUrls: ['./menus.component.scss']
 })
 export class MenusComponent {
-  menus:Menus[]=[]; 
-  constructor(private menusService:MenusService){
-  }
- 
-    //agregar rol
-    visible_agregar: boolean=false;
-    verAgregarMenu(){
-      this.visible_agregar=true;
-    }
-    menu:Menus={
-      nombre:'',
-      url:'',
-      estado:1,
-    }
-    guardar(){
-      console.log(this.menu)
-      if(this.menu.nombre.trim().length===0){
-        return;
-      }
-      this.menusService.agregarMenu(this.menu).subscribe(resp=>{})
-      this.visible_agregar=false;
-      this.menusService.getMenus().subscribe(menus=>{
-        this.menus=menus;
-      })
-    }
-    cerraragregarMenu() {
-      this.visible_agregar=false;
-    }
+  menus: Menus[] = [];
 
-    ngOnInit():void{
-      this.menusService.getMenus().subscribe(menus=>{
-        this.menus=menus;
-      } )
-    } 
-    //ver menu
-    visible:boolean=false;
-    ver_menu!:Menus;
-    verMenu(id_menu:number){
-      // console.log(id_rol)
-      console.log('ver rol0',this.ver_menu)
-      this.visible=true;
-      console.log("entra");
-      this.menusService.verMenu(id_menu).subscribe(menus=>{
-        this.ver_menu=menus.data[0];
-     })
-    }
+  modalMenuVisible: boolean = false;
+  dataMenu: Menus = {
+      nombre: null,
+      url:null,
+      estado: null,
+  };
+  tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
+  modalTitle: String = 'Agregar Menu';
+  titleButton: String = 'Agregar';
+
+  constructor(
+      private menusService: MenusService,
+  ) {}
+
+  ngOnInit(): void {
+      this.getMenus();
+  }
   
-    cerrarVerMenu() {
-      this.visible=false;
-      this.ver_menu != undefined
-    } 
-     //Eliminar menu
-  visible_eliminar: boolean=false;
-  verEliminarMenu(id_menu:number){
-    this.visible_eliminar=true;
-    this.menusService.verMenu(id_menu).subscribe(menus=>{
-      this.ver_menu=menus.data[0];
-    })
+  getMenus() {
+      this.menusService.getMenus().subscribe((menus) => {
+          this.menus = menus;
+      });
   }
-  eliminarMenu(id_menu:any){
-    console.log(id_menu)
-    this.menusService.eliminarMenu(id_menu).subscribe(menus=>{})
-    this.visible_eliminar=false;
-    this.menusService.getMenus().subscribe(menus=>{
-    this.menus=menus;
-    })
+
+  modalMenu(
+      menu: any,
+      tipoAccion: number,
+      modalTitle: string,
+      titleButton: string
+  ) {
+      this.modalMenuVisible = true;
+      if (menu == null) {
+          this.dataMenu = {
+              nombre: null,
+              url:null,
+              estado: null,
+              
+          };
+      } else {
+          this.dataMenu = menu;
+      }
+      this.tipoAccion = tipoAccion;
+      this.modalTitle = modalTitle;
+      this.titleButton = titleButton;
   }
-  cerrarElimiarMenu() {
-    this.visible_eliminar=false;
-    
+
+  cerrarModal(value: boolean) {
+      this.modalMenuVisible = value;
   }
-  //Habilitar rol
-  visible_habilitar: boolean=false;
-  verHabilitarMenu(id_menu:number){
-    this.visible_habilitar=true;
-    this.menusService.verMenu(id_menu).subscribe(menus=>{
-      this.ver_menu=menus.data[0];
-    })
+  
+  datosGuardadosModal(value: boolean) {
+      this.modalMenuVisible = value;
+      this.getMenus();
   }
-  habilitarMenu(id_menu:any){
-    this.menusService.habilitarMenu(id_menu).subscribe()
-    this.visible_habilitar=false;
-    this.menusService.getMenus().subscribe(menus=>{
-    this.menus=menus;
-    })
+    // buscar por filtro
+    onGlobalFilter(table: Table, event: Event) {
+      table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
-  cerrarHabilitarMenu() {
-    this.visible_habilitar=false;
-    
-  }
-   //Editar menu
-   visible_editar: boolean=false;
-   verEditarMenu(id_menu:number){
-     this.visible_editar=true;
-     this.menusService.verMenu(id_menu).subscribe(menus=>{
-       this.ver_menu=menus.data[0];
-     })
-   }
-   editarMenu(id_menu:any){
-     if(this.menu.nombre.trim().length===0){
-       return;
-     }
-     this.menusService.editarMenu(id_menu,this.menu).subscribe(resp=>{})
-     this.visible_editar=false;
-     this.menusService.getMenus().subscribe(menus=>{
-     this.menus=menus;
-     })
-   }
-   cerrarEditarMenu() {
-     this.visible_editar=false;
-     
-   }
 }
