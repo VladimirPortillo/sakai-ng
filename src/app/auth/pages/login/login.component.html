@@ -7,18 +7,67 @@
                     <div class="text-900 text-3xl font-medium mb-3" style="font-style: italic;">Comarapa Turismo</div>
                 </div>
 
-                <div>
-                    <label for="email1" class="block text-900 text-xl font-medium mb-2">Usuario:</label>
-                    <input id="email1" type="text" placeholder="Usuario..." pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                <form (ngSubmit)="login()" [formGroup]="loginForm">
+                    <div>
+                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Usuario:</label>
+                        <input 
+                            id="email1" 
+                            type="text" 
+                            placeholder="Usuario..." 
+                            pInputText 
+                            class="w-full md:w-30rem mb-5" 
+                            style="padding:1rem"
+                            formControlName="usuario"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('usuario')}">
+                        <div class="col-12 md:col-10">
+                            <small 
+                                class="ng-dirty ng-invalid"
+                                class="p-error"
+                                *ngIf="campoEsValido('usuario')">
+                                {{ campoErrorMsg('usuario') }}
+                            </small>
+                        </div>
 
-                    <label for="password1" class="block text-900 font-medium text-xl mb-2">Contraseña:</label>
-                    <p-password id="password1"  placeholder="Contraseña..."  styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Contraseña:</label>
+                        <p-password 
+                            id="password1"  
+                            placeholder="Contraseña..."  
+                            styleClass="mb-5" 
+                            inputStyleClass="w-full p-3 md:w-30rem"
+                            formControlName="contrasena"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('contrasena')}"
+                        ></p-password>
+                        <div class="col-12 md:col-10">
+                            <small 
+                                class="ng-dirty ng-invalid"
+                                class="p-error"
+                                *ngIf="campoEsValido('contrasena')">
+                                {{ campoErrorMsg('contrasena') }}
+                            </small>
+                        </div>
 
-                    <div class="flex justify-content-center"> 
-                        <a href="http://localhost:4200/#/index" pButton pRipple label="Ingresar" icon="pi pi-user" class="w-4 p-button-success"></a>    
-                        <!-- <button pButton pRipple label="Ingresar" icon="pi pi-user" class="w-4 p-button-success"></button> -->
+                        <div class="flex justify-content-center"> 
+                            <!-- <a href="http://localhost:4200/#/index" pButton pRipple label="Ingresar" icon="pi pi-user" class="w-4 p-button-success"></a>     -->
+                            <button 
+                                pButton pRipple 
+                                label="Ingresar" 
+                                icon="pi pi-user" 
+                                class="w-4 p-button-success"
+                                type="submit"
+                                ></button>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="col-12 md:col-10">
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="error">
+                            {{ msgError }}
+                        </small>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>

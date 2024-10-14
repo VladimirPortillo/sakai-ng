@@ -5,14 +5,15 @@
                 <div class="field grid">
                     <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
                     <div class="col-12 md:col-10">
-                        <input pInputText 
+                        <input 
+                            pInputText 
                             id="nombre" 
-                            type="text"
+                            type="text" 
                             formControlName="nombre"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}"/>
-                        <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}" />
+                        <small  
+                            class="ng-dirty ng-invalid" 
+                            class="p-error" 
                             *ngIf="campoEsValido('nombre')">
                             {{ campoErrorMsg('nombre') }}
                         </small>
@@ -21,14 +22,15 @@
                 <div class="field grid">
                     <label htmlFor="ap" class="col-12 mb-2 md:col-2 md:mb-0">Apellido paterno:</label>
                     <div class="col-12 md:col-10">
-                        <input pInputText 
+                        <input 
+                            pInputText 
                             id="ap" 
                             type="text" 
                             formControlName="ap"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('ap')}"/>
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('ap')}" />
                         <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
+                            class="ng-dirty ng-invalid" 
+                            class="p-error" 
                             *ngIf="campoEsValido('ap')">
                             {{ campoErrorMsg('ap') }}
                         </small>
@@ -37,14 +39,15 @@
                 <div class="field grid">
                     <label htmlFor="am" class="col-12 mb-2 md:col-2 md:mb-0">Apellido materno:</label>
                     <div class="col-12 md:col-10">
-                        <input pInputText 
+                        <input 
+                            pInputText 
                             id="am" 
-                            type="text"
+                            type="text" 
                             formControlName="am"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('am')}"/>
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('am')}" />
                         <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
+                            class="ng-dirty ng-invalid" 
+                            class="p-error" 
                             *ngIf="campoEsValido('am')">
                             {{ campoErrorMsg('am') }}
                         </small>
@@ -53,14 +56,15 @@
                 <div class="field grid">
                     <label htmlFor="ci" class="col-12 mb-2 md:col-2 md:mb-0">Nº de celula de identidad:</label>
                     <div class="col-12 md:col-10">
-                        <input pInputText 
+                        <input 
+                            pInputText 
                             id="ci" 
-                            type="text"
+                            type="text" 
                             formControlName="ci"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('ci')}"/>
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('ci')}" />
                         <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
+                            class="ng-dirty ng-invalid" 
+                            class="p-error" 
                             *ngIf="campoEsValido('ci')">
                             {{ campoErrorMsg('ci') }}
                         </small>
@@ -72,14 +76,11 @@
                         <p-calendar 
                             id="fecha_nac" 
                             [touchUI]="true" 
-                            [readonlyInput]="true"
+                            [readonlyInput]="true" 
                             formControlName="fecha_nac"
                             [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('fecha_nac')}">
                         </p-calendar>
-                        <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
-                            *ngIf="campoEsValido('fecha_nac')">
+                        <small class="ng-dirty ng-invalid" class="p-error" *ngIf="campoEsValido('fecha_nac')">
                             {{ campoErrorMsg('fecha_nac') }}
                         </small>
                     </div>
@@ -87,30 +88,36 @@
                 <div class="field grid">
                     <label htmlFor="usuario" class="col-12 mb-2 md:col-2 md:mb-0">Usuario:</label>
                     <div class="col-12 md:col-10">
-                        <input pInputText 
+                        <input 
+                            pInputText 
                             id="usuario" 
                             type="text" 
                             formControlName="usuario"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('usuario')}"/>
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('usuario')}" />
                         <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
+                            class="ng-dirty ng-invalid" 
+                            class="p-error" 
                             *ngIf="campoEsValido('usuario')">
                             {{ campoErrorMsg('usuario') }}
                         </small>
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="contrasena" class="col-12 mb-2 md:col-2 md:mb-0">Contraseña:</label>
+                    <label 
+                        htmlFor="contrasena" 
+                        class="col-12 mb-2 md:col-2 md:mb-0">
+                        Contraseña:
+                    </label>
                     <div class="col-12 md:col-10">
-                        <input pInputText 
+                        <input 
+                            pInputText 
                             id="contrasena" 
                             type="text" 
                             formControlName="contrasena"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('contrasena')}"/>
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('contrasena')}" />
                         <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
+                            class="ng-dirty ng-invalid" 
+                            class="p-error" 
                             *ngIf="campoEsValido('contrasena')">
                             {{ campoErrorMsg('contrasena') }}
                         </small>
@@ -123,14 +130,14 @@
                             id="rol" 
                             [options]="roles" 
                             optionLabel="nombre" 
-                            placeholder="Seleccionar rol" 
-                            [showClear]="true"
+                            placeholder="Seleccionar rol"
+                            [showClear]="true" 
                             formControlName="rol"
                             [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('rol')}">
                         </p-dropdown>
                         <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
+                            class="ng-dirty ng-invalid" 
+                            class="p-error" 
                             *ngIf="campoEsValido('rol')">
                             {{ campoErrorMsg('rol') }}
                         </small>
@@ -139,13 +146,15 @@
             </div>
             <div *ngIf="tipoAccion == 3 || tipoAccion == 4">
                 <div class="field grid">
-                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+                    <label htmlFor="name3" style="font-weight: bold;"
+                        class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
                     <div class="col-12 md:col-8">
                         <span>{{ usuario.nombre}} {{ usuario.ap}} {{ usuario.am}}</span>
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+                    <label htmlFor="name3" style="font-weight: bold;"
+                        class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
                     <div class="col-12 md:col-8">
                         <span *ngIf="usuario.estado==1">Activo</span>
                         <span *ngIf="usuario.estado==0">Eliminado</span>
@@ -156,13 +165,17 @@
                 <div class="col-12 md:col-6"></div>
                 <div class="col-12 md:col-3">
                     <p-button 
-                        type="submit"
+                        type="submit" 
                         label="{{ titleButton }}" 
-                        styleClass="p-button-text"
-                    ></p-button>
+                        styleClass="p-button-text">
+                    </p-button>
                 </div>
                 <div class="col-12 md:col-3">
-                    <p-button (click)="cerrarModal()" label="Cerrar" styleClass="p-button-text"></p-button>
+                    <p-button 
+                        (click)="cerrarModal()" 
+                        label="Cerrar" 
+                        styleClass="p-button-text">
+                    </p-button>
                 </div>
             </div>
         </div>

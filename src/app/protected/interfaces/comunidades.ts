@@ -8,4 +8,10 @@ export interface Comunidades{
     latitud:number | null;
     estado:number | null;
     id_usuario:number | null;
+    multimedias?:  Multimedia[];
+}
+
+export interface Multimedia {
+    ruta:         string;
+    tipo_archivo: string;
 }

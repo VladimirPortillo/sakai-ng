@@ -2,19 +2,38 @@
 	<div class="col-12">
 		<div class="card">
 			<h5>ADMINISTRAR ACTIVIDADES</h5>
-
-            <!-- Aqui va el contenido de la pagina -->
-            
-            <p-table [value]="actividades" #dt1  dataKey="id" [rows]="10"  [rowHover]="true" styleClass="p-datatable-gridlines" 
-					[paginator]="true"   [globalFilterFields]="['nombre']">
+            <!-- Aqui va el contenido de la pagina -->            
+            <p-table 
+				[value]="actividades" 
+				#dt1  
+				dataKey="id" 
+				[rows]="5"  
+				[rowHover]="true" 
+				styleClass="p-datatable-gridlines" 
+				[paginator]="true"   
+				[globalFilterFields]="['nombre']">
 				<ng-template pTemplate="caption">
 					<div class="flex justify-content-between flex-column sm:flex-row">     
 						<span class="p-input-icon-left mb-2" style="text-align:left;">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter  placeholder="Buscar..." class="w-full" (input)="onGlobalFilter(dt1, $event)" />
+							<input 
+								pInputText 
+								type="text" 
+								#filter  
+								placeholder="Buscar..." 
+								class="w-full" 
+								(input)="onGlobalFilter(dt1, $event)" />
 						</span>
                         <span style="text-align: right;">
-                            <button pButton pRipple type="button"  (click)="modalActividad(null,1,'Agregar Actividad','Guardar')" label="Agregar Actividad" class="p-button-secondary" style="text-align: right;"></button>
+                            <button 
+								pButton 
+								pRipple 
+								type="button"  
+								(click)="modalActividad(null,1,'Agregar Actividad','Guardar')" 
+								label="Agregar Actividad" 
+								class="p-button-secondary" 
+								style="text-align: right;">
+							</button>
                         </span>
 					</div>
 					<!-- <div class="grid formgrid">
@@ -78,26 +97,59 @@
 						</th>
 					</tr>
 				</ng-template>
-				<ng-template pTemplate="body" let-actividad>
+				<ng-template 
+					pTemplate="body" 
+					let-actividad 
+					let-rowIndex="rowIndex">
 					<tr>
 						<td>
-                            {{actividad.id_actividad}}
+                            {{ currentRowNumber + rowIndex + 1 }}
 						</td>
 						<td>
                             {{actividad.nombre}}
 						</td>
                         <td style="text-align: center;">
-                            <button pButton pRipple type="button" (click)="modalActividad(actividad,0,'Ver Actividad','')" icon="pi pi-user" class="p-button-rounded p-button-info p-button-outlined" ></button>
+                            <button 
+								pButton 
+								pRipple 
+								type="button" 
+								(click)="modalActividad(actividad,0,'Ver Actividad','')" 
+								icon="pi pi-user" 
+								class="p-button-rounded p-button-info p-button-outlined" >
+							</button>
 						</td>
 						<td style="text-align: center;">
-                            <button pButton pRipple type="button" (click)="modalActividad(actividad,2,'Editar Actividad','Editar')" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary p-button-outlined" ></button>
+                            <button 
+								pButton 
+								pRipple 
+								type="button" 
+								(click)="modalActividad(actividad,2,'Editar Actividad','Editar')" 
+								icon="pi pi-bookmark" 
+								class="p-button-rounded p-button-secondary p-button-outlined" >
+							</button>
 						</td>
 						<td style="text-align: center;">
-                            <button  pButton pRipple type="button" (click)="modalActividad(actividad,3,'Eliminar Actividad','Eliminar')" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" ></button>
+                            <button  
+								pButton 
+								pRipple 
+								type="button" 
+								(click)="modalActividad(actividad,3,'Eliminar Actividad','Eliminar')" 
+								icon="pi pi-times" 
+								class="p-button-rounded p-button-danger p-button-outlined" 
+								[disabled]="actividad.estado === 0">
+							</button>
 							
 						</td>
                         <td style="text-align: center;">
-                            <button pButton pRipple type="button"  (click)="modalActividad(actividad,4,'Habilitar Actividad','Habilitar')" icon="pi pi-check" class="p-button-rounded p-button-outlined" ></button>
+                            <button 
+								pButton 
+								pRipple 
+								type="button"  
+								(click)="modalActividad(actividad,4,'Habilitar Actividad','Habilitar')" 
+								icon="pi pi-check" 
+								class="p-button-rounded p-button-outlined" 
+								[disabled]="actividad.estado === 1">
+							</button>
                         </td>
 					</tr>
 				</ng-template>
@@ -112,9 +164,17 @@
 					</tr>
 				</ng-template>
     		</p-table>
+			<p-button 
+				label="Imprimir lista" 
+				severity="secondary" 
+				(click)="onImprimir()"
+			/>
 						<!-- modal -->
-
-			<p-dialog header="Header" [(visible)]="modalActividadVisible" [modal]="true" [style]="{ width: '40vw' }">
+			<p-dialog 
+				header="Header" 
+				[(visible)]="modalActividadVisible" 
+				[modal]="true" 
+				[style]="{ width: '40vw' }">
 
 				<ng-template pTemplate="header">
 					<span class="text-xl font-bold" >{{ modalTitle }}</span>

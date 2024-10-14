@@ -3,48 +3,82 @@
 		<div class="card">
 			<h5>ADMINISTRAR ATRACTIVOS TURISTICOS</h5>
 
-            <!-- Aqui va el contenido de la pagina -->
-            <p-table [value]="atractivos" #dt1  dataKey="id" [rows]="10"  [rowHover]="true" styleClass="p-datatable-gridlines" 
-                    [paginator]="true"   [globalFilterFields]="['nombre']" >
+			<!-- Aqui va el contenido de la pagina -->
+			<p-table 
+				[value]="atractivos" 
+				#dt1 
+				dataKey="id" 
+				[rows]="10" 
+				[rowHover]="true"
+				styleClass="p-datatable-gridlines" 
+				[paginator]="true" 
+				[globalFilterFields]="['nombre']">
 				<ng-template pTemplate="caption">
-					<div class="flex justify-content-between flex-column sm:flex-row">     
+					<div class="flex justify-content-between flex-column sm:flex-row">
 						<span class="p-input-icon-left mb-2" style="text-align:left;">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter  placeholder="Buscar..." class="w-full" (input)="onGlobalFilter(dt1, $event)"/>
+							<input 
+								pInputText 
+								type="text" 
+								#filter 
+								placeholder="Buscar..." 
+								class="w-full"
+								(input)="onGlobalFilter(dt1, $event)" />
 						</span>
-                        <span style="text-align: right;">
-                            <button pButton pRipple type="button"  (click)="modalAtractivo(null,1,'Agregar Atractivo Turistico','Guardar')" label="Agregar Atractivo Turistico"  class="p-button-secondary" style="text-align: right;"></button>
-                        </span>
+						<span style="text-align: right;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalAtractivo(null,1,'Agregar Atractivo Turistico','Guardar')"
+								label="Agregar Atractivo Turistico" 
+								class="p-button-secondary"
+								style="text-align: right;">
+							</button>
+						</span>
 					</div>
-                    <div class="grid formgrid">
-                        <div class="col-12 md:col-2">
-                            <div class="field-radiobutton">
-                                <p-radioButton name="atractivos" value="0" [(ngModel)]="valRadio" required></p-radioButton>
-                                <label for="0">Todos.</label>
-                            </div>
-                        </div>
-                        <div class="col-12 md:col-2">
-                            <div class="field-radiobutton">
-                                <p-radioButton name="atractivos" value="1" [(ngModel)]="valRadio"></p-radioButton>
-                                <label for="1">Activos.</label>
-                            </div>
-                        </div>
-                        <div class="col-12 md:col-2">
-                            <div class="field-radiobutton">
-                                <p-radioButton name="atractivos" value="2" [(ngModel)]="valRadio"></p-radioButton>
-                                <label for="2">Eliminados.</label>
-                            </div>
-                        </div>
-                        <div class="col-12 md:col-6">
-                            <div class="field-radiobutton">
-                               
-                            </div>
-                        </div>
-                    </div>
+					<div class="grid formgrid">
+						<div class="col-12 md:col-2">
+							<div class="field-radiobutton">
+								<p-radioButton 
+									name="atractivos" 
+									value="0" 
+									[(ngModel)]="valRadio"
+									required>
+								</p-radioButton>
+								<label for="0">Todos.</label>
+							</div>
+						</div>
+						<div class="col-12 md:col-2">
+							<div class="field-radiobutton">
+								<p-radioButton 
+									name="atractivos" 
+									value="1" 
+									[(ngModel)]="valRadio">
+								</p-radioButton>
+								<label for="1">Activos.</label>
+							</div>
+						</div>
+						<div class="col-12 md:col-2">
+							<div class="field-radiobutton">
+								<p-radioButton 
+									name="atractivos" 
+									value="2" 
+									[(ngModel)]="valRadio">
+								</p-radioButton>
+								<label for="2">Eliminados.</label>
+							</div>
+						</div>
+						<div class="col-12 md:col-6">
+							<div class="field-radiobutton">
+
+							</div>
+						</div>
+					</div>
 				</ng-template>
 				<ng-template pTemplate="header">
 					<tr>
-                        <th style="min-width: 3rem">
+						<th style="min-width: 3rem">
 							<div class="flex justify-content-between align-items-center">
 								<span>Nº</span>
 							</div>
@@ -55,7 +89,7 @@
 								<p-sortIcon field="nombre"></p-sortIcon>
 							</div>
 						</th>
-                        <th style="min-width: 10rem">
+						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
 								Ver
 							</div>
@@ -67,7 +101,7 @@
 						</th>
 						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center"></div>
-								Eliminar
+							Eliminar
 						</th>
 						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
@@ -76,27 +110,57 @@
 						</th>
 					</tr>
 				</ng-template>
-				<ng-template pTemplate="body" let-atractivo>
+				<ng-template pTemplate="body" let-atractivo let-rowIndex="rowIndex">
 					<tr>
 						<td>
-                            {{atractivo.id_atractivo}}
+							{{ currentRowNumber + rowIndex + 1 }}
 						</td>
 						<td>
-                            {{atractivo.nombre}}
-						</td>
-                        <td style="text-align: center;">
-                            <button pButton pRipple type="button" (click)="modalAtractivo(atractivo,0,'Ver Atractivo Turistico','')"  icon="pi pi-user" class="p-button-rounded p-button-info p-button-outlined" ></button>
+							{{atractivo.nombre}}
 						</td>
 						<td style="text-align: center;">
-                            <button pButton pRipple type="button" (click)="modalAtractivo(atractivo,2,'Editar Atractivo Turistico','Editar')" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary p-button-outlined" ></button>
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalAtractivo(atractivo,0,'Ver Atractivo Turistico','')" 
+								icon="pi pi-user"
+								class="p-button-rounded p-button-info p-button-outlined">
+							</button>
 						</td>
 						<td style="text-align: center;">
-                            <button  pButton pRipple type="button" (click)="modalAtractivo(atractivo,3,'Eliminar Atractivo Turistico','Eliminar')"  icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" ></button>
-							
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalAtractivo(atractivo,2,'Editar Atractivo Turistico','Editar')"
+								icon="pi pi-bookmark"
+								class="p-button-rounded p-button-secondary p-button-outlined">
+							</button>
 						</td>
-                        <td style="text-align: center;">
-                            <button pButton pRipple type="button"   (click)="modalAtractivo(atractivo,4,'Habilitar Atractivo Turistico','Habilitar')" icon="pi pi-check" class="p-button-rounded p-button-outlined" ></button>
-                        </td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalAtractivo(atractivo,3,'Eliminar Atractivo Turistico','Eliminar')"
+								icon="pi pi-times" 
+								class="p-button-rounded p-button-danger p-button-outlined"
+								[disabled]="atractivo.estado === 0">
+							</button>
+
+						</td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalAtractivo(atractivo,4,'Habilitar Atractivo Turistico','Habilitar')"
+								icon="pi pi-check" 
+								class="p-button-rounded p-button-outlined"
+								[disabled]="atractivo.estado === 1">
+							</button>
+						</td>
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="emptymessage">
@@ -109,28 +173,37 @@
 						<td colspan="8">Loading customers data. Please wait.</td>
 					</tr>
 				</ng-template>
-    		</p-table>
-                 <!-- modal -->
-                 <p-dialog header="Header" [(visible)]="modalAtractivoVisible" [modal]="true" [style]="{ width: '40vw' }">
-            
-                    <ng-template pTemplate="header">
-                        <span class="text-xl font-bold" >{{ modalTitle }}</span>
-                    </ng-template>
-    
-                    <app-modal-atractivo *ngIf="modalAtractivoVisible"
-                        [titleButton]="titleButton" 
-                        [atractivo]="dataAtractivo" 
-                        [tipoAccion]="tipoAccion"
-                        (onCloseModal)="cerrarModal($event)"
-                        (onSaveDataModal)="datosGuardadosModal($event)"
-                    ></app-modal-atractivo>
-                    
-                </p-dialog>
-            <!-- Aqui va el contenido de la pagina -->
-			
+			</p-table>
+			<p-button 
+				label="Imprimir lista" 
+				severity="secondary" 
+				(click)="onImprimir()" 
+			/>
+			<!-- modal -->
+			<p-dialog 
+				header="Header" 
+				[(visible)]="modalAtractivoVisible" 
+				[modal]="true" 
+				[style]="{ width: '40vw' }">
+
+				<ng-template pTemplate="header">
+					<span class="text-xl font-bold">{{ modalTitle }}</span>
+				</ng-template>
+
+				<app-modal-atractivo 
+					*ngIf="modalAtractivoVisible" 
+					[titleButton]="titleButton"
+					[atractivo]="dataAtractivo" 
+					[tipoAccion]="tipoAccion" 
+					(onCloseModal)="cerrarModal($event)"
+					(onSaveDataModal)="datosGuardadosModal($event)">
+				</app-modal-atractivo>
+
+			</p-dialog>
+			<!-- Aqui va el contenido de la pagina -->
+
 		</div>
 
 	</div>
 
 </div>
-

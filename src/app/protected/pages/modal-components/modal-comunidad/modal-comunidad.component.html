@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="superficie" class="col-12 mb-2 md:col-2 md:mb-0">Superficie:</label>
+                    <label htmlFor="superficie" class="col-12 mb-2 md:col-2 md:mb-0">Superficie en m2:</label>
                     <div class="col-12 md:col-10">
                         <input pInputText 
                             id="superficie" 
@@ -66,17 +66,41 @@
                         </small>
                     </div>
                 </div>
+                <div class="field grid ">
+                    <label htmlFor="poblacion" class="col-12 mb-2 md:col-2 md:mb-0">multimedias:</label>
+                    <div class="col-12 md:col-10">
+                    <div class="card" >
+                     
+                    </div>
+                    </div>
+                    
+                </div>
+
+                <!-- <div *ngIf="comunidad != null">
+                    <p>{{comunidad.multimedias[0].ruta}}</p>
+                    <p>{{comunidad.multimedias[0].tipo_archivo}}</p>
+                </div> -->
                 
             </div>
             <div *ngIf="tipoAccion == 3 || tipoAccion == 4">
                 <div class="field grid">
-                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+                    <label 
+                        htmlFor="name3" 
+                        style="font-weight: bold;" 
+                        class="col-12 mb-2 md:col-4 md:mb-0">
+                        Nombre:
+                    </label>
                     <div class="col-12 md:col-8">
                         <span>{{ comunidad.nombre}} </span>
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+                    <label 
+                        htmlFor="name3" 
+                        style="font-weight: bold;" 
+                        class="col-12 mb-2 md:col-4 md:mb-0">
+                        Estado:
+                    </label>
                     <div class="col-12 md:col-8">
                         <span *ngIf="comunidad.estado==1">Activo</span>
                         <span *ngIf="comunidad.estado==0">Eliminado</span>
@@ -93,7 +117,11 @@
                     ></p-button>
                 </div>
                 <div class="col-12 md:col-3">
-                    <p-button (click)="cerrarModal()" label="Cerrar" styleClass="p-button-text"></p-button>
+                    <p-button 
+                        (click)="cerrarModal()" 
+                        label="Cerrar" 
+                        styleClass="p-button-text">
+                    </p-button>
                 </div>
             </div>
         </div>

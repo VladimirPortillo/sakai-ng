@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuarios } from '../interfaces/usuarios';
+import { Login, LoginResponse } from '../interfaces/login';
+import { catchError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +31,14 @@ export class UsuariosService {
   habilitarUsuario(id_usuario:any){
     return this.http.get<any>('http://localhost:3000/api/habilitarUsuario/'+id_usuario);
   }
+
+  login(data_login:Login){
+    return this.http.post<LoginResponse>(
+      'http://localhost:3000/api/login',
+      data_login)
+      .pipe(
+        catchError(error => of(error.error.msg))
+      );
+  }
+
 }

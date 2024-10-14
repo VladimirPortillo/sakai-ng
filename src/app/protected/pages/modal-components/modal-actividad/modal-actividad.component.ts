@@ -2,7 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Actividades } from 'src/app/protected/interfaces/actividades';
+import { Comunidades } from 'src/app/protected/interfaces/comunidades';
+import { TipoActividades } from 'src/app/protected/interfaces/tipoActividades';
 import { ActividadesService } from 'src/app/protected/services/actividades.service';
+import { ComunidadesService } from 'src/app/protected/services/comunidades.service';
+import { tipoActividadesService } from 'src/app/protected/services/tipoActividades.service';
 
 @Component({
   selector: 'app-modal-actividad',
@@ -10,6 +14,13 @@ import { ActividadesService } from 'src/app/protected/services/actividades.servi
   styleUrls: ['./modal-actividad.component.scss']
 })
 export class ModalActividadComponent {
+
+    comunidades: Comunidades[] = [];
+    comunidad!: Comunidades;
+
+    tipoActividades: TipoActividades[] = [];
+    tipoActividad!: TipoActividades;
+
   @Input() titleButton!: String;
   @Input() actividad!: Actividades;
   @Input() tipoAccion!: number; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
@@ -29,17 +40,35 @@ export class ModalActividadComponent {
       direccion: ['', [Validators.required]],
       fecha_inicio: ['', [Validators.required]],
       fecha_fin: ['', [Validators.required]],
+      comunidad: ['', [Validators.required]],
+      tipoActividad:['', [Validators.required]],
   });
 
   constructor(
+    private comunidadesService: ComunidadesService,
+    private tipoActividadesService: tipoActividadesService,
       private fb: FormBuilder,
       private actividadesService: ActividadesService
   ) {}
 
   ngOnInit() {
-    console.log('modal usuario', this.actividad);
-      this.cargarDatos();
+    this.getComunidades();
+    // this.getTipoActividades();
   }
+
+  getComunidades() {
+    this.comunidadesService.getComunidades().subscribe((comunidades) => {
+        // console.log(roles);
+        this.comunidades = comunidades;
+        this.cargarDatos();
+    });
+    this.tipoActividadesService.getTipoActividades().subscribe((tipoActividades) => {
+        // console.log(roles);
+        this.tipoActividades = tipoActividades;
+        this.cargarDatos();
+    });
+    
+}
   cargarDatos() {
       if (this.tipoAccion == 0) this.miFormulario.disable();
       if (this.tipoAccion != 1) {
@@ -48,8 +77,17 @@ export class ModalActividadComponent {
           this.miFormulario.controls['direccion'].setValue(this.actividad.direccion);
           this.miFormulario.controls['fecha_inicio'].setValue(new Date(this.actividad.fecha_inicio + ''));
           this.miFormulario.controls['fecha_fin'].setValue(new Date(this.actividad.fecha_fin + ''));
+
+          this.miFormulario.controls['comunidad'].setValue(this.buscarComunidad());
+          this.miFormulario.controls['tipoActividad'].setValue(this.buscarTipoActividad());
       }
   }
+  buscarComunidad() {
+    return this.comunidades.find((comunidad) => comunidad.id_comunidad == this.actividad.id_comunidad);
+}
+buscarTipoActividad() {
+    return this.tipoActividades.find((tipoActividad) => tipoActividad.id_tipo == this.actividad.id_tipo);
+}
   campoEsValido(campo: string) {
       return (
           this.miFormulario.controls[campo].errors &&
@@ -105,8 +143,12 @@ export class ModalActividadComponent {
       this.actividad.direccion = this.miFormulario.value.direccion;
       this.actividad.fecha_inicio = this.miFormulario.value.fecha_inicio;
       this.actividad.fecha_fin = this.miFormulario.value.fecha_fin;
-     
+      this.actividad.id_comunidad = this.miFormulario.value.comunidad.id_comunidad;
+      this.actividad.id_tipo = this.miFormulario.value.tipoActividad.id_tipo;
+      this.actividad.longitud = 0;
+      this.actividad.latitud = 0;
       this.actividad.estado = 1;
+      console.log('agregar_restaurante:', this.actividad);
       
 
       this.actividadesService.agregarActividad(this.actividad).subscribe((resp) => {
@@ -120,7 +162,10 @@ export class ModalActividadComponent {
       this.actividad.direccion = this.miFormulario.value.direccion;
       this.actividad.fecha_inicio = this.miFormulario.value.fecha_inicio;
       this.actividad.fecha_fin = this.miFormulario.value.fecha_fin;
-     
+      this.actividad.id_comunidad = this.miFormulario.value.comunidad.id_comunidad;
+      this.actividad.id_tipo = this.miFormulario.value.tipoActividad.id_tipo;
+      this.actividad.longitud = 0;
+      this.actividad.latitud = 0;
       this.actividad.estado = 1;
 
       this.actividadesService

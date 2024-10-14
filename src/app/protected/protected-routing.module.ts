@@ -12,6 +12,9 @@ import { AtractivosComponent } from './pages/atractivos/atractivos.component';
 import { HotelesComponent } from './pages/hoteles/hoteles.component';
 import { RestaurantesComponent } from './pages/restaurantes/restaurantes.component';
 import { GastronomiasComponent } from './pages/gastronomias/gastronomias.component';
+import { TipoActividadesComponent } from './pages/tipo-actividades/tipo-actividades.component';
+import { PdfReportComponent } from './pages/pdf-report/pdf-report.component';
+import { AgregarComunidadComponent } from './pages/agregar-comunidad/agregar-comunidad.component';
 
 const routes: Routes = [
     {
@@ -24,10 +27,13 @@ const routes: Routes = [
             { path: 'menus', component: MenusComponent },
             { path: 'usuarios', component: UsuariosComponent },
             { path: 'comunidades', component: ComunidadesComponent },
+            { path: 'comunidades/agregar', component: AgregarComunidadComponent },
             { path: 'atractivos', component: AtractivosComponent },
             { path: 'hoteles', component: HotelesComponent },
             { path: 'restaurantes', component: RestaurantesComponent },
             { path: 'gastronomias', component: GastronomiasComponent },
+            { path: 'tipoActividades', component: TipoActividadesComponent },
+            { path: 'pdfReportes', component: PdfReportComponent },
             { path: '**', redirectTo: '' },
         ],
     },

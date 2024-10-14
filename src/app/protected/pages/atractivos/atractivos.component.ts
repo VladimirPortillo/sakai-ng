@@ -4,6 +4,7 @@ import { Table } from 'primeng/table';
 import { Atractivos_turisticos } from '../../interfaces/atractivos';
 import { AtractivosService } from '../../services/atractivos.service';
 import { ComunidadesService } from '../../services/comunidades.service';
+import { ReportesService } from '../../services/reportes.service';
 
 @Component({
   selector: 'app-atractivos',
@@ -12,6 +13,7 @@ import { ComunidadesService } from '../../services/comunidades.service';
 })
 export class AtractivosComponent {
   atractivos: Atractivos_turisticos[] = [];
+  currentRowNumber:number = 0;
   valRadio: string = '';
   
 
@@ -31,7 +33,8 @@ export class AtractivosComponent {
 
   constructor(
       private atractivosService: AtractivosService,
-      private comunidadesService: ComunidadesService
+      private comunidadesService: ComunidadesService,
+      private srvImprimir: ReportesService,
   ) {}
 
   ngOnInit(): void {
@@ -83,5 +86,26 @@ export class AtractivosComponent {
     onGlobalFilter(table: Table, event: Event) {
       table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
+      //para hacer reportes
+      onImprimir(){
+        let numdatos=0;
+        const encabezado=["N°","Nombre","descripción"];
+        this.atractivosService.getAtractivos().subscribe((atractivos) => {
+            this.atractivos = atractivos;
+            const cuerpo= Object(this.atractivos).map(
+                (obj:any)=>{        
+                    const datos=[
+                        numdatos+=1,    
+                        obj.nombre,
+                        obj.descripcion
+                    ]
+                    return datos;
+                }
+            )
+            console.log(cuerpo);
+            this.srvImprimir.imprimir(encabezado,cuerpo,"Lista Atractivos",true);
+        });
+
+    }
   
 }

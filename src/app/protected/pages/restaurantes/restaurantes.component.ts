@@ -4,6 +4,7 @@ import { Table } from 'primeng/table';
 import { Restaurantes } from '../../interfaces/restaurantes';
 import { RestaurantesService } from '../../services/restaurantes.service';
 import { ComunidadesService } from '../../services/comunidades.service';
+import { ReportesService } from '../../services/reportes.service';
 
 @Component({
   selector: 'app-restaurantes',
@@ -12,6 +13,7 @@ import { ComunidadesService } from '../../services/comunidades.service';
 })
 export class RestaurantesComponent {
   restaurantes: Restaurantes[] = [];
+  currentRowNumber:number = 0;
 
   modalRestauranteVisible: boolean = false;
   dataRestaurante: Restaurantes = {
@@ -20,7 +22,7 @@ export class RestaurantesComponent {
       direccion: null,
       categoria: null,
       telefono: null,
-      foto: null,
+      delivery: null,
       longitud: null,
       latitud: null,
       estado: null,
@@ -32,7 +34,8 @@ export class RestaurantesComponent {
 
   constructor(
       private restaurantesService: RestaurantesService,
-      private comunidadesService: ComunidadesService
+      private comunidadesService: ComunidadesService,
+      private srvImprimir: ReportesService,
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +62,7 @@ export class RestaurantesComponent {
               direccion: null,
               categoria: null,
               telefono: null,
-              foto: null,
+              delivery: null,
               longitud: null,
               latitud: null,
               estado: null,
@@ -85,4 +88,14 @@ export class RestaurantesComponent {
     onGlobalFilter(table: Table, event: Event) {
       table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
+  onImprimir(){
+    // const encabezado=["Nombre"];
+    // this.rolesService.getRoles().subscribe((roles) => {
+    //     this.roles = roles;
+    //     //const cuerpo = roles.map(rol => Object.values(rol));
+    //     const cuerpo=roles.map(rol => Object.values([rol.nombre]));
+    //     console.log(cuerpo);
+    //     this.srvImprimir.imprimir(encabezado,cuerpo,"Lista Roles",true);
+    // });
+}
 }

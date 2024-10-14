@@ -8,4 +8,6 @@ export interface Actividades {
     longitud: number | null;
     latitud: number | null;
     estado: number | null;
+    id_comunidad:number | null;
+    id_tipo: number | null;
 }

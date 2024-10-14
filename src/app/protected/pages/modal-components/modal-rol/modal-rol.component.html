@@ -5,14 +5,15 @@
                 <div class="field grid">
                     <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
                     <div class="col-12 md:col-10">
-                        <input pInputText 
+                        <input 
+                            pInputText 
                             id="nombre" 
-                            type="text"
+                            type="text" 
                             formControlName="nombre"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}"/>
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}" />
                         <small 
-                            class="ng-dirty ng-invalid"
-                            class="p-error"
+                            class="ng-dirty ng-invalid" 
+                            class="p-error" 
                             *ngIf="campoEsValido('nombre')">
                             {{ campoErrorMsg('nombre') }}
                         </small>
@@ -21,13 +22,19 @@
             </div>
             <div *ngIf="tipoAccion == 3 || tipoAccion == 4">
                 <div class="field grid">
-                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+                    <label htmlFor="name3" style="font-weight: bold;"
+                        class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
                     <div class="col-12 md:col-8">
                         <span>{{ rol.nombre}}</span>
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+                    <label 
+                        htmlFor="name3" 
+                        style="font-weight: bold;"
+                        class="col-12 mb-2 md:col-4 md:mb-0">
+                        Estado:
+                    </label>
                     <div class="col-12 md:col-8">
                         <span *ngIf="rol.estado==1">Activo</span>
                         <span *ngIf="rol.estado==0">Eliminado</span>
@@ -38,13 +45,17 @@
                 <div class="col-12 md:col-6"></div>
                 <div class="col-12 md:col-3">
                     <p-button 
-                        type="submit"
+                        type="submit" 
                         label="{{ titleButton }}" 
-                        styleClass="p-button-text"
-                    ></p-button>
+                        styleClass="p-button-text">
+                    </p-button>
                 </div>
                 <div class="col-12 md:col-3">
-                    <p-button (click)="cerrarModal()" label="Cerrar" styleClass="p-button-text"></p-button>
+                    <p-button 
+                        (click)="cerrarModal()" 
+                        label="Cerrar" 
+                        styleClass="p-button-text">
+                    </p-button>
                 </div>
             </div>
         </div>

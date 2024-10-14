@@ -51,7 +51,11 @@
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="categoria" class="col-12 mb-2 md:col-2 md:mb-0">Categoria:</label>
+                    <label 
+                        htmlFor="categoria" 
+                        class="col-12 mb-2 md:col-2 md:mb-0">
+                        Categoria:
+                    </label>
                     <div class="col-12 md:col-10">
                         <div class="field-radiobutton">
                             <p-radioButton 
@@ -71,11 +75,6 @@
                                 </p-radioButton>
                                 <label for="0">Tradicional.</label>
                             </div>
-                        <!-- <input pInputText 
-                            id="categoria" 
-                            type="text"
-                            formControlName="categoria"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('categoria')}"/> -->
                         <small 
                             class="ng-dirty ng-invalid"
                             class="p-error"
@@ -101,7 +100,40 @@
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="comunidad" class="col-12 mb-2 md:col-2 md:mb-0">Comunidad a asignar:</label>
+                    <label htmlFor="categoria" class="col-12 mb-2 md:col-2 md:mb-0">Delivery:</label>
+                    <div class="col-12 md:col-10">
+                        <div class="field-radiobutton">
+                            <p-radioButton 
+                                id="delivery" 
+                                formControlName="delivery"
+                                [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('delivery')}"
+                                value="mixto">
+                            </p-radioButton>
+                            <label for="0">Si.</label>
+                            </div>
+                            <div class="field-radiobutton">
+                                <p-radioButton 
+                                    id="delivery" 
+                                    formControlName="delivery"
+                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('delivery')}"
+                                    value="tradicional">
+                                </p-radioButton>
+                                <label for="0">No.</label>
+                            </div>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('delivery')">
+                            {{ campoErrorMsg('delivery') }}
+                        </small>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label 
+                        htmlFor="comunidad" 
+                        class="col-12 mb-2 md:col-2 md:mb-0">
+                        Comunidad a asignar:
+                    </label>
                     <div class="col-12 md:col-10">
                         <p-dropdown 
                             id="comunidad" 
@@ -123,13 +155,23 @@
             </div>
             <div *ngIf="tipoAccion == 3 || tipoAccion == 4">
                 <div class="field grid">
-                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Nombre:</label>
+                    <label 
+                        htmlFor="name3" 
+                        style="font-weight: bold;" 
+                        class="col-12 mb-2 md:col-4 md:mb-0">
+                        Nombre:
+                    </label>
                     <div class="col-12 md:col-8">
                         <span>{{ restaurante.nombre}} </span>
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="name3" style="font-weight: bold;" class="col-12 mb-2 md:col-4 md:mb-0">Estado:</label>
+                    <label 
+                        htmlFor="name3" 
+                        style="font-weight: bold;" 
+                        class="col-12 mb-2 md:col-4 md:mb-0">
+                        Estado:
+                    </label>
                     <div class="col-12 md:col-8">
                         <span *ngIf="restaurante.estado==1">Activo</span>
                         <span *ngIf="restaurante.estado==0">Eliminado</span>
@@ -146,7 +188,11 @@
                     ></p-button>
                 </div>
                 <div class="col-12 md:col-3">
-                    <p-button (click)="cerrarModal()" label="Cerrar" styleClass="p-button-text"></p-button>
+                    <p-button 
+                        (click)="cerrarModal()" 
+                        label="Cerrar" 
+                        styleClass="p-button-text">
+                    </p-button>
                 </div>
             </div>
         </div>

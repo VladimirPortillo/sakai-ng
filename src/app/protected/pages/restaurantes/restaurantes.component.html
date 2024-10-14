@@ -3,21 +3,41 @@
 		<div class="card">
 			<h5>ADMINISTRAR RESTAURANTES</h5>
 
-            <!-- Aqui va el contenido de la pagina -->
-            <p-table [value]="restaurantes" #dt1  dataKey="id" [rows]="10"  [rowHover]="true" 
-                    styleClass="p-datatable-gridlines" [paginator]="true"   [globalFilterFields]="['nombre']">
+			<!-- Aqui va el contenido de la pagina -->
+			<p-table 
+				[value]="restaurantes" 
+				#dt1 
+				dataKey="id" 
+				[rows]="10" 
+				[rowHover]="true"
+				styleClass="p-datatable-gridlines" 
+				[paginator]="true" 
+				[globalFilterFields]="['nombre']">
 				<ng-template pTemplate="caption">
-					<div class="flex justify-content-between flex-column sm:flex-row">     
+					<div class="flex justify-content-between flex-column sm:flex-row">
 						<span class="p-input-icon-left mb-2" style="text-align:left;">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter  placeholder="Buscar..." class="w-full" 
-									(input)="onGlobalFilter(dt1, $event)"/>
+							<input 
+								pInputText 
+								type="text" 
+								#filter 
+								placeholder="Buscar..." 
+								class="w-full"
+								(input)="onGlobalFilter(dt1, $event)" />
 						</span>
-                        <span style="text-align: right;">
-                            <button pButton pRipple type="button" (click)="modalRestaurante(null,1,'Agregar Restaurante','Guardar')" label="Agregar Restaurante"  class="p-button-secondary" style="text-align: right;"></button>
-                        </span>
+						<span style="text-align: right;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalRestaurante(null,1,'Agregar Restaurante','Guardar')"
+								label="Agregar Restaurante" 
+								class="p-button-secondary"
+								style="text-align: right;">
+							</button>
+						</span>
 					</div>
-                    <!-- <div class="grid formgrid">
+					<!-- <div class="grid formgrid">
                         <div class="col-12 md:col-2">
                             <div class="field-radiobutton">
                                 <p-radioButton name="city" value="Chicago" ></p-radioButton>
@@ -46,7 +66,7 @@
 				</ng-template>
 				<ng-template pTemplate="header">
 					<tr>
-                        <th style="min-width: 3rem">
+						<th style="min-width: 3rem">
 							<div class="flex justify-content-between align-items-center">
 								<span>Nº</span>
 							</div>
@@ -57,7 +77,7 @@
 								<p-sortIcon field="nombre"></p-sortIcon>
 							</div>
 						</th>
-                        <th style="min-width: 10rem">
+						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
 								Ver
 							</div>
@@ -69,7 +89,7 @@
 						</th>
 						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center"></div>
-								Eliminar
+							Eliminar
 						</th>
 						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
@@ -78,27 +98,57 @@
 						</th>
 					</tr>
 				</ng-template>
-				<ng-template pTemplate="body" let-restaurante>
+				<ng-template pTemplate="body" let-restaurante let-rowIndex="rowIndex">
 					<tr>
 						<td>
-                            {{restaurante.id_restaurante}}
+							{{ currentRowNumber + rowIndex + 1 }}
 						</td>
 						<td>
-                            {{restaurante.nombre}}
-						</td>
-                        <td style="text-align: center;">
-                            <button pButton pRipple type="button" (click)="modalRestaurante(restaurante,0,'Ver Restaurante','')"  icon="pi pi-user" class="p-button-rounded p-button-info p-button-outlined" ></button>
+							{{restaurante.nombre}}
 						</td>
 						<td style="text-align: center;">
-                            <button pButton pRipple type="button"  (click)="modalRestaurante(restaurante,2,'Editar Restaurante','Editar')" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary p-button-outlined" ></button>
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalRestaurante(restaurante,0,'Ver Restaurante','')" 
+								icon="pi pi-user"
+								class="p-button-rounded p-button-info p-button-outlined">
+							</button>
 						</td>
 						<td style="text-align: center;">
-                            <button  pButton pRipple type="button"  (click)="modalRestaurante(restaurante,3,'Eliminar Restaurante','Eliminar')" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" ></button>
-							
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalRestaurante(restaurante,2,'Editar Restaurante','Editar')"
+								icon="pi pi-bookmark"
+								class="p-button-rounded p-button-secondary p-button-outlined">
+							</button>
 						</td>
-                        <td style="text-align: center;">
-                            <button pButton pRipple type="button"  (click)="modalRestaurante(restaurante,4,'Habilitar Restaurante','Habilitar')" icon="pi pi-check" class="p-button-rounded p-button-outlined" ></button>
-                        </td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalRestaurante(restaurante,3,'Eliminar Restaurante','Eliminar')"
+								icon="pi pi-times" 
+								class="p-button-rounded p-button-danger p-button-outlined"
+								[disabled]="restaurante.estado === 0">
+							</button>
+
+						</td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalRestaurante(restaurante,4,'Habilitar Restaurante','Habilitar')"
+								icon="pi pi-check" 
+								class="p-button-rounded p-button-outlined"
+								[disabled]="restaurante.estado === 1">
+							</button>
+						</td>
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="emptymessage">
@@ -111,25 +161,34 @@
 						<td colspan="8">Loading customers data. Please wait.</td>
 					</tr>
 				</ng-template>
-    		</p-table>
-            <!-- modal -->
-            <p-dialog header="Header" [(visible)]="modalRestauranteVisible" [modal]="true" [style]="{ width: '40vw' }">
-            
-                <ng-template pTemplate="header">
-                    <span class="text-xl font-bold" >{{ modalTitle }}</span>
-                </ng-template>
+			</p-table>
+			<p-button 
+				label="Imprimir" 
+				severity="secondary" 
+				(click)="onImprimir()" />
+			<!-- modal -->
+			<p-dialog 
+				header="Header" 
+				[(visible)]="modalRestauranteVisible" 
+				[modal]="true" 
+				[style]="{ width: '40vw' }">
 
-                <app-modal-restaurante *ngIf="modalRestauranteVisible"
-                    [titleButton]="titleButton" 
-                    [restaurante]="dataRestaurante" 
-                    [tipoAccion]="tipoAccion"
-                    (onCloseModal)="cerrarModal($event)"
-                    (onSaveDataModal)="datosGuardadosModal($event)"
-                ></app-modal-restaurante>
-				
-            </p-dialog>
-            <!-- Aqui va el contenido de la pagina -->
-			
+				<ng-template pTemplate="header">
+					<span class="text-xl font-bold">{{ modalTitle }}</span>
+				</ng-template>
+
+				<app-modal-restaurante 
+					*ngIf="modalRestauranteVisible" 
+					[titleButton]="titleButton"
+					[restaurante]="dataRestaurante" 
+					[tipoAccion]="tipoAccion" 
+					(onCloseModal)="cerrarModal($event)"
+					(onSaveDataModal)="datosGuardadosModal($event)">
+				</app-modal-restaurante>
+
+			</p-dialog>
+			<!-- Aqui va el contenido de la pagina -->
+
 		</div>
 
 	</div>

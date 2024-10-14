@@ -32,6 +32,7 @@ export class ModalRestauranteComponent {
       direccion: ['', [Validators.required]],
       categoria: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
+      delivery: ['', [Validators.required]],
       comunidad: ['', [Validators.required]],
   });
 
@@ -42,7 +43,7 @@ export class ModalRestauranteComponent {
   ) {}
 
   ngOnInit() {
-      console.log('modal usuario', this.restaurante);
+      console.log('modal restaurante:', this.restaurante);
       this.getComunidades();
   }
 
@@ -62,6 +63,7 @@ export class ModalRestauranteComponent {
           this.miFormulario.controls['direccion'].setValue(this.restaurante.direccion);
           this.miFormulario.controls['categoria'].setValue(this.restaurante.categoria);
           this.miFormulario.controls['telefono'].setValue(this.restaurante.telefono);
+          this.miFormulario.controls['delivery'].setValue(this.restaurante.delivery);
         
           this.miFormulario.controls['comunidad'].setValue(this.buscarComunidad());
       }
@@ -126,12 +128,12 @@ export class ModalRestauranteComponent {
       this.restaurante.direccion = this.miFormulario.value.direccion;
       this.restaurante.categoria = this.miFormulario.value.categoria;
       this.restaurante.telefono = this.miFormulario.value.telefono;
-      this.restaurante.foto = '--';
+      this.restaurante.delivery = this.miFormulario.value.delivery;
       this.restaurante.longitud = 0;
       this.restaurante.latitud = 0;
       this.restaurante.estado = 1;
       this.restaurante.id_comunidad = this.miFormulario.value.comunidad.id_comunidad;
-      console.log('usuario', this.restaurante);
+      console.log('agregar_restaurante:', this.restaurante);
 
       this.restaurantesService.agregarRestaurante(this.restaurante).subscribe((resp) => {
           this.onSaveDataModal.emit(false);
@@ -144,12 +146,12 @@ export class ModalRestauranteComponent {
       this.restaurante.direccion = this.miFormulario.value.direccion;
       this.restaurante.categoria = this.miFormulario.value.categoria;
       this.restaurante.telefono = this.miFormulario.value.telefono;
-      this.restaurante.foto = '--';
+      this.restaurante.delivery = this.miFormulario.value.delivery;
       this.restaurante.longitud = 0;
       this.restaurante.latitud = 0;
       this.restaurante.estado = 1;
       this.restaurante.id_comunidad = this.miFormulario.value.comunidad.id_comunidad;
-      console.log('usuario', this.restaurante);
+      console.log('modal_restaurante:', this.restaurante);
 
       this.restaurantesService
           .editarRestaurante(this.restaurante, this.restaurante.id_restaurante)
@@ -159,7 +161,7 @@ export class ModalRestauranteComponent {
   }
 
   accionRestaurante() {
-      console.log('usuario', this.restaurante);
+      console.log('restaurante', this.restaurante);
       if(this.tipoAccion == 3) {
           // Eliminación de usuario
           this.restaurantesService.eliminarRestaurante(this.restaurante.id_restaurante)

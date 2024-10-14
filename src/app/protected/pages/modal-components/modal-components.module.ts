@@ -15,6 +15,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FileUploadModule } from 'primeng/fileupload';
+
+
+
+
+import { ImageModule } from 'primeng/image';
+import { GalleriaModule } from 'primeng/galleria';
+import { CarouselModule } from 'primeng/carousel';
 
 import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
 import { ModalRolComponent } from './modal-rol/modal-rol.component';
@@ -25,6 +33,9 @@ import { ModalAtractivoComponent } from './modal-atractivo/modal-atractivo.compo
 import { ModalComunidadComponent } from './modal-comunidad/modal-comunidad.component';
 import { ModalGastronomiaComponent } from './modal-gastronomia/modal-gastronomia.component';
 import { ModalMenuComponent } from './modal-menu/modal-menu.component';
+import { ModalTipoActividadComponent } from './modal-tipo-actividad/modal-tipo-actividad.component';
+
+
 
 @NgModule({
     declarations: [
@@ -36,7 +47,9 @@ import { ModalMenuComponent } from './modal-menu/modal-menu.component';
         ModalAtractivoComponent, 
         ModalComunidadComponent, 
         ModalGastronomiaComponent, 
-        ModalMenuComponent
+        ModalMenuComponent, 
+        ModalTipoActividadComponent,
+        
     ],
     imports: [
         CommonModule,
@@ -54,7 +67,12 @@ import { ModalMenuComponent } from './modal-menu/modal-menu.component';
         DialogModule,
         ConfirmDialogModule,
         CalendarModule,
-        InputTextareaModule
+        InputTextareaModule,
+        FileUploadModule,
+        CarouselModule,
+        ImageModule,
+		GalleriaModule
+        
     ],
     exports: [
         ModalUsuarioComponent,
@@ -65,7 +83,8 @@ import { ModalMenuComponent } from './modal-menu/modal-menu.component';
         ModalRolComponent, 
         ModalActividadComponent, 
         ModalGastronomiaComponent,
-        ModalMenuComponent
+        ModalMenuComponent,
+        ModalTipoActividadComponent
     ],
 })
 export class ModalComponentsModule {}

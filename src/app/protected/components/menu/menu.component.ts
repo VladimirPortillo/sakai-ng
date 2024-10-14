@@ -72,6 +72,16 @@ export class MenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-microsoft',
                         routerLink: ['gastronomias'], //   /index/actividades
                     },
+                    {
+                        label: 'Administrar tipo actividades',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['tipoActividades'], //   /index/actividades
+                    }, 
+                    {
+                        label: 'Administrar Reportes',
+                        icon: 'pi pi-fw pi-microsoft',
+                        routerLink: ['pdfReportes'], //   /index/actividades
+                    }, 
                 ],
             },
         ];

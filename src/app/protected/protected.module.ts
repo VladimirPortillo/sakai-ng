@@ -10,7 +10,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { RolesComponent } from './pages/roles/roles.component';
 import { TableModule } from 'primeng/table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
 import { SliderModule } from 'primeng/slider';
 import { InputTextModule } from 'primeng/inputtext';
@@ -25,6 +25,20 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CalendarModule } from "primeng/calendar";
 import { InputTextareaModule } from "primeng/inputtextarea";
+import { FileUploadModule } from 'primeng/fileupload';
+import { SelectButtonModule } from 'primeng/selectbutton';
+// import { GoogleMapsModule } from '@angular/google-maps';
+
+
+
+
+import { AutoCompleteModule } from "primeng/autocomplete";
+import { ChipsModule } from "primeng/chips";
+import { InputMaskModule } from "primeng/inputmask";
+import { InputNumberModule } from "primeng/inputnumber";
+import { CascadeSelectModule } from "primeng/cascadeselect";
+
+
 
 import { ActividadesComponent } from './pages/actividades/actividades.component';
 import { MenusComponent } from './pages/menus/menus.component';
@@ -35,6 +49,11 @@ import { HotelesComponent } from './pages/hoteles/hoteles.component';
 import { RestaurantesComponent } from './pages/restaurantes/restaurantes.component';
 import { GastronomiasComponent } from './pages/gastronomias/gastronomias.component';
 import { ModalComponentsModule } from './pages/modal-components/modal-components.module';
+import { PdfReportComponent } from './pages/pdf-report/pdf-report.component';
+import { TipoActividadesComponent } from './pages/tipo-actividades/tipo-actividades.component';
+import { VerImagenesComponent } from './pages/ver-imagenes/ver-imagenes.component';
+import { AgregarComunidadComponent } from './pages/agregar-comunidad/agregar-comunidad.component';
+import { MapComponent } from './pages/map/map.component';
 
 
 @NgModule({
@@ -49,14 +68,22 @@ import { ModalComponentsModule } from './pages/modal-components/modal-components
         AtractivosComponent, 
         HotelesComponent, 
         RestaurantesComponent, 
-        GastronomiasComponent],
+        GastronomiasComponent, 
+        PdfReportComponent, 
+        TipoActividadesComponent, 
+        VerImagenesComponent, 
+        AgregarComunidadComponent, 
+        MapComponent],
     imports: [
         CommonModule,
         ProtectedRoutingModule,
         ComponentsModule,
         ModalComponentsModule,
+        // GoogleMapsModule,
 
         FormsModule,
+        ReactiveFormsModule,
+
         TableModule,
         RatingModule,
         ButtonModule,
@@ -73,7 +100,15 @@ import { ModalComponentsModule } from './pages/modal-components/modal-components
         DialogModule,
         ConfirmDialogModule,
         CalendarModule,
-        InputTextareaModule
+        InputTextareaModule,
+        FileUploadModule,
+        SelectButtonModule,
+
+        AutoCompleteModule,
+        ChipsModule,
+        InputMaskModule,
+        InputNumberModule,
+        CascadeSelectModule 
     ],
 })
 export class ProtectedModule {}

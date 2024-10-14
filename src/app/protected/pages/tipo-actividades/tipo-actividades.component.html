@@ -1,0 +1,196 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>ADMINISTRAR TIPO ACTIVIDADES</h5>
+
+			<!-- Aqui va el contenido de la pagina -->
+
+			<p-table 
+				[value]="tipoActividades" 
+				#dt1 
+				dataKey="id" 
+				[rows]="5" 
+				[rowHover]="true"
+				styleClass="p-datatable-gridlines" 
+				[paginator]="true" 
+				[globalFilterFields]="['nombre']">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<span class="p-input-icon-left mb-2" style="text-align:left;">
+							<i class="pi pi-search"></i>
+							<input 
+								pInputText 
+								type="text" 
+								#filter 
+								placeholder="Buscar..." 
+								class="w-full"
+								(input)="onGlobalFilter(dt1, $event)" />
+						</span>
+						<span style="text-align: right;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalTipoActividad(null,1,'Agregar Tipo Actividad','Guardar')"
+								label="Agregar Tipo Actividad" 
+								class="p-button-secondary"
+								style="text-align: right;">
+							</button>
+
+						</span>
+					</div>
+					<!-- <div class="grid formgrid">
+                        <div class="col-12 md:col-2">
+                            <div class="field-radiobutton">
+                                <p-radioButton name="city" value="2" [(ngModel)]="valRadio" checked></p-radioButton>
+                                <label for="city1">Todos.</label>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-2">
+                            <div class="field-radiobutton">
+                                <p-radioButton name="city" value="1" [(ngModel)]="valRadio"></p-radioButton>
+                                <label for="city2">Activos.</label>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-2">
+                            <div class="field-radiobutton">
+                                <p-radioButton name="city" value="0" [(ngModel)]="valRadio"></p-radioButton>
+                                <label for="city3">Eliminados.</label>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="field-radiobutton">
+                               
+                            </div>
+                        </div>
+                    </div> -->
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 3rem">
+							<div class="flex justify-content-between align-items-center">
+								Nº
+							</div>
+						</th>
+						<th 
+							pSortableColumn="nombre" 
+							style="min-width: 12rem; text-align:center;">
+							<div class="flex justify-content-between align-items-center;text-align:center;">
+								Nombre
+								<p-sortIcon field="nombre"></p-sortIcon>
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Ver
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Editar
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center"></div>
+							Eliminar
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Habilitar
+							</div>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-tipoActividad let-rowIndex="rowIndex">
+					<tr>
+						<td>
+							{{ currentRowNumber + rowIndex + 1 }}
+						</td>
+						<td>
+							{{tipoActividad.nombre}}
+						</td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalTipoActividad(tipoActividad,0,'Ver Tipo Actividad','')" 
+								icon="pi pi-user"
+								class="p-button-rounded p-button-info p-button-outlined">
+							</button>
+						</td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalTipoActividad(tipoActividad,2,'Editar Tipo Actividad','Editar')"
+								icon="pi pi-bookmark"
+								class="p-button-rounded p-button-secondary p-button-outlined">
+							</button>
+						</td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalTipoActividad(tipoActividad,3,'Eliminar Tipo Actividad','Eliminar')"
+								icon="pi pi-times" 
+								class="p-button-rounded p-button-danger p-button-outlined"
+								[disabled]="tipoActividad.estado === 0">
+							</button>
+
+						</td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalTipoActividad(tipoActividad,4,'Habilitar Tipo Actividad','Habilitar')"
+								icon="pi pi-check" 
+								class="p-button-rounded p-button-outlined"
+								[disabled]="tipoActividad.estado === 1">
+							</button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No hay tipo actividades para mostrar.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Cargando los roles espere por favor.</td>
+					</tr>
+				</ng-template>
+			</p-table>
+
+
+			<!-- modal -->
+
+			<p-dialog header="Header" [(visible)]="modalTipoActividadVisible" [modal]="true"
+				[style]="{ width: '40vw' }">
+
+				<ng-template pTemplate="header">
+					<span class="text-xl font-bold">{{ modalTitle }}</span>
+				</ng-template>
+
+				<app-modal-tipo-actividad 
+					*ngIf="modalTipoActividadVisible" 
+					[titleButton]="titleButton"
+					[tipoActividad]="dataTipoActividad" 
+					[tipoAccion]="tipoAccion" 
+					(onCloseModal)="cerrarModal($event)"
+					(onSaveDataModal)="datosGuardadosModal($event)">
+				</app-modal-tipo-actividad>
+
+			</p-dialog>
+
+			<!-- Aqui va el contenido de la pagina -->
+
+		</div>
+
+	</div>
+
+</div>

@@ -2,50 +2,70 @@
 	<div class="col-12">
 		<div class="card">
 			<h5>ADMINISTRAR MENUS</h5>
-            <!-- Aqui va el contenido de la pagina -->
+			<!-- Aqui va el contenido de la pagina -->
 
-            <p-table [value]="menus" #dt1  dataKey="id" [rows]="5"  [rowHover]="true" styleClass="p-datatable-gridlines" 
-                [paginator]="true"   [globalFilterFields]="['nombre']">
+			<p-table 
+				[value]="menus" 
+				#dt1 
+				dataKey="id" 
+				[rows]="5" 
+				[rowHover]="true" 
+				styleClass="p-datatable-gridlines"
+				[paginator]="true" 
+				[globalFilterFields]="['nombre']">
 				<ng-template pTemplate="caption">
-					<div class="flex justify-content-between flex-column sm:flex-row">     
+					<div class="flex justify-content-between flex-column sm:flex-row">
 						<span class="p-input-icon-left mb-2" style="text-align:left;">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter  placeholder="Buscar..." class="w-full" (input)="onGlobalFilter(dt1, $event)"/>
+							<input 
+								pInputText 
+								type="text" 
+								#filter 
+								placeholder="Buscar..." 
+								class="w-full"
+								(input)="onGlobalFilter(dt1, $event)" />
 						</span>
-                        <span style="text-align: right;">
-                            <button pButton pRipple type="button" (click)="modalMenu(null,1,'Agregar Menu','Guardar')" label="Agregar Menu" class="p-button-secondary" style="text-align: right;" ></button>
-                        </span>
+						<span style="text-align: right;">
+							<button 
+								pButton 
+								pRipple 
+								type="button" 
+								(click)="modalMenu(null,1,'Agregar Menu','Guardar')"
+								label="Agregar Menu" 
+								class="p-button-secondary" 
+								style="text-align: right;">
+							</button>
+						</span>
 					</div>
-                    <div class="grid formgrid">
-                        <div class="col-12 md:col-2">
-                            <div class="field-radiobutton">
-                                <p-radioButton name="city" value="Chicago" ></p-radioButton>
-                                <label for="city1">Todos.</label>
-                            </div>
-                        </div>
-                        <div class="col-12 md:col-2">
-                            <div class="field-radiobutton">
-                                <p-radioButton name="city" value="Los Angeles" 
-                                               ></p-radioButton>
-                                <label for="city2">Activos.</label>
-                            </div>
-                        </div>
-                        <div class="col-12 md:col-2">
-                            <div class="field-radiobutton">
-                                <p-radioButton name="city" value="New York"></p-radioButton>
-                                <label for="city3">Eliminados.</label>
-                            </div>
-                        </div>
-                        <div class="col-12 md:col-6">
-                            <div class="field-radiobutton">
-                               
-                            </div>
-                        </div>
-                    </div>
+					<div class="grid formgrid">
+						<div class="col-12 md:col-2">
+							<div class="field-radiobutton">
+								<p-radioButton name="city" value="Chicago"></p-radioButton>
+								<label for="city1">Todos.</label>
+							</div>
+						</div>
+						<div class="col-12 md:col-2">
+							<div class="field-radiobutton">
+								<p-radioButton name="city" value="Los Angeles"></p-radioButton>
+								<label for="city2">Activos.</label>
+							</div>
+						</div>
+						<div class="col-12 md:col-2">
+							<div class="field-radiobutton">
+								<p-radioButton name="city" value="New York"></p-radioButton>
+								<label for="city3">Eliminados.</label>
+							</div>
+						</div>
+						<div class="col-12 md:col-6">
+							<div class="field-radiobutton">
+
+							</div>
+						</div>
+					</div>
 				</ng-template>
 				<ng-template pTemplate="header">
 					<tr>
-                        <th style="min-width: 3rem">
+						<th style="min-width: 3rem">
 							<div class="flex justify-content-between align-items-center">
 								<span>Nº</span>
 							</div>
@@ -56,7 +76,7 @@
 								<p-sortIcon field="nombre"></p-sortIcon>
 							</div>
 						</th>
-                        <th style="min-width: 10rem">
+						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
 								Ver
 							</div>
@@ -68,7 +88,7 @@
 						</th>
 						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center"></div>
-								Eliminar
+							Eliminar
 						</th>
 						<th style="min-width: 10rem">
 							<div class="flex justify-content-between align-items-center">
@@ -77,27 +97,57 @@
 						</th>
 					</tr>
 				</ng-template>
-				<ng-template pTemplate="body" let-menu>
+				<ng-template pTemplate="body" let-menu let-rowIndex="rowIndex">
 					<tr>
 						<td>
-                            {{menu.id_menu+1}}
+							{{ currentRowNumber + rowIndex + 1 }}
 						</td>
 						<td>
-                            {{menu.nombre}}
-						</td>
-                        <td style="text-align: center;">
-                            <button pButton pRipple type="button" (click)="modalMenu(menu,0,'Ver Menu','')" icon="pi pi-user" class="p-button-rounded p-button-info p-button-outlined" ></button>
+							{{menu.nombre}}
 						</td>
 						<td style="text-align: center;">
-                            <button pButton pRipple type="button" (click)="modalMenu(menu,2,'Editar Menu','Editar')" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary p-button-outlined" ></button>
+							<button 
+								pButton 
+								pRipple 
+								type="button" 
+								(click)="modalMenu(menu,0,'Ver Menu','')"
+								icon="pi pi-user" 
+								class="p-button-rounded p-button-info p-button-outlined">
+							</button>
 						</td>
 						<td style="text-align: center;">
-                            <button  pButton pRipple type="button" (click)="modalMenu(menu,3,'Eliminar Menu','Eliminar')" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" ></button>
-							
+							<button 
+								pButton 
+								pRipple 	
+								type="button" 
+								(click)="modalMenu(menu,2,'Editar Menu','Editar')"
+								icon="pi pi-bookmark"
+								class="p-button-rounded p-button-secondary p-button-outlined">
+							</button>
 						</td>
-                        <td style="text-align: center;">
-                            <button pButton pRipple type="button" (click)="modalMenu(menu,4,'Habilitar Menu','Habilitar')" icon="pi pi-check" class="p-button-rounded p-button-outlined" ></button>
-                        </td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button" 
+								(click)="modalMenu(menu,3,'Eliminar Menu','Eliminar')"
+								icon="pi pi-times" 
+								class="p-button-rounded p-button-danger p-button-outlined"
+								[disabled]="menu.estado === 0">
+							</button>
+
+						</td>
+						<td style="text-align: center;">
+							<button 
+								pButton 
+								pRipple 
+								type="button"
+								(click)="modalMenu(menu,4,'Habilitar Menu','Habilitar')" 
+								icon="pi pi-check"
+								class="p-button-rounded p-button-outlined" 
+								[disabled]="menu.estado === 1">
+							</button>
+						</td>
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="emptymessage">
@@ -110,26 +160,35 @@
 						<td colspan="8">Cargando los datos de los menus. Espere por favor.</td>
 					</tr>
 				</ng-template>
-    		</p-table>
-            <!-- modal -->
+			</p-table>
+			<p-button 
+				label="Imprimir" 
+				severity="secondary" 
+				(click)="onImprimir()" />
+			<!-- modal -->
 
-			<p-dialog header="Header" [(visible)]="modalMenuVisible" [modal]="true" [style]="{ width: '40vw' }">
+			<p-dialog 
+				header="Header" 
+				[(visible)]="modalMenuVisible" 
+				[modal]="true" 
+				[style]="{ width: '40vw' }">
 
 				<ng-template pTemplate="header">
-					<span class="text-xl font-bold" >{{ modalTitle }}</span>
+					<span class="text-xl font-bold">{{ modalTitle }}</span>
 				</ng-template>
 
-				<app-modal-menu *ngIf="modalMenuVisible"
+				<app-modal-menu 
+					*ngIf="modalMenuVisible" 
 					[titleButton]="titleButton" 
-					[menu]="dataMenu" 
-					[tipoAccion]="tipoAccion"
+					[menu]="dataMenu"
+					[tipoAccion]="tipoAccion" 
 					(onCloseModal)="cerrarModal($event)"
-					(onSaveDataModal)="datosGuardadosModal($event)"
-				></app-modal-menu>
-				
+					(onSaveDataModal)="datosGuardadosModal($event)">
+				</app-modal-menu>
+
 			</p-dialog>
-            <!-- Aqui va el contenido de la pagina -->
-			
+			<!-- Aqui va el contenido de la pagina -->
+
 		</div>
 
 	</div>

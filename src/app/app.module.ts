@@ -6,8 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
+
+import { PdfReportComponent } from './protected/pages/pdf-report/pdf-report.component';
 
 
 @NgModule({
@@ -18,6 +23,9 @@ import { AppRoutingModule } from './app-routing.module';
         BrowserAnimationsModule,
         HttpClientModule,
         DialogModule,
+        ButtonModule,
+        FormsModule,
+         
 
     ],
     providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],

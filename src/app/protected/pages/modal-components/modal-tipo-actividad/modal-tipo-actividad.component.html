@@ -1,0 +1,84 @@
+<form (ngSubmit)="guardar()" [formGroup]="miFormulario">
+    <div class="col-12">
+        <div class="p-fluid">
+            <div *ngIf="tipoAccion == 0 || tipoAccion == 1 || tipoAccion == 2">
+                <div class="field grid">
+                    <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
+                    <div class="col-12 md:col-10">
+                        <input pInputText 
+                            id="nombre" 
+                            type="text"
+                            formControlName="nombre"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}"/>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('nombre')">
+                            {{ campoErrorMsg('nombre') }}
+                        </small>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Descripción:</label>
+                    <div class="col-12 md:col-10">
+                        <input 
+                            pInputText 
+                            id="descripcion" 
+                            type="text"
+                            formControlName="descripcion"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('descripcion')}"/>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('descripcion')">
+                            {{ campoErrorMsg('descripcion') }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="tipoAccion == 3 || tipoAccion == 4">
+                <div class="field grid">
+                    <label 
+                        htmlFor="name3" 
+                        style="font-weight: bold;" 
+                        class="col-12 mb-2 md:col-4 md:mb-0">
+                        Nombre:
+                    </label>
+                    <div class="col-12 md:col-8">
+                        <span>{{tipoActividad.nombre}}</span>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label 
+                        htmlFor="name3" 
+                        style="font-weight: bold;" 
+                        class="col-12 mb-2 md:col-4 md:mb-0">
+                        Estado:
+                    </label>
+                    <div class="col-12 md:col-8">
+                        <span *ngIf="tipoActividad.estado==1">Activo</span>
+                        <span *ngIf="tipoActividad.estado==0">Eliminado</span>
+                    </div>
+                </div>
+            </div>
+            <div class="field grid">
+                <div class="col-12 md:col-6"></div>
+                <div class="col-12 md:col-3">
+                    <p-button 
+                        type="submit"
+                        label="{{ titleButton }}" 
+                        styleClass="p-button-text"
+                    ></p-button>
+                </div>
+                <div class="col-12 md:col-3">
+                    <p-button 
+                        (click)="cerrarModal()" 
+                        label="Cerrar" 
+                        styleClass="p-button-text">
+                    </p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

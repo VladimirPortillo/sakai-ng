@@ -1,0 +1,40 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>ADMINISTRAR REPORTES</h5>
+            <!-- Aqui va el contenido de la pagina -->
+            <div class="col-12 md:col-6">
+                <div class="card p-fluid">
+                    <h5>Filtrar actividades en una comunidad en un rango de fechas:</h5>
+                    <div class="field">
+                        <label htmlFor="name1">Comunidad:</label>
+                        <p-dropdown  
+                            [options]="comunidades"
+                            optionLabel="nombre"
+                            [(ngModel)]="comunidad"  
+                            placeholder="Seleccionar comunidad" 
+                            [showClear]="true"
+                            >
+                        </p-dropdown>
+                    </div>
+                    <h6>Rango de fechas de las actividades</h6>
+                    <div class="field">
+                        <label htmlFor="email1">Fecha inicio:</label>
+                        <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+                    </div>
+                    <div class="field">
+                        <label htmlFor="age1">Fecha fin:</label>
+                        <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button pButton pRipple label="Generar"></button>
+                    </div>
+                </div>
+            </div>
+            <!-- Aqui va el contenido de la pagina -->
+			
+		</div>
+
+	</div>
+
+</div>

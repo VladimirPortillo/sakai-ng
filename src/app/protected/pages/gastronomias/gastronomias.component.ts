@@ -3,6 +3,7 @@ import { Table } from 'primeng/table';
 
 import { Gastronomia } from '../../interfaces/gastronomias';
 import { GastronomiasService } from '../../services/gastronomias.service';
+import { ReportesService } from '../../services/reportes.service';
 
 @Component({
   selector: 'app-gastronomias',
@@ -11,6 +12,7 @@ import { GastronomiasService } from '../../services/gastronomias.service';
 })
 export class GastronomiasComponent {
   gastronomias: Gastronomia[] = [];
+  currentRowNumber:number = 0;
 
   modalGastronomiaVisible: boolean = false;
   dataGastronomia: Gastronomia = {
@@ -25,6 +27,7 @@ export class GastronomiasComponent {
 
   constructor(
       private gastronomiasService: GastronomiasService,
+      private srvImprimir: ReportesService,
   ) {}
 
   ngOnInit(): void {
@@ -71,4 +74,14 @@ export class GastronomiasComponent {
     onGlobalFilter(table: Table, event: Event) {
       table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
+  onImprimir(){
+    // const encabezado=["Nombre"];
+    // this.rolesService.getRoles().subscribe((roles) => {
+    //     this.roles = roles;
+    //     //const cuerpo = roles.map(rol => Object.values(rol));
+    //     const cuerpo=roles.map(rol => Object.values([rol.nombre]));
+    //     console.log(cuerpo);
+    //     this.srvImprimir.imprimir(encabezado,cuerpo,"Lista Roles",true);
+    // });
+}
 }

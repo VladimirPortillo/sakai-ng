@@ -5,7 +5,7 @@ export interface Restaurantes{
     direccion:string | null;
     categoria:string | null;
     telefono:number | null;
-    foto:string | null;
+    delivery:string | null;
     longitud:number | null;
     latitud:number | null;
     estado:number | null;
