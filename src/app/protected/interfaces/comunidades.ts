@@ -8,10 +8,27 @@ export interface Comunidades{
     latitud:number | null;
     estado:number | null;
     id_usuario:number | null;
-    multimedias?:  Multimedia[];
+    multimedias:  Multimedia[] | [];
 }
 
 export interface Multimedia {
+    id_multimedia?:number;
     ruta:         string;
     tipo_archivo: string;
+    eliminar: boolean  | false;
+}
+
+
+export interface ResponseCreateComunidad {
+    ok:   boolean;
+    msg:  string;
+    data: any;
+}
+
+export interface ResponseEditarComunidad {
+    ok:               boolean;
+    msg:              string;
+    data:             any;
+    deleteMultimedia: any;
+    createMultimedia: any;
 }

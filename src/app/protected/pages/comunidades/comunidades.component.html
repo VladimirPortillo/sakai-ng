@@ -88,7 +88,7 @@
 								pButton 
 								pRipple 
 								type="button"
-								(click)="modalComunidad(comunidad,0,'Ver Comunidad','')" 
+								(click)="verComunidad(comunidad.id_comunidad)" 
 								icon="pi pi-user"
 								class="p-button-rounded p-button-info p-button-outlined"></button>
 						</td>
@@ -97,7 +97,7 @@
 								pButton 
 								pRipple 
 								type="button"
-								(click)="modalComunidad(comunidad,2,'Editar Comunidad','Editar')" 
+								(click)="editarComunidad(comunidad.id_comunidad)" 
 								icon="pi pi-bookmark"
 								class="p-button-rounded p-button-secondary p-button-outlined">
 							</button>

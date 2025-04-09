@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import { TopbarComponent } from './topbar/topbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -10,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MenuComponent } from './menu/menu.component';
 import { MenuitemComponent } from './menuitem/menuitem.component';
 import { RouterModule } from '@angular/router';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -21,12 +23,14 @@ import { RouterModule } from '@angular/router';
         MenuComponent,
         MenuitemComponent,
         MenuitemComponent,
+        LoadingComponent,
     ],
     imports: [
         CommonModule,
         RouterModule,
         DialogModule,
-        ButtonModule
+        ButtonModule,
+        ProgressSpinnerModule
     ],
     exports: [
         TopbarComponent,
@@ -34,6 +38,7 @@ import { RouterModule } from '@angular/router';
         FooterComponent,
         MenuComponent,
         MenuitemComponent,
+        LoadingComponent
     ],
 })
 export class ComponentsModule {}

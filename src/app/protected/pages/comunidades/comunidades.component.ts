@@ -24,6 +24,7 @@ export class ComunidadesComponent {
         latitud: null,
         estado: null,
         id_usuario: null,
+        multimedias: []
     };
     tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
     modalTitle: String = 'Agregar Comunidad';
@@ -49,6 +50,16 @@ export class ComunidadesComponent {
         console.log("entra agregar");        
         this.router.navigate(['/index/comunidades/agregar']);
     }
+    verComunidad(id_comunidad:number) {
+        console.log("entra ver"); 
+        console.log("entra ver", id_comunidad);       
+        this.router.navigate(['/index/comunidades/ver',id_comunidad]);
+    }
+    editarComunidad(id_comunidad:number) {
+        console.log("entra editar"); 
+        console.log("entra editar", id_comunidad);       
+        this.router.navigate(['/index/comunidades/editar',id_comunidad]);
+    }
 
 
     modalComunidad(
@@ -68,6 +79,7 @@ export class ComunidadesComponent {
                 latitud: null,
                 estado: null,
                 id_usuario: null,
+                multimedias: []
             };
             this.modalComunidadVisible = true;
         } else {

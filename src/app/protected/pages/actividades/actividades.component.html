@@ -2,7 +2,16 @@
 	<div class="col-12">
 		<div class="card">
 			<h5>ADMINISTRAR ACTIVIDADES</h5>
-            <!-- Aqui va el contenido de la pagina -->            
+            <!-- Aqui va el contenido de la pagina -->
+			
+			<!-- <div *ngIf="loading">
+				loading
+			</div>
+
+			<div *ngIf="!loading">
+				contenido de la pagina
+			</div> -->
+			
             <p-table 
 				[value]="actividades" 
 				#dt1  
@@ -28,11 +37,12 @@
                             <button 
 								pButton 
 								pRipple 
-								type="button"  
-								(click)="modalActividad(null,1,'Agregar Actividad','Guardar')" 
+								type="button" 
+								(click)="agregarActividad()"
 								label="Agregar Actividad" 
 								class="p-button-secondary" 
-								style="text-align: right;">
+								style="text-align: right;"
+								>
 							</button>
                         </span>
 					</div>
@@ -113,7 +123,7 @@
 								pButton 
 								pRipple 
 								type="button" 
-								(click)="modalActividad(actividad,0,'Ver Actividad','')" 
+								(click)="verActividad(actividad.id_actividad)" 
 								icon="pi pi-user" 
 								class="p-button-rounded p-button-info p-button-outlined" >
 							</button>
@@ -123,7 +133,7 @@
 								pButton 
 								pRipple 
 								type="button" 
-								(click)="modalActividad(actividad,2,'Editar Actividad','Editar')" 
+								(click)="editarActividad(actividad.id_actividad)" 
 								icon="pi pi-bookmark" 
 								class="p-button-rounded p-button-secondary p-button-outlined" >
 							</button>

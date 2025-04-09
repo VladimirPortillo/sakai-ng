@@ -6,6 +6,8 @@ import { AtractivosService } from '../../services/atractivos.service';
 import { ComunidadesService } from '../../services/comunidades.service';
 import { ReportesService } from '../../services/reportes.service';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-atractivos',
   templateUrl: './atractivos.component.html',
@@ -26,6 +28,7 @@ export class AtractivosComponent {
       latitud: null,
       estado: null,
       id_comunidad: null,
+      multimedias: []
   };
   tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
   modalTitle: String = 'Agregar Restaurante';
@@ -35,6 +38,7 @@ export class AtractivosComponent {
       private atractivosService: AtractivosService,
       private comunidadesService: ComunidadesService,
       private srvImprimir: ReportesService,
+      private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +52,18 @@ export class AtractivosComponent {
             });
         
   }
-
+  agregarAtractivo() {
+    // console.log("entra agregar");        
+    this.router.navigate(['/index/atractivos/agregar']);
+}
+editarAtractivo(id_atractivo:number) {
+    console.log("entra editar", id_atractivo);       
+    this.router.navigate(['/index/atractivos/editar',id_atractivo]);
+}
+verAtractivo(id_atractivo:number) {
+    console.log("entra ver", id_atractivo);       
+    this.router.navigate(['/index/atractivos/ver',id_atractivo]);
+}
   modalAtractivo(
       atractivo: any,
       tipoAccion: number,
@@ -65,6 +80,7 @@ export class AtractivosComponent {
               latitud: null,
               estado: null,
               id_comunidad: null,
+              multimedias: []
           };
       } else {
           this.dataAtractivo = atractivo;

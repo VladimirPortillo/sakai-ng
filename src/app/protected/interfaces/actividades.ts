@@ -1,3 +1,5 @@
+import { Multimedia } from "./comunidades";
+
 export interface Actividades {
     id_actividad?: number;
     nombre: string | null;
@@ -10,4 +12,23 @@ export interface Actividades {
     estado: number | null;
     id_comunidad:number | null;
     id_tipo: number | null;
+    multimedias:  Multimedia[] | [];
+}
+/* export interface Multimedia {
+    ruta:         string;
+    tipo_archivo: string;
+}
+ */
+
+export interface ResponseCreateActividad {
+    ok:   boolean;
+    msg:  string;
+    data: any;
+}
+export interface ResponseEditarActividad {
+    ok:               boolean;
+    msg:              string;
+    data:             any;
+    deleteMultimedia: any;
+    createMultimedia: any;
 }

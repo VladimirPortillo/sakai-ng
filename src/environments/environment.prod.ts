@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  urlApi: 'http://localhost:3000',
+  rutaPublic: '/public/uploads/'
 };

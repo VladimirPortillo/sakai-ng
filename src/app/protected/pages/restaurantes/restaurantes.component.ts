@@ -5,6 +5,7 @@ import { Restaurantes } from '../../interfaces/restaurantes';
 import { RestaurantesService } from '../../services/restaurantes.service';
 import { ComunidadesService } from '../../services/comunidades.service';
 import { ReportesService } from '../../services/reportes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-restaurantes',
@@ -27,6 +28,7 @@ export class RestaurantesComponent {
       latitud: null,
       estado: null,
       id_comunidad: null,
+      multimedias:[],
   };
   tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
   modalTitle: String = 'Agregar Restaurante';
@@ -36,12 +38,26 @@ export class RestaurantesComponent {
       private restaurantesService: RestaurantesService,
       private comunidadesService: ComunidadesService,
       private srvImprimir: ReportesService,
+      private router:Router
   ) {}
 
   ngOnInit(): void {
       this.getRestaurantes();
   }
-  
+  agregarRestaurante() {
+    console.log("entra agregar");        
+    this.router.navigate(['/index/restaurantes/agregar']);
+}
+editarRestaurante(id_restaurante:number) {
+    console.log("entra editar"); 
+    console.log("entra editar", id_restaurante);       
+    this.router.navigate(['/index/restaurantes/editar',id_restaurante]);
+}
+verRestaurante(id_restaurante:number) {
+    console.log("entra ver"); 
+    console.log("entra ver", id_restaurante);       
+    this.router.navigate(['/index/restaurantes/ver',id_restaurante]);
+} 
   getRestaurantes() {
       this.restaurantesService.getRestaurantes().subscribe((restaurantes) => {
           this.restaurantes = restaurantes;
@@ -67,6 +83,7 @@ export class RestaurantesComponent {
               latitud: null,
               estado: null,
               id_comunidad: null,
+              multimedias:[],
           };
       } else {
           this.dataRestaurante = restaurante;

@@ -6,6 +6,12 @@ import { Usuarios } from 'src/app/protected/interfaces/usuarios';
 import { RolesService } from 'src/app/protected/services/roles.service';
 import { UsuariosService } from 'src/app/protected/services/usuarios.service';
 
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { PrimeNGConfig } from 'primeng/api';
+registerLocaleData(localeEs, 'es');
+
 @Component({
     selector: 'app-modal-usuario',
     templateUrl: './modal-usuario.component.html',
@@ -19,6 +25,8 @@ export class ModalUsuarioComponent {
     @Output() onCloseModal: EventEmitter<boolean> = new EventEmitter();
     @Output() onSaveDataModal: EventEmitter<boolean> = new EventEmitter();
 
+    minFechaNacimiento: Date;
+    maxFechaNacimiento: Date;
     roles: Roles[] = [];
     rol!: Roles;
     miFormulario: FormGroup = this.fb.group({
@@ -41,11 +49,19 @@ export class ModalUsuarioComponent {
     constructor(
         private rolesService: RolesService,
         private fb: FormBuilder,
-        private usuariosService: UsuariosService
-    ) {}
+        private usuariosService: UsuariosService,
+        private primengConfig: PrimeNGConfig,
+    ) {
+        const hoy = new Date();
+    
+        // Establece el rango de fechas válidas
+        this.maxFechaNacimiento = new Date(hoy.getFullYear() - 18, hoy.getMonth(), hoy.getDate()); // Máximo 18 años atrás
+        this.minFechaNacimiento = new Date(hoy.getFullYear() - 100, hoy.getMonth(), hoy.getDate()); // Mínimo 100 años atrás
+      }
+    
 
     ngOnInit() {
-        console.log('modal usuario', this.usuario);
+        this.cambiarIdioma();
         this.getRoles();
     }
 
@@ -186,5 +202,18 @@ export class ModalUsuarioComponent {
         }
             
     }
-
+      //cambiar idioma al colendario a español
+  cambiarIdioma(){
+    this.primengConfig.setTranslation({
+      dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
+      dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
+      dayNamesMin: ["D", "L", "M", "M", "J", "V", "S"],
+      monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+      monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+      today: 'Hoy',
+      clear: 'Limpiar',
+      dateFormat: 'dd/mm/yy',
+      weekHeader: 'Sem'
+    });
+  }
 }

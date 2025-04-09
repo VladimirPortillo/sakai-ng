@@ -1,0 +1,195 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>AGREGAR GASTRONOMIA</h5>
+            <!-- Aqui va el contenido de la pagina -->
+            <form (ngSubmit)="guardar()" [formGroup]="miFormulario">
+                <div class="col-12">
+                    <div class="p-fluid">
+                        <div >
+                            <div class="field grid">
+                                <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText 
+                                        id="nombre" 
+                                        type="text"
+                                        formControlName="nombre"
+                                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}"/>
+                                    <small 
+                                        class="ng-dirty ng-invalid"
+                                        class="p-error"
+                                        *ngIf="campoEsValido('nombre')">
+                                        {{ campoErrorMsg('nombre') }}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="descripcion" class="col-12 mb-2 md:col-2 md:mb-0">Descripción:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText 
+                                        id="descripcion" 
+                                        type="text" 
+                                        formControlName="descripcion"
+                                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('descripcion')}"/>
+                                    <small 
+                                        class="ng-dirty ng-invalid"
+                                        class="p-error"
+                                        *ngIf="campoEsValido('descripcion')">
+                                        {{ campoErrorMsg('descripcion') }}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="tipo" class="col-12 mb-2 md:col-2 md:mb-0">Tipo:</label>
+                                <div class="col-12 md:col-10">
+                                    <div class="field-radiobutton">
+                                        <p-radioButton 
+                                            id="tipo" 
+                                            formControlName="tipo"
+                                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('tipo')}"
+                                            value="comida">
+                                        </p-radioButton>
+                                        <label for="0">Comida.</label>
+                                    </div>
+                                    <div class="field-radiobutton">
+                                        <p-radioButton 
+                                            id="tipo" 
+                                            formControlName="tipo"
+                                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('tipo')}"
+                                            value="bebida">
+                                        </p-radioButton>
+                                        <label for="0">Bebida.</label>
+                                    </div>
+                                    <!-- <input pInputText 
+                                        id="tipo" 
+                                        type="text"
+                                        formControlName="tipo"
+                                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('tipo')}"
+                                    /> -->
+                                    <small 
+                                        class="ng-dirty ng-invalid"
+                                        class="p-error"
+                                        *ngIf="campoEsValido('tipo')">
+                                        {{ campoErrorMsg('tipo') }}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="comunidad" class="col-12 mb-2 md:col-2 md:mb-0">Comunidad a asignar:</label>
+                                <div class="col-12 md:col-10">
+                                    <p-multiSelect 
+                                        id="comunidad" 
+                                        [options]="comunidades" 
+                                        placeholder="Seleccionar Comunidades" 
+                                        optionLabel="nombre" 
+                                        class="multiselect-custom"
+                                        formControlName="comunidades"
+                                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('comunidades')}" 
+                                        display="chip"> 
+                                                <ng-template let-comunidad pTemplate="item">
+                                                    <div class="flex align-items-center">
+                                                        <span class="ml-2">{{comunidad.nombre}}</span>
+                                                    </div>
+                                                </ng-template>
+                                    </p-multiSelect>
+
+
+                                    <small 
+                                        class="ng-dirty ng-invalid"
+                                        class="p-error"
+                                        *ngIf="campoEsValido('comunidades')">
+                                        {{ campoErrorMsg('comunidades') }}
+                                    </small>
+
+                                    <!-- <p-dropdown 
+                                        id="comunidad" 
+                                        [options]="comunidades" 
+                                        optionLabel="nombre" 
+                                        placeholder="Seleccionar comunidad" 
+                                        [showClear]="true"
+                                        formControlName="comunidad"
+                                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('comunidad')}">
+                                    </p-dropdown> -->
+                                    <!-- <small 
+                                        class="ng-dirty ng-invalid"
+                                        class="p-error"
+                                        *ngIf="campoEsValido('comunidad')">
+                                        {{ campoErrorMsg('comunidad') }}
+                                    </small> -->
+                                </div>
+                            </div>
+                            <div class="field grid ">
+                                <label 
+                                    htmlFor="multimedia" 
+                                    class="col-12 mb-2 md:col-2 md:mb-0">
+                                    multimedias:
+                                </label>
+                                <div class="col-12 md:col-10">
+                                    <div class="card">
+                                        <p-fileUpload 
+                                            name="demo[]" 
+                                            chooseLabel="Seleccionar archivos"
+                                            cancelLabel="Borrar todos los eleccionados"
+                                            (onUpload)="onUpload($event)"
+                                            url="./upload.php" 
+                                            [multiple]="true" 
+                                            accept="image/*" 
+                                            [maxFileSize]="1000000"
+                                            [showUploadButton]="false" 
+                                            (onSelect)="onSelectFiles($event)"
+                                            >
+                                            <ng-template pTemplate="content">
+                                                <ul *ngIf="uploadedFiles.length">
+                                                    <li *ngFor="let file of uploadedFiles">
+                                                        {{file.name}} - {{file.size}}
+                                                        bytes
+                                                    </li>
+                                                </ul>
+                                            </ng-template>
+                                        </p-fileUpload>
+                                    </div>
+
+                                    <input 
+                                        id="multimedia"
+                                        type="text" 
+                                        pInputText 
+                                        formControlName="multimedia"
+                                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('multimedia')}" 
+                                    />
+                                    <small 
+                                        class="ng-dirty ng-invalid" 
+                                        class="p-error"
+                                        *ngIf="campoEsValido('multimedia')">
+                                        {{ campoErrorMsg('multimedia') }}
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field grid">
+                            <div class="col-12 md:col-6"></div>
+                            <div class="col-12 md:col-3">
+                                <p-button 
+                                    type="submit"
+                                    label="Guardar" 
+                                    styleClass="p-button-text"
+                                ></p-button>
+                            </div>
+                            <div class="col-12 md:col-3">
+                                <p-button 
+                                    (click)="volver()" 
+                                    label="Volver" 
+                                    styleClass="p-button-text">
+                                </p-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Aqui va el contenido de la pagina -->
+        </div>
+
+    </div>
+
+</div>

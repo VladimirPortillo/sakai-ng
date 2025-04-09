@@ -73,14 +73,4 @@ export class MenusComponent {
     onGlobalFilter(table: Table, event: Event) {
       table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
-  onImprimir(){
-    // const encabezado=["Nombre"];
-    // this.rolesService.getRoles().subscribe((roles) => {
-    //     this.roles = roles;
-    //     //const cuerpo = roles.map(rol => Object.values(rol));
-    //     const cuerpo=roles.map(rol => Object.values([rol.nombre]));
-    //     console.log(cuerpo);
-    //     this.srvImprimir.imprimir(encabezado,cuerpo,"Lista Roles",true);
-    // });
-}
 }

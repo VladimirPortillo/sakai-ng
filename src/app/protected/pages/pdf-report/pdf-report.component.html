@@ -3,34 +3,81 @@
 		<div class="card">
 			<h5>ADMINISTRAR REPORTES</h5>
             <!-- Aqui va el contenido de la pagina -->
+            <form   
+            (ngSubmit)="guardar()" 
+            [formGroup]="miFormulario">
             <div class="col-12 md:col-6">
                 <div class="card p-fluid">
                     <h5>Filtrar actividades en una comunidad en un rango de fechas:</h5>
                     <div class="field">
                         <label htmlFor="name1">Comunidad:</label>
                         <p-dropdown  
+                            id="id_comunidad"
                             [options]="comunidades"
                             optionLabel="nombre"
                             [(ngModel)]="comunidad"  
                             placeholder="Seleccionar comunidad" 
                             [showClear]="true"
-                            >
+                            formControlName="id_comunidad"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('id_comunidad')}">
+                            
                         </p-dropdown>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('id_comunidad')">
+                            {{ campoErrorMsg('id_comunidad') }}
+                        </small>
                     </div>
                     <h6>Rango de fechas de las actividades</h6>
                     <div class="field">
                         <label htmlFor="email1">Fecha inicio:</label>
-                        <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+                        <p-calendar 
+                            
+                            id="fecha_inic"
+                            [showIcon]="true" 
+                            inputId="icon"
+                            
+                            formControlName="fecha_inic"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('fecha_inic')}">
+                            
+                        </p-calendar>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('fecha_inic')">
+                            {{ campoErrorMsg('fecha_inic') }}
+                        </small>
                     </div>
                     <div class="field">
                         <label htmlFor="age1">Fecha fin:</label>
-                        <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+                        <p-calendar 
+                            id="fecha_fin"
+                            [showIcon]="true" 
+                            inputId="icon"
+                            formControlName="fecha_fin"
+                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('fecha_fin')}">
+                        </p-calendar>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('fecha_fin')">
+                            {{ campoErrorMsg('fecha_fin') }}
+                        </small>
                     </div>
+                    <div *ngIf="miFormulario.errors?.['fechaInvalida']">
+                        <small 
+                            class="text-danger"
+                            style="color: red;">
+                            La fecha de inicio no puede ser posterior a la fecha de fin.
+                        </small>
+                      </div>
                     <div class="flex flex-wrap gap-2">
-                        <button pButton pRipple label="Generar"></button>
+                        <p-button pRipple type="submit" label="Generar"></p-button>
                     </div>
                 </div>
             </div>
+        </form>
             <!-- Aqui va el contenido de la pagina -->
 			
 		</div>

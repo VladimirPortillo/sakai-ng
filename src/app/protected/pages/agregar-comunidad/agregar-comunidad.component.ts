@@ -4,13 +4,14 @@ import { ComunidadesService } from '../../services/comunidades.service';
 import { HttpUploadProgressEvent } from '@angular/common/http';
 import { Comunidades } from '../../interfaces/comunidades';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { DataMaps } from '../../interfaces/maps';
+import { UploadEvent } from '../../interfaces/imagenes';
 
 @Component({
   selector: 'app-agregar-comunidad',
   templateUrl: './agregar-comunidad.component.html',
   styleUrls: ['./agregar-comunidad.component.scss'],
-  providers: [MessageService]
+  //providers: [MessageService]
 })
 export class AgregarComunidadComponent {
   
@@ -26,16 +27,20 @@ export class AgregarComunidadComponent {
     descripcion: ['', [Validators.required]],
     superficie: ['', [Validators.required]],
     poblacion: ['', [Validators.required]],
+    ubicacion: ['', [Validators.required]],
+    multimedia: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
 
   });
+
+  datosCoordenada: string = '';
+  coordenadas: DataMaps = {longitud: null, latitud: null};
 
   constructor(
     private fb: FormBuilder,
     private comunidadesService: ComunidadesService,
-    private router: Router,
-    private messageService: MessageService
-    //private messageService: MessageService
-  ) { }
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
 
@@ -64,11 +69,25 @@ export class AgregarComunidadComponent {
           .requiredLength;
       return `Este campo debe tener máximo ${value} caracteres.`;
     }
+    if (this.miFormulario.controls[campo]?.errors?.['min']) {
+      return `Debe subir al menos 1 archivo y maximo 5 archivos.`;
+    }
+    if (this.miFormulario.controls[campo]?.errors?.['max']) {
+      return `Debe subir al menos 1 archivo y maximo 5 archivos.`;
+    }
     return;
+  }
+
+  coordenadasMapa(coordenadas: DataMaps) {
+    console.log('retorno datos mapa', coordenadas);
+    this.miFormulario.patchValue({ubicacion : JSON.stringify(coordenadas)});
+    this.datosCoordenada = 'Longitud: ' + coordenadas.longitud + ', Latitud: ' + coordenadas.latitud;
   }
 
 
   guardar() {
+    console.log('imagenes', this.filesMulti);
+    this.miFormulario.patchValue({multimedia : this.filesMulti.length});
     console.log('miFormulario', this.miFormulario.value);
     if (this.miFormulario.invalid) {
       this.miFormulario.markAllAsTouched();
@@ -76,28 +95,36 @@ export class AgregarComunidadComponent {
     }
 
     this.agregarComunidad();
-    this.miFormulario.reset();
   }
 
-  agregarComunidad() {
-    console.log(this.miFormulario.value);
-    console.log(this.miFormulario.value.nombre);
+  agregarComunidad() {    
+
+    console.log('miFormulario', this.miFormulario.value);
+
+    const coordenadas: DataMaps = JSON.parse(this.miFormulario.value.ubicacion);
 
     const comunidad: Comunidades = {
       nombre: this.miFormulario.value.nombre,
       descripcion: this.miFormulario.value.descripcion,
       superficie: this.miFormulario.value.superficie,
       poblacion: this.miFormulario.value.poblacion,
-      longitud: 0,
-      latitud: 0,
+      longitud: coordenadas.longitud,
+      latitud: coordenadas.latitud,
       estado: 1,
-      id_usuario: 1
+      id_usuario: 1,
+      multimedias: []
     }
 
     console.log('comunidad', comunidad);
 
-    this.comunidadesService.agregarComunidad(comunidad).subscribe((resp) => {
+    this.comunidadesService.agregarComunidadCompleto(comunidad, this.filesMulti).subscribe((resp) => {
       console.log('Guardar comunidad', resp);
+      if(resp.ok) {
+        this.miFormulario.reset();
+        this.datosCoordenada = '';
+        this.filesMulti = [];
+        this.router.navigate(['/index/comunidades']);
+      }
     });
   }
 
@@ -108,11 +135,19 @@ export class AgregarComunidadComponent {
   //cargar imagenes
   autoUpload: boolean = true;
   uploadedFiles: any[] = [];
-  onUpload(event: any) {
+  onUpload(event: UploadEvent) {
+    console.log('entra a onupload');
     for (const file of event.files) {
       this.uploadedFiles.push(file);
     }
-
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+    console.log('image', this.uploadedFiles);
   }
+
+  filesMulti: File[] = [];
+
+  onSelectFiles(event: any) {
+    this.filesMulti = event.currentFiles;
+    this.miFormulario.patchValue({multimedia : this.filesMulti.length});    
+  }
+
 }

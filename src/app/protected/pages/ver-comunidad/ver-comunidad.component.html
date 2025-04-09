@@ -1,0 +1,121 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>VER COMUNIDAD</h5>
+			<!-- Aqui va el contenido de la pagina -->
+            <app-loading [loading]="loading"></app-loading>
+            <div *ngIf="!loading">
+            <form  [formGroup]="miFormulario">
+                <div class="col-12">
+                    <div class="p-fluid">
+                        <div>
+                            <div class="field grid">
+                                <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText 
+                                        id="nombre" 
+                                        type="text"
+                                        formControlName="nombre"/>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="descripcion" class="col-12 mb-2 md:col-2 md:mb-0">Descripción:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText 
+                                        id="descripcion" 
+                                        type="text" 
+                                        formControlName="descripcion"/>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="superficie" class="col-12 mb-2 md:col-2 md:mb-0">Superficie en m2:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText 
+                                        id="superficie" 
+                                        type="text"
+                                        formControlName="superficie"/>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label htmlFor="poblacion" class="col-12 mb-2 md:col-2 md:mb-0">Poblacion:</label>
+                                <div class="col-12 md:col-10">
+                                    <input pInputText 
+                                        id="poblacion" 
+                                        type="text"
+                                        formControlName="poblacion"/>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label 
+                                    htmlFor="ubicacion" 
+                                    class="col-12 mb-2 md:col-2 md:mb-0"
+                                    >Ubicación en mapa:
+                                </label>
+                                <div class="col-12 md:col-10">
+                                    <p>{{ datosCoordenada }}</p>
+                                    <input 
+                                        id="ubicacion"
+                                        type="text" 
+                                        pInputText
+                                        formControlName="ubicacion"/>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="field grid">
+                                <label 
+                                    htmlFor="mapa" 
+                                    class="col-12 mb-2 md:col-2 md:mb-0">
+                                </label>
+                                <div class="col-12 md:col-10">
+                                    <app-map
+                                        (onReturnData)="coordenadasMapa($event)"
+                                        [coordenadas]="coordenadas"
+                                    ></app-map>
+                                </div>   
+                            </div>
+                            <div class="field grid ">
+                                <label 
+                                    htmlFor="multimedia" 
+                                    class="col-12 mb-2 md:col-2 md:mb-0">
+                                    Multimedias:
+                                </label>
+                                <div class="col-12 md:col-10">
+                                    <div class="card">
+                                        <div class="image-container">
+                                            <div *ngFor="let m of comunidad.multimedias">
+                                                <p-image 
+                                                    [src]="urlPublic + m.ruta" 
+                                                    alt="Image" 
+                                                    width="150"
+                                                    height="150"
+                                                    [preview]="true"/>
+                                                
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field grid">
+                            <div class="col-12 md:col-6"></div>
+                            <div class="col-12 md:col-3"> 
+                            </div>
+                            <div class="col-12 md:col-3">
+                                <p-button 
+                                    (click)="volver()" 
+                                    label="Volver" 
+                                    styleClass="p-button-text">
+                                </p-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <!-- Aqui va el contenido de la pagina -->
+		</div>
+
+	</div>
+
+</div>

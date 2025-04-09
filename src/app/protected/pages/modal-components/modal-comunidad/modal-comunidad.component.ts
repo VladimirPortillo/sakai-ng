@@ -28,33 +28,6 @@ export class ModalComunidadComponent {
     @Output() onCloseModal: EventEmitter<boolean> = new EventEmitter();
     @Output() onSaveDataModal: EventEmitter<boolean> = new EventEmitter();
 
-    //para ver las imagenes inicio
-    displayCustom: boolean=false;
-    activeIndex: number = 0;
-    images: any[]=[];
-    responsiveOptions: any[] = [
-        {
-            breakpoint: '1500px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '1024px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 2
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ];
-    imageClick(index: number) {
-        this.activeIndex = index;
-        this.displayCustom = true;
-    }
-    //para ver imagenes fin
 
     miFormulario: FormGroup = this.fb.group({
         nombre: [

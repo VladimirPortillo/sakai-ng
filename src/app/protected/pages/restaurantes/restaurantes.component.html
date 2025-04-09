@@ -30,7 +30,7 @@
 								pButton 
 								pRipple 
 								type="button"
-								(click)="modalRestaurante(null,1,'Agregar Restaurante','Guardar')"
+								(click)="agregarRestaurante()"
 								label="Agregar Restaurante" 
 								class="p-button-secondary"
 								style="text-align: right;">
@@ -111,7 +111,7 @@
 								pButton 
 								pRipple 
 								type="button"
-								(click)="modalRestaurante(restaurante,0,'Ver Restaurante','')" 
+								(click)="verRestaurante(restaurante.id_restaurante)" 
 								icon="pi pi-user"
 								class="p-button-rounded p-button-info p-button-outlined">
 							</button>
@@ -121,7 +121,7 @@
 								pButton 
 								pRipple 
 								type="button"
-								(click)="modalRestaurante(restaurante,2,'Editar Restaurante','Editar')"
+								(click)="editarRestaurante(restaurante.id_restaurante)"
 								icon="pi pi-bookmark"
 								class="p-button-rounded p-button-secondary p-button-outlined">
 							</button>

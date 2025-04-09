@@ -1,3 +1,5 @@
+import { Multimedia } from "./comunidades";
+
 export interface Restaurantes{
     id_restaurante?:number;
     nombre:string | null;
@@ -10,4 +12,23 @@ export interface Restaurantes{
     latitud:number | null;
     estado:number | null;
     id_comunidad:number | null;
+    multimedias:  Multimedia[] | [];
+}
+// export interface Multimedia {
+//     ruta:         string;
+//     tipo_archivo: string;
+// }
+
+
+export interface ResponseCreateRestaurante {
+    ok:   boolean;
+    msg:  string;
+    data: any;
+}
+export interface ResponseEditarRestaurante {
+    ok:               boolean;
+    msg:              string;
+    data:             any;
+    deleteMultimedia: any;
+    createMultimedia: any;
 }

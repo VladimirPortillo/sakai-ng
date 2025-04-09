@@ -1,13 +1,16 @@
-<p>map works!</p>
-<h1>Integrate Google Maps in Angular - Tutsmake.com</h1>
+<label>Ubicación en el mapa</label>
+<div id="map" style="height: 500px; width: 100%;">
+  <google-map 
+    height="400px" 
+    width="500px" 
+    [center]="center" 
+    [zoom]="zoom" 
+    (mapClick)="addMarker($event)">
 
-<google-map height="450px" width="1000px">
+    <!-- <map-marker *ngFor="let marker of markers" [position]="marker.position"></map-marker> -->
+    <map-marker *ngIf="mapMarker" [position]="marker.position"></map-marker>
+
+  </google-map>
   
-</google-map>
-
-
-<div id="map"></div>
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=INSERT_YOUR_API_KEY&callback=initMap&v=weekly&solution_channel=GMP_CCS_geocodingservice_v2"
-  defer
-></script>
+  <!-- <map-marker *ngFor="let marker of markers" [position]="marker.position"></map-marker> -->
+</div>

@@ -30,7 +30,7 @@
 								pButton 
 								pRipple 
 								type="button" 
-								(click)="modalGastronomia(null,1,'Agregar Gastronomia','Guardar')" 
+								(click)="agregarGastronomia()" 
 								label="Agregar Gastronomia" 
 								class="p-button-secondary" 
 								style="text-align: right;">
@@ -111,7 +111,7 @@
 								pButton 
 								pRipple 
 								type="button"  
-								(click)="modalGastronomia(gastronomia,0,'Ver Gastronomia','')" 
+								(click)="verGastronomia(gastronomia.id_gastronomia)" 
 								icon="pi pi-user" 
 								class="p-button-rounded p-button-info p-button-outlined" >
 							</button>
@@ -121,7 +121,7 @@
 								pButton 
 								pRipple 
 								type="button"  
-								(click)="modalGastronomia(gastronomia,2,'Editar Gastronomia','Editar')" 
+								(click)="editarGastronomia(gastronomia.id_gastronomia)" 
 								icon="pi pi-bookmark" 
 								class="p-button-rounded p-button-secondary p-button-outlined" >
 							</button>

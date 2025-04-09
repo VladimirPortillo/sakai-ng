@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 import { LOCALE_ID } from '@angular/core';
@@ -26,6 +27,8 @@ export class ActividadesComponent {
     actividades: Actividades[] = [];
     currentRowNumber:number = 0;
 
+    //loading: boolean = true;
+
     modalActividadVisible: boolean = false;
     dataActividad: Actividades = {
         nombre: null,
@@ -38,6 +41,7 @@ export class ActividadesComponent {
         estado: null,
         id_comunidad: null,
         id_tipo: null,
+        multimedias:[]
     };
     tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
     modalTitle: String = 'Agregar Actividad';
@@ -46,7 +50,8 @@ export class ActividadesComponent {
     constructor(
         private actividadesService: ActividadesService,
         private srvImprimir: ReportesService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private router:Router
     ) {}
 
     ngOnInit(): void {
@@ -56,7 +61,21 @@ export class ActividadesComponent {
     getActividades() {
         this.actividadesService.getActividades().subscribe((actividades) => {
             this.actividades = actividades;
+            //this.loading = false
         });
+    }
+    agregarActividad() {
+        this.router.navigate(['/index/actividades/agregar']);
+    }
+    editarActividad(id_actividad:number) {
+        console.log("entra editar"); 
+        console.log("entra editar", id_actividad);       
+        this.router.navigate(['/index/actividades/editar',id_actividad]);
+    }
+    verActividad(id_actividad:number) {
+        console.log("entra ver"); 
+        console.log("entra ver", id_actividad);       
+        this.router.navigate(['/index/actividades/ver',id_actividad]);
     }
 
     modalActividad(
@@ -78,6 +97,7 @@ export class ActividadesComponent {
                 estado: null,
                 id_comunidad: null,
                 id_tipo: null,
+                multimedias:[]
             };
         } else {
             this.dataActividad = actividad;

@@ -1,0 +1,207 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>EDITAR COMUNIDAD</h5>
+			<!-- Aqui va el contenido de la pagina -->
+            <app-loading [loading]="loading"></app-loading>
+            <div *ngIf="!loading"> 
+                <form (ngSubmit)="guardar()" [formGroup]="miFormulario">
+                    <div class="col-12">
+                        <div class="p-fluid">
+                            <div>
+                                <div class="field grid">
+                                    <label htmlFor="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre:</label>
+                                    <div class="col-12 md:col-10">
+                                        <input pInputText 
+                                            id="nombre" 
+                                            type="text"
+                                            formControlName="nombre"
+                                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('nombre')}"/>
+                                        <small 
+                                            class="ng-dirty ng-invalid"
+                                            class="p-error"
+                                            *ngIf="campoEsValido('nombre')">
+                                            {{ campoErrorMsg('nombre') }}
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="field grid">
+                                    <label htmlFor="descripcion" class="col-12 mb-2 md:col-2 md:mb-0">Descripción:</label>
+                                    <div class="col-12 md:col-10">
+                                        <input pInputText 
+                                            id="descripcion" 
+                                            type="text" 
+                                            formControlName="descripcion"
+                                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('descripcion')}"/>
+                                        <small 
+                                            class="ng-dirty ng-invalid"
+                                            class="p-error"
+                                            *ngIf="campoEsValido('descripcion')">
+                                            {{ campoErrorMsg('descripcion') }}
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="field grid">
+                                    <label htmlFor="superficie" class="col-12 mb-2 md:col-2 md:mb-0">Superficie en m2:</label>
+                                    <div class="col-12 md:col-10">
+                                        <input pInputText 
+                                            id="superficie" 
+                                            type="text"
+                                            formControlName="superficie"
+                                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('superficie')}"/>
+                                        <small 
+                                            class="ng-dirty ng-invalid"
+                                            class="p-error"
+                                            *ngIf="campoEsValido('superficie')">
+                                            {{ campoErrorMsg('superficie') }}
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="field grid">
+                                    <label htmlFor="poblacion" class="col-12 mb-2 md:col-2 md:mb-0">Poblacion:</label>
+                                    <div class="col-12 md:col-10">
+                                        <input pInputText 
+                                            id="poblacion" 
+                                            type="text"
+                                            formControlName="poblacion"
+                                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('poblacion')}"/>
+                                        <small 
+                                            class="ng-dirty ng-invalid"
+                                            class="p-error"
+                                            *ngIf="campoEsValido('poblacion')">
+                                            {{ campoErrorMsg('poblacion') }}
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="field grid">
+                                    <label 
+                                        htmlFor="ubicacion" 
+                                        class="col-12 mb-2 md:col-2 md:mb-0"
+                                        >Ubicación en mapa:
+                                    </label>
+                                    <div class="col-12 md:col-10">
+                                        <p>{{ datosCoordenada }}</p>
+                                        <input 
+                                            id="ubicacion"
+                                            type="text" 
+                                            pInputText
+                                            formControlName="ubicacion"
+                                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('ubicacion')}" 
+                                        />
+                                        <small 
+                                            class="ng-dirty ng-invalid" 
+                                            class="p-error"
+                                            *ngIf="campoEsValido('ubicacion')">
+                                            {{ campoErrorMsg('ubicacion') }}
+                                        </small>
+                                    </div>
+                                    
+                                </div>
+                                <div class="field grid">
+                                    <label 
+                                        htmlFor="mapa" 
+                                        class="col-12 mb-2 md:col-2 md:mb-0">
+                                    </label>
+                                    <div class="col-12 md:col-10">
+                                        <app-map
+                                            (onReturnData)="coordenadasMapa($event)"
+                                            [coordenadas]="coordenadas"
+                                        ></app-map>
+                                    </div>   
+                                </div>
+                                <div class="field grid ">
+                                    <label 
+                                        htmlFor="multimedia" 
+                                        class="col-12 mb-2 md:col-2 md:mb-0">
+                                        multimedias:
+                                    </label>
+                                    <div class="col-12 md:col-10">
+                                        <div class="card">
+                                            <p-fileUpload 
+                                                name="demo[]" 
+                                                chooseLabel="Seleccionar archivos"
+                                                cancelLabel="Borrar todos los eleccionados"
+                                                (onUpload)="onUpload($event)"
+                                                url="./upload.php" 
+                                                [multiple]="true" 
+                                                accept="image/*" 
+                                                [maxFileSize]="1000000"
+                                                [showUploadButton]="false" 
+                                                (onSelect)="onSelectFiles($event)"
+                                                >
+                                                <ng-template pTemplate="content">
+                                                    <ul *ngIf="uploadedFiles.length">
+                                                        <li *ngFor="let file of uploadedFiles">
+                                                            {{file.name}} - {{file.size}}
+                                                            bytes
+                                                        </li>
+                                                    </ul>
+
+                                                    <div *ngIf="comunidad.multimedias.length">
+
+                                                        <div *ngFor="let m of comunidad.multimedias">
+                                                            <div *ngIf="m.eliminar === false" class="p-fileupload-row ng-star-inserted">
+                                                                <div class="ng-star-inserted">
+                                                                    <p-image [src]="urlPublic + m.ruta" width="50"/>
+                                                                </div>
+                                                                <div class="p-fileupload-filename">{{ m.ruta }}</div>
+                                                                <div>---</div>
+                                                                <div>
+                                                                    <p-button 
+                                                                        (click)="elimarImage(m)" 
+                                                                        label=""
+                                                                        icon="pi pi-times" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </ng-template>
+                                            </p-fileUpload>
+                                        </div>
+
+                                        <input 
+                                            id="multimedia"
+                                            type="text" 
+                                            pInputText 
+                                            formControlName="multimedia"
+                                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('multimedia')}" 
+                                        />
+                                        <small 
+                                            class="ng-dirty ng-invalid" 
+                                            class="p-error"
+                                            *ngIf="campoEsValido('multimedia')">
+                                            {{ campoErrorMsg('multimedia') }}
+                                        </small>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <div class="col-12 md:col-6"></div>
+                                <div class="col-12 md:col-3">
+                                    <p-button 
+                                        type="submit"
+                                        label="Editar" 
+                                        styleClass="p-button-text"
+                                    ></p-button>
+                                </div>
+                                <div class="col-12 md:col-3">
+                                    <p-button 
+                                        (click)="volver()" 
+                                        label="Volver" 
+                                        styleClass="p-button-text">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>            
+            <!-- Aqui va el contenido de la pagina -->
+            </div>
+		</div>
+
+	</div>
+
+</div>

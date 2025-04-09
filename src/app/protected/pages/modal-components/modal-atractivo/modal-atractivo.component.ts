@@ -48,8 +48,21 @@ export class ModalAtractivoComponent {
       this.comunidadesService.getComunidades().subscribe((comunidades) => {
           // console.log(roles);
           this.comunidades = comunidades;
-          this.cargarDatos();
+          if(this.tipoAccion === 0) {
+            this.obtenerMultimedias();
+          } else {
+            this.cargarDatos();
+          }
       });
+  }
+
+  obtenerMultimedias() {
+    if(this.atractivo.id_atractivo !== undefined) {
+        this.atractivosService.verAtractivo(this.atractivo.id_atractivo).subscribe((resp) => {
+            console.log('atractivo con multimedia:', resp.data);
+            this.cargarDatos();
+        });
+    }
   }
 
   cargarDatos() {

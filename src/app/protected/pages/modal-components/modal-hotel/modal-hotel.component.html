@@ -51,69 +51,136 @@
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="tipo" class="col-12 mb-2 md:col-2 md:mb-0">Tipo:</label>
+                    <label htmlFor="tipo" class="col-12 mb-2 md:col-2 md:mb-0">Estrellas:</label>
                     <div class="col-12 md:col-10">
                         <div class="field-radiobutton">
                         <p-radioButton 
-                                id="tipo" 
-                                formControlName="tipo"
-                                [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('tipo')}"
-                                value="hotel">
+                                id="estrellas" 
+                                formControlName="estrellas"
+                                [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('estrellas')}"
+                                value="1">
                             </p-radioButton>
-                            <label for="0">Hotel.</label>
+                            <label for="0">1 Estrella.</label>
                             </div>
                             <div class="field-radiobutton">
                                 <p-radioButton 
-                                    id="tipo" 
-                                    formControlName="tipo"
-                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('tipo')}"
-                                    value="hostal">
+                                    id="estrellas" 
+                                    formControlName="estrellas"
+                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('estrellas')}"
+                                    value="2">
                                 </p-radioButton>
-                                <label for="0">Hostal.</label>
+                                <label for="0">2 Estrellas.</label>
                             </div>
-                        <!-- <input pInputText 
-                            id="tipo" 
-                            type="text"
-                            formControlName="tipo"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('tipo')}"/> -->
+                            <div class="field-radiobutton">
+                                <p-radioButton 
+                                    id="estrellas" 
+                                    formControlName="estrellas"
+                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('estrellas')}"
+                                    value="3">
+                                </p-radioButton>
+                                <label for="0">3 Estrellas.</label>
+                            </div>
                         <small 
                             class="ng-dirty ng-invalid"
                             class="p-error"
-                            *ngIf="campoEsValido('tipo')">
-                            {{ campoErrorMsg('tipo') }}
+                            *ngIf="campoEsValido('estrellas')">
+                            {{ campoErrorMsg('estrellas') }}
                         </small>
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="categoria" class="col-12 mb-2 md:col-2 md:mb-0">Categoria:</label>
+                    <label htmlFor="tipo" class="col-12 mb-2 md:col-2 md:mb-0">Garaje:</label>
                     <div class="col-12 md:col-10">
-
-                        <input pInputText 
-                            id="categoria" 
-                            type="text"
-                            formControlName="categoria"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('categoria')}"/>
+                        <div class="field-radiobutton">
+                        <p-radioButton 
+                                id="garaje" 
+                                formControlName="garaje"
+                                [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('garaje')}"
+                                value="si">
+                            </p-radioButton>
+                            <label for="0">Si.</label>
+                            </div>
+                            <div class="field-radiobutton">
+                                <p-radioButton 
+                                    id="garaje" 
+                                    formControlName="garaje"
+                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('garaje')}"
+                                    value="no">
+                                </p-radioButton>
+                                <label for="0">No.</label>
+                            </div>
                         <small 
                             class="ng-dirty ng-invalid"
                             class="p-error"
-                            *ngIf="campoEsValido('categoria')">
-                            {{ campoErrorMsg('categoria') }}
+                            *ngIf="campoEsValido('garaje')">
+                            {{ campoErrorMsg('garaje') }}
                         </small>
                     </div>
                 </div>
                 <div class="field grid">
-                    <label htmlFor="num_habitaciones" class="col-12 mb-2 md:col-2 md:mb-0">Nuemro de habitaciones:</label>
+                    <label htmlFor="tipo" class="col-12 mb-2 md:col-2 md:mb-0">Alimentación:</label>
                     <div class="col-12 md:col-10">
-                        <input pInputText 
-                            id="num_habitaciones" 
-                            type="text"
-                            formControlName="num_habitaciones"
-                            [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('num_habitaciones')}"/>
+                        <div class="field-radiobutton">
+                        <p-radioButton 
+                                id="alimentacion" 
+                                formControlName="alimentacion"
+                                [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('alimentacion')}"
+                                value="Desayuno">
+                            </p-radioButton>
+                            <label for="0">Desayuno.</label>
+                            </div>
+                            <div class="field-radiobutton">
+                                <p-radioButton 
+                                    id="alimentacion" 
+                                    formControlName="alimentacion"
+                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('alimentacion')}"
+                                    value="Desayuno y almuerzo">
+                                </p-radioButton>
+                                <label for="0">Desayuno y almuerzo.</label>
+                            </div>
+                            <div class="field-radiobutton">
+                                <p-radioButton 
+                                    id="alimentacion" 
+                                    formControlName="alimentacion"
+                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('alimentacion')}"
+                                    value="Desayuno, almuerzo y cena">
+                                </p-radioButton>
+                                <label for="0">Desayuno, almuerzo y cena.</label>
+                            </div>
                         <small 
                             class="ng-dirty ng-invalid"
                             class="p-error"
-                            *ngIf="campoEsValido('num_habitaciones')">
-                            {{ campoErrorMsg('num_habitaciones') }}
+                            *ngIf="campoEsValido('alimentacion')">
+                            {{ campoErrorMsg('alimentacion') }}
+                        </small>
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label htmlFor="tipo" class="col-12 mb-2 md:col-2 md:mb-0">Aire acondicionado:</label>
+                    <div class="col-12 md:col-10">
+                        <div class="field-radiobutton">
+                        <p-radioButton 
+                                id="aire_acondicionado" 
+                                formControlName="aire_acondicionado"
+                                [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('aire_acondicionado')}"
+                                value="si">
+                            </p-radioButton>
+                            <label for="0">Si.</label>
+                            </div>
+                            <div class="field-radiobutton">
+                                <p-radioButton 
+                                    id="aire_acondicionado" 
+                                    formControlName="aire_acondicionado"
+                                    [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('aire_acondicionado')}"
+                                    value="no">
+                                </p-radioButton>
+                                <label for="0">No.</label>
+                            </div>
+                        <small 
+                            class="ng-dirty ng-invalid"
+                            class="p-error"
+                            *ngIf="campoEsValido('aire_acondicionado')">
+                            {{ campoErrorMsg('aire_acondicionado') }}
                         </small>
                     </div>
                 </div>
@@ -133,6 +200,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="field grid">
                     <label htmlFor="comunidad" class="col-12 mb-2 md:col-2 md:mb-0">Comunidad a asignar:</label>
                     <div class="col-12 md:col-10">
@@ -164,18 +232,6 @@
                     </label>
                     <div class="col-12 md:col-8">
                         <span>{{ hotel.nombre}} </span>
-                    </div>
-                </div>
-                <div class="field grid">
-                    <label 
-                        htmlFor="name3" 
-                        style="font-weight: bold;" 
-                        class="col-12 mb-2 md:col-4 md:mb-0">
-                        Estado:
-                    </label>
-                    <div class="col-12 md:col-8">
-                        <span *ngIf="hotel.estado==1">Activo</span>
-                        <span *ngIf="hotel.estado==0">Eliminado</span>
                     </div>
                 </div>
             </div>

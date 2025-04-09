@@ -30,10 +30,11 @@ export class ModalHotelComponent {
       ],
       descripcion: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
-      tipo: ['', [Validators.required]],
-      categoria: ['', [Validators.required]],
-      num_habitaciones: ['', [Validators.required]],
+      estrellas: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
+      garaje: ['', [Validators.required]],
+      alimentacion: ['', [Validators.required]],
+      aire_acondicionado: ['', [Validators.required]],
       comunidad: ['', [Validators.required]],
   });
 
@@ -62,10 +63,11 @@ export class ModalHotelComponent {
           this.miFormulario.controls['nombre'].setValue(this.hotel.nombre);
           this.miFormulario.controls['descripcion'].setValue(this.hotel.descripcion);
           this.miFormulario.controls['direccion'].setValue(this.hotel.direccion);
-          this.miFormulario.controls['tipo'].setValue(this.hotel.tipo);
-          this.miFormulario.controls['categoria'].setValue(this.hotel.categoria);
-          this.miFormulario.controls['num_habitaciones'].setValue(this.hotel.num_habitaciones);
+          this.miFormulario.controls['estrellas'].setValue(this.hotel.estrellas);
           this.miFormulario.controls['telefono'].setValue(this.hotel.telefono);
+          this.miFormulario.controls['garaje'].setValue(this.hotel.garaje);
+          this.miFormulario.controls['alimentacion'].setValue(this.hotel.alimentacion);
+          this.miFormulario.controls['aire_acondicionado'].setValue(this.hotel.aire_acondicionado);
         
           this.miFormulario.controls['comunidad'].setValue(this.buscarComunidad());
       }
@@ -128,11 +130,11 @@ export class ModalHotelComponent {
       this.hotel.nombre = this.miFormulario.value.nombre;
       this.hotel.descripcion = this.miFormulario.value.descripcion;
       this.hotel.direccion = this.miFormulario.value.direccion;
-      this.hotel.tipo = this.miFormulario.value.tipo;
-      this.hotel.categoria = this.miFormulario.value.categoria;
-      this.hotel.num_habitaciones = this.miFormulario.value.num_habitaciones;
-      this.hotel.telefono = this.miFormulario.value.telefono;
-      this.hotel.foto = '--';
+      this.miFormulario.controls['estrellas'].setValue(this.hotel.estrellas);
+          this.miFormulario.controls['telefono'].setValue(this.hotel.telefono);
+          this.miFormulario.controls['garaje'].setValue(this.hotel.garaje);
+          this.miFormulario.controls['alimentacion'].setValue(this.hotel.alimentacion);
+          this.miFormulario.controls['aire_acondicionado'].setValue(this.hotel.aire_acondicionado);
       this.hotel.longitud = 0;
       this.hotel.latitud = 0;
       this.hotel.estado = 1;
@@ -148,11 +150,11 @@ export class ModalHotelComponent {
       this.hotel.nombre = this.miFormulario.value.nombre;
       this.hotel.descripcion = this.miFormulario.value.descripcion;
       this.hotel.direccion = this.miFormulario.value.direccion;
-      this.hotel.tipo = this.miFormulario.value.tipo;
-      this.hotel.categoria = this.miFormulario.value.categoria;
-      this.hotel.num_habitaciones = this.miFormulario.value.num_habitaciones;
-      this.hotel.telefono = this.miFormulario.value.telefono;
-      this.hotel.foto = '--';
+      this.miFormulario.controls['estrellas'].setValue(this.hotel.estrellas);
+          this.miFormulario.controls['telefono'].setValue(this.hotel.telefono);
+          this.miFormulario.controls['garaje'].setValue(this.hotel.garaje);
+          this.miFormulario.controls['alimentacion'].setValue(this.hotel.alimentacion);
+          this.miFormulario.controls['aire_acondicionado'].setValue(this.hotel.aire_acondicionado);
       this.hotel.longitud = 0;
       this.hotel.latitud = 0;
       this.hotel.estado = 1;

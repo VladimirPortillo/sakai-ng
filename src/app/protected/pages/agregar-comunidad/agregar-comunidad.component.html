@@ -99,23 +99,24 @@
                             </div>
                             <div class="field grid">
                                 <label 
-                                    htmlFor="poblacion" 
+                                    htmlFor="ubicacion" 
                                     class="col-12 mb-2 md:col-2 md:mb-0"
                                     >Ubicación en mapa:
                                 </label>
                                 <div class="col-12 md:col-10">
+                                    <p>{{ datosCoordenada }}</p>
                                     <input 
-                                        pInputText 
-                                        
+                                        id="ubicacion"
                                         type="text" 
-                                        disabled
-                                    
+                                        pInputText
+                                        formControlName="ubicacion" 
+                                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('ubicacion')}" 
                                     />
                                     <small 
                                         class="ng-dirty ng-invalid" 
                                         class="p-error"
-                                        *ngIf="campoEsValido('poblacion')">
-                                        {{ campoErrorMsg('poblacion') }}
+                                        *ngIf="campoEsValido('ubicacion')">
+                                        {{ campoErrorMsg('ubicacion') }}
                                     </small>
                                 </div>
                                 
@@ -126,13 +127,15 @@
                                     class="col-12 mb-2 md:col-2 md:mb-0">
                                 </label>
                                 <div class="col-12 md:col-10">
-                                    <app-map></app-map>
-                                </div>
-                                
+                                    <app-map
+                                        (onReturnData)="coordenadasMapa($event)"
+                                        [coordenadas]="coordenadas"
+                                    ></app-map>
+                                </div>   
                             </div>
                             <div class="field grid ">
                                 <label 
-                                    htmlFor="poblacion" 
+                                    htmlFor="multimedia" 
                                     class="col-12 mb-2 md:col-2 md:mb-0">
                                     multimedias:
                                 </label>
@@ -148,6 +151,7 @@
                                             accept="image/*" 
                                             [maxFileSize]="1000000"
                                             [showUploadButton]="false" 
+                                            (onSelect)="onSelectFiles($event)"
                                             >
                                             <ng-template pTemplate="content">
                                                 <ul *ngIf="uploadedFiles.length">
@@ -159,8 +163,22 @@
                                             </ng-template>
                                         </p-fileUpload>
                                     </div>
-                                </div>
 
+                                    <input 
+                                        id="multimedia"
+                                        type="text" 
+                                        pInputText 
+                                        formControlName="multimedia"
+                                        [ngClass]="{'ng-invalid ng-dirty' : campoEsValido('multimedia')}" 
+                                    />
+                                    <small 
+                                        class="ng-dirty ng-invalid" 
+                                        class="p-error"
+                                        *ngIf="campoEsValido('multimedia')">
+                                        {{ campoErrorMsg('multimedia') }}
+                                    </small>
+
+                                </div>
                             </div>
                         </div>
                         <div class="field grid">

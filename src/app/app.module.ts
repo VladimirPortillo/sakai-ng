@@ -4,6 +4,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HttpClientModule }from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { GoogleMapsModule } from '@angular/google-maps';
+
 import { AppComponent } from './app.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -25,6 +27,7 @@ import { PdfReportComponent } from './protected/pages/pdf-report/pdf-report.comp
         DialogModule,
         ButtonModule,
         FormsModule,
+        GoogleMapsModule
          
 
     ],

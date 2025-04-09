@@ -27,7 +27,8 @@ import { CalendarModule } from "primeng/calendar";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { FileUploadModule } from 'primeng/fileupload';
 import { SelectButtonModule } from 'primeng/selectbutton';
-// import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsModule } from '@angular/google-maps';
+
 
 
 
@@ -54,6 +55,26 @@ import { TipoActividadesComponent } from './pages/tipo-actividades/tipo-activida
 import { VerImagenesComponent } from './pages/ver-imagenes/ver-imagenes.component';
 import { AgregarComunidadComponent } from './pages/agregar-comunidad/agregar-comunidad.component';
 import { MapComponent } from './pages/map/map.component';
+import { EditarComunidadComponent } from './pages/editar-comunidad/editar-comunidad.component';
+import { AgregarActividadComponent } from './pages/agregar-actividad/agregar-actividad.component';
+import { EditarActividadComponent } from './pages/editar-actividad/editar-actividad.component';
+import { AgregarAtractivoComponent } from './pages/agregar-atractivo/agregar-atractivo.component';
+import { EditarAtractivoComponent } from './pages/editar-atractivo/editar-atractivo.component';
+import { AgregarGastronomiaComponent } from './pages/agregar-gastronomia/agregar-gastronomia.component';
+import { EditarGastronomiaComponent } from './pages/editar-gastronomia/editar-gastronomia.component';
+import { AgregarHotelComponent } from './pages/agregar-hotel/agregar-hotel.component';
+import { EditarHotelComponent } from './pages/editar-hotel/editar-hotel.component';
+import { AgregarRestauranteComponent } from './pages/agregar-restaurante/agregar-restaurante.component';
+import { EditarRestauranteComponent } from './pages/editar-restaurante/editar-restaurante.component';
+import { ImageModule } from 'primeng/image';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { VerComunidadComponent } from './pages/ver-comunidad/ver-comunidad.component';
+import { GalleriaModule } from 'primeng/galleria';
+import { VerActividadComponent } from './pages/ver-actividad/ver-actividad.component';
+import { VerRestauranteComponent } from './pages/ver-restaurante/ver-restaurante.component';
+import { VerAtractivoComponent } from './pages/ver-atractivo/ver-atractivo.component';
+import { VerHotelComponent } from './pages/ver-hotel/ver-hotel.component';
+import { VerGastronomiaComponent } from './pages/ver-gastronomia/ver-gastronomia.component';
 
 
 @NgModule({
@@ -73,17 +94,27 @@ import { MapComponent } from './pages/map/map.component';
         TipoActividadesComponent, 
         VerImagenesComponent, 
         AgregarComunidadComponent, 
-        MapComponent],
+        MapComponent, 
+        EditarComunidadComponent, 
+        AgregarActividadComponent, 
+        EditarActividadComponent, 
+        AgregarAtractivoComponent, 
+        EditarAtractivoComponent, 
+        AgregarGastronomiaComponent, 
+        EditarGastronomiaComponent, 
+        AgregarHotelComponent, 
+        EditarHotelComponent, 
+        AgregarRestauranteComponent, 
+        EditarRestauranteComponent, 
+        VerComunidadComponent, VerActividadComponent, VerRestauranteComponent, VerAtractivoComponent, VerHotelComponent, VerGastronomiaComponent],
     imports: [
         CommonModule,
         ProtectedRoutingModule,
         ComponentsModule,
         ModalComponentsModule,
-        // GoogleMapsModule,
-
+        GoogleMapsModule,
         FormsModule,
         ReactiveFormsModule,
-
         TableModule,
         RatingModule,
         ButtonModule,
@@ -108,7 +139,10 @@ import { MapComponent } from './pages/map/map.component';
         ChipsModule,
         InputMaskModule,
         InputNumberModule,
-        CascadeSelectModule 
+        CascadeSelectModule,
+        ImageModule,
+        ProgressSpinnerModule,
+        GalleriaModule  
     ],
 })
 export class ProtectedModule {}

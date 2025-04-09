@@ -4,6 +4,7 @@ import { Table } from 'primeng/table';
 import { Gastronomia } from '../../interfaces/gastronomias';
 import { GastronomiasService } from '../../services/gastronomias.service';
 import { ReportesService } from '../../services/reportes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gastronomias',
@@ -19,7 +20,11 @@ export class GastronomiasComponent {
       nombre: null,
       descripcion: null,
       tipo: null,
-      estado:null,
+      estado: null,
+      ids_comunidad: [],
+      multimedias: [],
+      comunidades: [],
+      delete_ids_comunidad: []
   };
   tipoAccion: number = 1; //1=agregar, 0 = ver, 2=editar, 3 = eliminar, 4 = habilitar
   modalTitle: String = 'Agregar Gastronomia';
@@ -28,6 +33,7 @@ export class GastronomiasComponent {
   constructor(
       private gastronomiasService: GastronomiasService,
       private srvImprimir: ReportesService,
+      private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +45,20 @@ export class GastronomiasComponent {
           this.gastronomias = gastronomias;
       });
   }
-
+  agregarGastronomia() {
+    console.log("entra agregar");        
+    this.router.navigate(['/index/gastronomias/agregar']);
+}
+editarGastronomia(id_gastronomia:number) {
+    console.log("entra editar"); 
+    console.log("entra editar", id_gastronomia);       
+    this.router.navigate(['/index/gastronomias/editar',id_gastronomia]);
+}
+verGastronomia(id_gastronomia:number) {
+    console.log("entra ver"); 
+    console.log("entra ver", id_gastronomia);       
+    this.router.navigate(['/index/gastronomias/ver',id_gastronomia]);
+}
   modalGastronomia(
       gastronomia: any,
       tipoAccion: number,
@@ -53,6 +72,10 @@ export class GastronomiasComponent {
               descripcion: null,
               tipo: null,
               estado:null,
+              ids_comunidad: [],
+              multimedias:[],
+              comunidades: [],
+              delete_ids_comunidad: []
           };
       } else {
           this.dataGastronomia = gastronomia;

@@ -1,0 +1,20 @@
+#multimedia {
+    display: none;
+}
+
+#ubicacion {
+    display: none;
+    
+}
+.image-container {
+    display: flex;          /* Alinea los elementos en fila */
+    gap: 10px;              /* Espacio entre las imágenes */
+    overflow-x: auto;       /* Permite desplazamiento horizontal si hay muchas imágenes */
+  }
+  
+  .image-container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
